@@ -93,7 +93,7 @@ fi
 
 # MacOS config
 if [[ "$CONFIG" == 'mac' ]]; then
-	alias github='cd Document/GitHub'
+	alias github='cd ~/Document/GitHub'
 fi
 
 # Initialization code that may require console input (password prompts, [y/n]
