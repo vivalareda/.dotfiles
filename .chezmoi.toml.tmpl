@@ -1,0 +1,4 @@
+{{ $hostname := promptString "hostname" -}}
+
+[data]
+  hostname = {{ $hostname | quote }}

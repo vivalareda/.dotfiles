@@ -1,3 +1,5 @@
+#!/bin/sh
+
 install_on_mac() {
   brew install ansible
 }
@@ -14,13 +16,14 @@ install_on_ubuntu() {
 OS="$(uname -s)"
 case "$OS" in
   Linux*)
-    if [ -f /etc/arch-release]; then
+    if [ -f /etc/arch-release ]; then
       install_on_arch
     elif [ -f /etc/lsb-release ] && grep -qi "ubuntu" /etc/lsb-release; then
       install_on_ubuntu
     else
       echo "Unsupported Linux distro"
       exit 1
+    fi
       ;;
     Darwin*)
       install_on_mac
