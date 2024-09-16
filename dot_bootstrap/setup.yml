@@ -9,7 +9,8 @@
       - neovim
       - fzf 
       - yazi
-      # Add all your desired packages here
+      - bat
+      - eza
 
   tasks:
     - name: Update Homebrew
