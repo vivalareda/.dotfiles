@@ -1,5 +1,5 @@
 # Configuration for Linux
-if [[ "$OSTYPE" == 'linux-gnu' ]]; then
+if [[ "$CONFIG" == 'arch' ]]; then
     #Display Pokemon
     pokemon-colorscripts --no-title -r 1,3,6
 
@@ -72,7 +72,7 @@ if [[ "$OSTYPE" == 'linux-gnu' ]]; then
 fi
 
 # MacOS config
-if [[ "$OSYPE" == *"darwin"* ]]; then
+if [[ "$CONFIG" == 'mac' ]]; then
     # HOME="/Users/reda"
 fi
 # Initialization code that may require console input (password prompts, [y/n]
@@ -88,7 +88,7 @@ ZSH="${HOME}/.oh-my-zsh"
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# Path to powerlevel10k theme
+# Load oh-my-zsh theme
 source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # List of plugins used
@@ -110,6 +110,8 @@ alias .5='cd ../../../../..'
 
 # custom alias
 alias fzfc='code $(fzf --preview="bat --color=always {}")'
+alias sz='source ~/.zshrc'
+alias ez='code ~/.zshrc'
 
 # custom commands
 

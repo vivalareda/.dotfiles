@@ -1,0 +1,26 @@
+---
+- name: Install Homebrew packages
+  hosts: localhost
+  connection: local
+  become: false
+
+  vars:
+    homebrew_packages:
+      - neovim
+      - fzf 
+      - yazi
+      # Add all your desired packages here
+
+  tasks:
+    - name: Update Homebrew
+      community.general.homebrew:
+        update_homebrew: yes
+
+    - name: Install Homebrew packages
+      community.general.homebrew:
+        name: "{{ homebrew_packages }}"
+        state: present
+
+    - name: Upgrade all Homebrew packages
+      community.general.homebrew:
+        upgrade_all: yes
