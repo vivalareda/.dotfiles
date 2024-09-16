@@ -113,7 +113,7 @@ source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 
 # List of plugins used
-plugins=( git sudo zsh-256-color zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd )
+plugins=( git sudo zsh256-color zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd )
 
 #ZSH-AUTOSUGGESTIONS
 bindkey 'jq' autosuggest-accept
