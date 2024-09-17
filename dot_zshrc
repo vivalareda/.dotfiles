@@ -122,6 +122,8 @@ bindkey 'jj' autosuggest-execute
 ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=("forward-char" "vi-forward-char")
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg-cyan'
 
+# change ls to use eza
+alias ls='eza --color=always --icons=always --long --git --no-filesize --no-user --no-permissions'
 
 # Handy change dir shortcuts
 alias ..='cd ..'
