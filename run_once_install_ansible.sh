@@ -5,7 +5,7 @@ install_on_mac() {
 }
 
 install_on_arch() {
-  pacman -S ansible
+  sudo pacman -S ansible
 }
 
 install_on_ubuntu() {
