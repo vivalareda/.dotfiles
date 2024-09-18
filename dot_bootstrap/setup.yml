@@ -11,6 +11,7 @@
       - yazi
       - bat
       - eza
+      - ripgrep
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
