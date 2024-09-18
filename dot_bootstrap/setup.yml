@@ -12,7 +12,8 @@
       - bat
       - eza
       - ripgrep
-      - pyenv pyenv-virtualenv
+      - pyenv
+      - virtualenv
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
