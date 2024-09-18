@@ -5,6 +5,7 @@
 ---@type ChadrcConfig
 local M = {}
 
+M.lsp = {signature = false}
 M.ui = {
   telescope = { style = "bordered" },
 }

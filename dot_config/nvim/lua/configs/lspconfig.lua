@@ -16,6 +16,8 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+require("noice").setup()
+
 -- configuring single server, example: typescript
 -- lspconfig.tsserver.setup {
 --   on_attach = nvlsp.on_attach,
