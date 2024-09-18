@@ -5,5 +5,5 @@ This repo contains the configuration to setup my machines. This is using [Chezmo
 
 ```shell
 export GITHUB_USERNAME=vivalareda
-chezmoi init https://github.com/$GITHUB_USERNAME/dotfiles.git
+chezmoi init https://github.com/$GITHUB_USERNAME/.dotfiles.git
 ```
