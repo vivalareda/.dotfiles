@@ -1,5 +1,5 @@
 ---
-- name: Install Homebrew packages
+- name: Install system 
   hosts: localhost
   connection: local
   become: false
@@ -7,10 +7,20 @@
   vars:
     homebrew_packages:
       - neovim
-      - fzf 
+      - fzf
       - yazi
       - bat
       - eza
+
+    oh_my_zsh_plugins:
+      - name: zsh-syntax-highlighting
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+      - name: zsh-autosuggestions
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+      - name: zsh-256color
+        repo: https://github.com/chrissicool/zsh-256color.git
+      - name: zsh-interactive-cd
+        repo: https://github.com/mrjohannchang/zsh-interactive-cd.git
 
   tasks:
     - name: Update Homebrew
@@ -25,3 +35,14 @@
     - name: Upgrade all Homebrew packages
       community.general.homebrew:
         upgrade_all: yes
+
+    - name: Clone p10k theme
+      shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+    - name: Install plugins
+      git:
+        repo: "{{ item.repo }}"
+        dest: "{{ ZSH_CUSTOM | default('~/.oh-my-zsh/custom') }}/plugins/{{ item.name }}"
+        update: yes
+      loop: "{{ oh_my_zsh_plugins }}"
+ 

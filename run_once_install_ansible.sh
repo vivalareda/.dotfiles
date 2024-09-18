@@ -1,4 +1,4 @@
-#!/bin/sh
+#/bin/sh
 
 install_on_mac() {
   brew install ansible
@@ -34,3 +34,6 @@ case "$OS" in
       ;;
   esac
 
+ansible-playbook ~/.bootstrap/setup.yml --ask-become-pass
+
+echo "Ansible installation complete."
