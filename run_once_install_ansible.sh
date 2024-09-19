@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 install_on_mac() {
   brew install ansible
