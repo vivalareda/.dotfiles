@@ -16,6 +16,7 @@
       - virtualenv
       - gh
       - tldr
+      - gcc
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
