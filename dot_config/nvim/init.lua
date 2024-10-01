@@ -21,7 +21,7 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
-
+  { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "plugins" },
 }, lazy_config)
 
