@@ -42,6 +42,10 @@
       community.general.homebrew:
         upgrade_all: yes
 
+    - name: Clone TMP
+      shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+      ignore_errors: true
+
     - name: Clone p10k theme
       shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
       ignore_errors: true
