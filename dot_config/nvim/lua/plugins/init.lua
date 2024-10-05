@@ -11,46 +11,51 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
+    opt = {
+      servers = {
+        pyright = {},
+      },
+    },
   },
 
   {
     "numToStr/Comment.nvim",
-    opts = {
-
-    },
+    opts = {},
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css"
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
       },
     },
   },
   {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.8', -- or use branch = '0.1.x'
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8", -- or use branch = '0.1.x'
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
     "smoka7/hop.nvim",
     version = "*",
     opts = {
-      keys = 'etovxqpdygfblzhckisuran'
+      keys = "etovxqpdygfblzhckisuran",
     },
   },
   {
-    'xvzc/chezmoi.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    "xvzc/chezmoi.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("chezmoi").setup {
-      }
-    end
+      require("chezmoi").setup {}
+    end,
   },
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 }
