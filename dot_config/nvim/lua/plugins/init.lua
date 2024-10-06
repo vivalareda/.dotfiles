@@ -1,4 +1,5 @@
 return {
+
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
@@ -11,11 +12,6 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
-    opt = {
-      servers = {
-        pyright = {},
-      },
-    },
   },
 
   {

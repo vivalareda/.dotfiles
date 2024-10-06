@@ -22,7 +22,6 @@ require("lazy").setup({
     import = "nvchad.plugins",
   },
 
-
   { import = "plugins" },
 }, lazy_config)
 

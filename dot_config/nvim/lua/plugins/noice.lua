@@ -1,20 +1,18 @@
--- lazy.nvim
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
     -- add any options here
-    preset = { bottom_search = false },
   },
   dependencies = {
     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    "rcarriga/nvim-notify",
+    -- -- OPTIONAL:
+    -- --   `nvim-notify` is only needed, if you want to use the notification view.
+    -- --   If not available, we use `mini` as the fallback
+    -- "rcarriga/nvim-notify",
   },
-  require("noice").setup({
+  require("noice").setup {
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
       override = {
@@ -25,10 +23,10 @@ return {
     },
     -- you can enable a preset for easier configuration
     presets = {
-      bottom_search = true, -- use a classic bottom cmdline for search
+      bottom_search = false, -- use a classic bottom cmdline for search
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = false, -- add a border to hover docs and signature help
     },
-  }),
+  },
 }
