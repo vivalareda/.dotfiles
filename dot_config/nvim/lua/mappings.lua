@@ -13,6 +13,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jj", "<ESC>")
 map({ "o", "n", "v" }, "H", "^")
 map({ "o", "n", "v" }, "L", "$")
+map({ "n", "v" }, "c", '"_c')
 map("v", "<leader>c", '"+y', { noremap = true, silent = true })
 map("n", "<leader>v", '"+p', { noremap = true, silent = true })
 
