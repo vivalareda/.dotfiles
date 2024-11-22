@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-languages=$(echo "typescript rust bash java python" | tr " " "\n")
+languages=$(echo "typescript rust bash java python bash" | tr " " "\n")
 core_utils=$(echo "find xargs sed awk" | tr " " "\n")
 selected=$(echo -e "$languages\n$core_utils" | fzf)
 
