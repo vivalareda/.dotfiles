@@ -120,7 +120,10 @@ alias ez='nvim ~/.zshrc'
 alias mkdir='mkdir -p'
 alias nv='nvim'
 alias vim='nvim'
-if ! command -v zoxide &> /dev/null; then
+
+# Separate zoxide config
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
   alias cd='z'
 fi
 
@@ -133,6 +136,8 @@ cheat() {
 redo() {
   sudo $(fc -ln -1)
 }
+
+source <(fzf --zsh)
 
 # Load p10k configuration if available
 [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
