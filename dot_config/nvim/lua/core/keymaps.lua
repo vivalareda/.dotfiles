@@ -76,6 +76,9 @@ lsp_map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 lsp_map("<leader>ac", vim.lsp.buf.code_action, "[C]ode [A]ction")
 lsp_map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+-- Super secret keymap
+keymap("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "Make it rain animation" })
+
 -- Formatting Keymap
 -- keymap({ "n", "v" }, "<leader>l", function()
 --     require("conform").format({ async = true, lsp_format = "fallback" })

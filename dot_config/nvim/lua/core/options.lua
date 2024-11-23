@@ -40,6 +40,9 @@ opt.backspace = "indent,eol,start"
 -- Clipboard
 opt.clipboard:append "unnamedplus"
 
+-- Persistent Undo
+opt.undofile = true
+
 -- Split Windows
 opt.splitright = true
 opt.splitbelow = true

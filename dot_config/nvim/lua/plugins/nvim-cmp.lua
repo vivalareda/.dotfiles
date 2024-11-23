@@ -32,6 +32,17 @@ return {
       color_square_width = 2,
     }
 
+    luasnip.config.set_config {
+      history = true,
+      updateevents = "TextChanged,TextChangedI",
+    }
+
+    require("luasnip.loaders.from_lua").lazy_load {
+      paths = {
+        "~/.config/nvim/snippets",
+      },
+    }
+
     cmp.setup {
       completion = {
         completeopt = "menu,menuone,preview,noselect",
@@ -42,8 +53,14 @@ return {
         end,
       },
       mapping = {
-        ["<C-k>"] = cmp.mapping.select_prev_item(), -- keep for previous suggestion with Ctrl+k
-        ["<C-j>"] = cmp.mapping.select_next_item(), -- keep for next suggestion with Ctrl+j
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- scroll up in documentation
+        ["<C-f>"] = cmp.mapping.scroll_docs(4), -- scroll down in documentation
+
+        ["<C-a>"] = function()
+          if require("luasnip").expand() then
+            require("luasnip").expand()
+          end
+        end,
 
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
