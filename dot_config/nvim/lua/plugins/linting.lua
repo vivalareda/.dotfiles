@@ -5,19 +5,25 @@ return {
     local lint = require "lint"
 
     lint.linters_by_ft = {
-      python = { "pylint" },
+      python = { "mypy" },
     }
 
     -- Override pylint linter configuration
-    lint.linters.pylint = {
-      cmd = "pylint",
-      args = {
-        "--disable=C0111,C0103,C0301,E0401,C0303",
-        "--output-format=text",
-      },
-      stdin = false,
-      stream = "stdout",
-      ignore_exitcode = true,
+    -- lint.linters.pylint = {
+    --   cmd = "pylint",
+    --   args = {
+    --     "--disable=C0111,C0103,C0301,E0401,C0303",
+    --     "--output-format=text",
+    --   },
+    --   stdin = false,
+    --   stream = "stdout",
+    --   ignore_exitcode = true,
+    -- }
+
+    lint.linters.flake8 = {
+      cmd = "flake8",
+      args = { "--max-line-length=120" }, -- Increase line length limit
+      stdin = false, -- Flake8 does not require stdin
     }
 
     -- Create autocommands for linting

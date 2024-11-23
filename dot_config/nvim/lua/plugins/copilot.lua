@@ -25,7 +25,7 @@ return {
         function()
           require("CopilotChat").prompt "SimpleQuestion"
         end,
-        mode = "n",
+        mode = { "n", "v" },
         desc = "Ask a simple question",
       },
     },
