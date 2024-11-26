@@ -17,16 +17,16 @@ return {
             actions.prompt_actions { selection = require("CopilotChat.select").visual }
           )
         end,
-        mode = "n",
+        mode = { "n", "v" },
         desc = "Prompt actions",
       },
       {
-        "<leader>cs",
+        "<C-p>",
         function()
-          require("CopilotChat").prompt "SimpleQuestion"
+          require("CopilotChat").toggle()
         end,
-        mode = { "n", "v" },
-        desc = "Ask a simple question",
+        mode = "n",
+        desc = "Open Copilot chat",
       },
     },
     config = function(_, opts)
@@ -92,6 +92,10 @@ return {
             description = "Make the text more concise",
             context = "buffer",
           },
+        },
+        window = {
+          height = 0.3, -- 30% of screen height
+          width = 0.3, -- 60% of screen width
         },
       }))
     end,
