@@ -120,6 +120,7 @@ alias ez='nvim ~/.zshrc'
 alias mkdir='mkdir -p'
 alias nv='nvim'
 alias vim='nvim'
+alias nvconfig='cd ~/.config/nvim && nvim'
 
 # Separate zoxide config
 if command -v zoxide &> /dev/null; then
