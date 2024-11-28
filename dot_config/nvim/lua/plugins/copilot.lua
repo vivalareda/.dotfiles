@@ -33,6 +33,18 @@ return {
       local chat = require "CopilotChat"
       local select = require "CopilotChat.select"
 
+      vim.api.nvim_create_autocmd("BufEnter", {
+        callback = function()
+          -- Detect the project root using .git or fallback to the current directory
+          local root = vim.fn.finddir(".git/..", vim.fn.expand "%:p:h" .. ";")
+          if root == "" then
+            root = vim.fn.expand "%:p:h" -- Fallback to the directory of the current file
+          end
+          vim.g.copilot_workspace_folders = { root }
+          print("Updated Copilot workspace to:", root)
+        end,
+      })
+
       chat.setup(vim.tbl_deep_extend("force", opts, {
         prompts = {
           ChatRename = {

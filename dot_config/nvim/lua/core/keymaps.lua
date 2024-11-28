@@ -33,6 +33,13 @@ keymap("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 keymap("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- Copilot Keymaps
+vim.keymap.set('i', '<C-R>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+
 -- Telescope Keymaps
 local builtin = require "telescope.builtin"
 keymap("n", "<leader>fh", builtin.help_tags, { desc = "[S]earch [H]elp" })

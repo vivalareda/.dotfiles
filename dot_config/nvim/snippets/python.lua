@@ -1,0 +1,47 @@
+-- local ls = require "luasnip"
+-- local s = ls.snippet
+-- local t = ls.text_node
+-- local i = ls.insert_node
+-- local su = require "luasnip_snippets.common.snip_utils"
+-- local te = su.trig_engine
+-- local nl = su.new_line
+-- local d = ls.dynamic_node
+-- local sn = ls.snippet_node
+-- local jt = su.join_text
+-- local k = require("luasnip.nodes.key_indexer").new_key
+--
+-- ls.add_snippets("python", {
+--   s({ trig = "prf" }, {
+--     t 'print(f"',
+--     i(0, ""),
+--     t '")',
+--   }),
+--   s({ trig = "cla", descr = "(cla)", priority = -1000, trigEngine = te "w" }, {
+--     t "class ",
+--     i(1, "class_name", { key = "i1" }),
+--     t ":",
+--     nl(),
+--     t '\t"""',
+--     i(0, "description", { key = "i0" }),
+--     t '"""',
+--   }),
+--   s({ trig = "try", descr = '(try) "Try / Except"', priority = -50, trigEngine = te "b" }, {
+--     t "try:",
+--     nl(),
+--     t "\t",
+--     d(1, function(args, snip)
+--       return sn(nil, { i(1, jt({ snip.env.LS_SELECT_DEDENT or {} }, "\t"), { key = "i1" }) })
+--     end),
+--     nl(),
+--     t "except ",
+--     i(2, "Exception", { key = "i2" }),
+--     t " as ",
+--     i(3, "my_exception", { key = "i3" }),
+--     t ":",
+--     nl(),
+--     t "\t",
+--     d(4, function(args, snip)
+--       return sn(nil, { i(1, jt({ "raise ", args[1] }, "\t"), { key = "i4" }) })
+--     end, { k "i3" }),
+--   }),
+-- })
