@@ -122,20 +122,29 @@ alias nv='nvim'
 alias vim='nvim'
 alias nvconfig='cd ~/.config/nvim && nvim'
 
+# GITHUB ALIASES
+alias gcm='git commit -m'
+alias ga='git add .'
+alias gp='git push'
+
 # Separate zoxide config
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
   alias cd='z'
 fi
 
+# obsidian plugin nvim config 
+if [ -f ~/.obsidian_env ]; then
+  source ~/.obsidian_env
+else 
+	echo "obsidian path not set homie run setobspath if u wanna set it"
+fi
 
-# Custom commands
-cheat() {
-  curl cheat.sh/$1
-}
-
-redo() {
-  sudo $(fc -ln -1)
+setobspath() {
+  print -n "What's the path? "
+  read OBSIDIAN_PATH
+  echo "export OBSIDIAN_PATH=\"$OBSIDIAN_PATH\"" > ~/.obsidian_env
+  source ~/.zshrc
 }
 
 source <(fzf --zsh)
