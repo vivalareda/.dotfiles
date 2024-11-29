@@ -18,6 +18,7 @@
       - tldr
       - gcc
       - zoxide
+      - wget
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
