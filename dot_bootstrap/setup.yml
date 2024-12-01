@@ -19,6 +19,7 @@
       - gcc
       - zoxide
       - wget
+      - tmux
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
