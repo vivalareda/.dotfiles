@@ -41,7 +41,6 @@ return {
             root = vim.fn.expand "%:p:h" -- Fallback to the directory of the current file
           end
           vim.g.copilot_workspace_folders = { root }
-          print("Updated Copilot workspace to:", root)
         end,
       })
 
