@@ -27,16 +27,10 @@ keymap("n", "<leader>ca", function()
   vim.cmd "startinsert"
 end, { noremap = true, silent = true })
 
--- Window Navigation
-keymap("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-keymap("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-keymap("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-keymap("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
 -- Copilot Keymaps
-vim.keymap.set('i', '<C-R>', 'copilot#Accept("\\<CR>")', {
+vim.keymap.set("i", "<C-R>", 'copilot#Accept("\\<CR>")', {
   expr = true,
-  replace_keycodes = false
+  replace_keycodes = false,
 })
 vim.g.copilot_no_tab_map = true
 
