@@ -1,5 +1,0 @@
-[user]
-	email = tarzaltreda@gmail.com
-	name = Reda Tarzalt
-[credential]
-	helper = /opt/homebrew/bin/gh auth git-credential
