@@ -68,7 +68,7 @@ inner.horizontal = 5
 inner.vertical =   5
 outer.left =       5
 outer.bottom =     5
-outer.top =        25
+outer.top = [{ monitor.main = 25 }, { monitor."DELL P2419HC" = 55 }, 25]
 outer.right =      5
 
 [workspace-to-monitor-force-assignment]
