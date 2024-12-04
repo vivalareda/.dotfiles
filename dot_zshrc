@@ -80,7 +80,13 @@ fi
 
 # macOS-specific configuration
 if [[ "$CONFIG" == "mac" ]]; then
+
+  ff() {
+    aerospace list-windows -all | fzf --bind 'enter:execute(bash -c "aerospace focus -window-id {1}")+abort'
+  }
+
   alias github='cd ~/Documents/GitHub'
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # WSL-specific configuration
