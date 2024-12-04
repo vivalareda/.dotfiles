@@ -1,0 +1,10 @@
+# BEGIN_KITTY_FONTS
+font_family      family="ZedMono Nerd Font Mono"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
+
+font_size 20.0
+cursor_blink_interval 0
+cursor_shape block
