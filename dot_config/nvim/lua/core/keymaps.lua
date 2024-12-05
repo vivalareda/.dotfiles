@@ -67,20 +67,56 @@ local lsp_map = function(keys, func, desc)
   keymap("n", keys, func, { desc = "LSP: " .. desc })
 end
 
-lsp_map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-lsp_map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-lsp_map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-lsp_map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-lsp_map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-lsp_map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-lsp_map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-lsp_map("<leader>ac", vim.lsp.buf.code_action, "[C]ode [A]ction")
-lsp_map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+-- lsp_map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+-- lsp_map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+-- lsp_map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+-- lsp_map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+-- lsp_map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+-- lsp_map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+-- lsp_map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+-- lsp_map("<leader>ac", vim.lsp.buf.code_action, "[C]ode [A]ction")
+-- lsp_map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+local function lsp_keymaps(bufnr)
+  local buf_opts = { noremap = true, silent = true, buffer = bufnr }
+  keymap(
+    "n",
+    "gd",
+    require("telescope.builtin").lsp_definitions,
+    vim.tbl_extend("force", buf_opts, { desc = "[G]oto [D]efinition" })
+  )
+  keymap(
+    "n",
+    "gr",
+    require("telescope.builtin").lsp_references,
+    vim.tbl_extend("force", buf_opts, { desc = "[G]oto [R]eferences" })
+  )
+  keymap(
+    "n",
+    "gI",
+    require("telescope.builtin").lsp_implementations,
+    vim.tbl_extend("force", buf_opts, { desc = "[G]oto [I]mplementation" })
+  )
+  keymap("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", buf_opts, { desc = "[R]e[n]ame" }))
+  -- keymap("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", buf_opts, { desc = "[C]ode [A]ction" }))
+  keymap("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", buf_opts, { desc = "Hover Documentation" }))
+  keymap("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", buf_opts, { desc = "[G]oto [D]eclaration" }))
+  keymap(
+    "n",
+    "<leader>ds",
+    require("telescope.builtin").lsp_document_symbols,
+    vim.tbl_extend("force", buf_opts, { desc = "[D]ocument [S]ymbols" })
+  )
+  keymap(
+    "n",
+    "<leader>ws",
+    require("telescope.builtin").lsp_dynamic_workspace_symbols,
+    vim.tbl_extend("force", buf_opts, { desc = "[W]orkspace [S]ymbols" })
+  )
+end
 
 -- Super secret keymap
 keymap("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "Make it rain animation" })
 
--- Formatting Keymap
--- keymap({ "n", "v" }, "<leader>l", function()
---     require("conform").format({ async = true, lsp_format = "fallback" })
--- end, { desc = "[F]ormat buffer" })
+return {
+  lsp_keymaps = lsp_keymaps, -- Function for LSP keymaps to be used in `on_attach`
+}
