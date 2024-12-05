@@ -4,6 +4,8 @@ dot_config/kitty/
 dot_config/aerospace
 .config/aerospace
 dot_config/sketchybar
+dit_config/borders
+.config/borders
 .config/sketchybar
 {{- else if eq .chezmoi.os "darwin" }}
 kitty/
