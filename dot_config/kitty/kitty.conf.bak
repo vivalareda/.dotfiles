@@ -1,7 +1,7 @@
 # BEGIN_KITTY_FONTS
-font_family      family="JetBrains Mono Light Italic"
-bold_font        auto
-italic_font      auto
+font_family      family='JetBrains Mono' postscript_name=JetBrainsMono-Light
+bold_font        family='JetBrains Mono' style=Light
+italic_font      family='JetBrains Mono' postscript_name=JetBrainsMono-LightItalic
 bold_italic_font auto
 # END_KITTY_FONTS
 
