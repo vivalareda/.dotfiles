@@ -52,6 +52,7 @@ return {
         "eslint_d", -- JavaScript/TypeScript linter
         "pylint", -- Python linter
         "tflint", -- Terraform linter
+        "markdownlint", -- Markdown linter
       },
       auto_update = true, -- Automatically update tools
       run_on_start = true, -- Run installation/update on startup
