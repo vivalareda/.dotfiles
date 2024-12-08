@@ -8,10 +8,11 @@
 {{- if eq .chezmoi.os "linux" }}
 
 [credential "https://github.com"]
-    helper = /home/linuxbrew/.linuxbrew/bin/brew
+    helper = /home/linuxbrew/.linuxbrew/bin/gh auth git-credential
 
 [credential "https://gist.github.com"]
-    helper = /home/linuxbrew/.linuxbrew/bin/brew
+    helper = /home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+
 {{- else if eq .chezmoi.os "darwin" }}
 [credential "https://github.com"]
     helper = /opt/homebrew/bin/gh auth git-credential
