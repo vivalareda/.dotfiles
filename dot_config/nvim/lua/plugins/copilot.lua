@@ -38,6 +38,12 @@ return {
         end,
         desc = "Copilot Quick Chat",
       },
+      window = {
+        layout = "float",
+        width = 0.4,
+        height = 0.4,
+        border = "rounded",
+      },
     },
 
     config = function(_, opts)
@@ -56,7 +62,24 @@ return {
       })
 
       chat.setup(vim.tbl_deep_extend("force", opts, {
-        prompts = {},
+        prompts = {
+          DiagnosticError = {
+            selection = select.visual,
+            prompt = "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provid the missing character or line to change with the line number",
+            description = "Fix diagnostic error",
+            context = "file",
+          },
+        },
+        mappings = {
+          reset = {
+            normal = "<C-u>",
+          },
+        },
+        -- window = {
+        --   layout = "float",
+        --   width = 1,
+        --   height = 0.4,
+        -- },
       }))
     end,
   },
