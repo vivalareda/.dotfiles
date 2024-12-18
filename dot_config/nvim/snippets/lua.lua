@@ -6,7 +6,9 @@ local i = ls.insert_node -- Placeholder for cursor
 local f = ls.function_node -- Function-generated text
 
 return {
-  s("hello", {
-    t "print('Hello, world!')",
+  ls.add_snippets("lua", {
+    ls.snippet("hw", {
+      ls.text_node "Hello, World!",
+    }),
   }),
 }

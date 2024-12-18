@@ -36,7 +36,6 @@ return {
         "tailwindcss",
         "svelte",
         "graphql",
-        "emmet_ls",
         "prismals",
         "terraformls",
       },

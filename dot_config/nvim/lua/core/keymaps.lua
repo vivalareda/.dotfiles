@@ -2,6 +2,19 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap.set
 
+keymap("n", "<leader>nh", function()
+  require("snacks").notifier.show_history()
+end, { desc = "Show Notification History" })
+
+keymap({ "i" }, "<Tab>", function()
+  local ls = require "luasnip"
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  else
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-n>", true, false, true), "n", false)
+  end
+end, { silent = true })
+
 -- Exit keymaps
 keymap("n", "<leader>wq", ":wqa<CR>") -- save and quit
 keymap("n", "<leader>qq", ":qa!<CR>") -- quit without saving
