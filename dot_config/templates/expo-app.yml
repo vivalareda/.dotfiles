@@ -1,0 +1,97 @@
+version: "3"
+tasks:
+  setup:all:
+    desc: "Create a new Expo project and set up Tailwind CSS, NativeWind, and Metro"
+    silent: true
+    cmds:
+      - |
+        read -p "Enter the project name: " PROJECT_NAME
+        if [ -d "{{.USER_WORKING_DIR}}/$PROJECT_NAME" ]; then
+          echo "❌ Directory '$PROJECT_NAME' already exists. Please use a different name."
+          exit 1
+        fi
+        echo "🚀 Creating Expo project: $PROJECT_NAME..."
+        task --taskfile ~/.config/templates/expo-app.yml new:expo PROJECT_NAME=$PROJECT_NAME
+  new:expo:
+    desc: "Create a new Expo project"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - echo "📦 Creating project in {{.USER_WORKING_DIR}}/{{.PROJECT_NAME}}..."
+      - npx create-expo-app@latest {{.PROJECT_NAME}} --template default
+      - echo "🛠️  Setting up project dependencies..."
+      - task --taskfile ~/.config/templates/expo-app.yml setup:dependencies PROJECT_NAME={{.PROJECT_NAME}}
+      - echo "🎨 Configuring Tailwind CSS..."
+      - task --taskfile ~/.config/templates/expo-app.yml setup:tailwind PROJECT_NAME={{.PROJECT_NAME}}
+      - echo "⚙️  Setting up Metro bundler..."
+      - task --taskfile ~/.config/templates/expo-app.yml setup:metro PROJECT_NAME={{.PROJECT_NAME}}
+      - echo "📝 Setting up Babel..."
+      - task --taskfile ~/.config/templates/expo-app.yml setup:babel PROJECT_NAME={{.PROJECT_NAME}}
+      - echo "🔒 Setting up .gitignore..."
+      - task --taskfile ~/.config/templates/expo-app.yml setup:gitignore PROJECT_NAME={{.PROJECT_NAME}}
+  setup:dependencies:
+    desc: "Install dependencies"
+    dir: "{{.USER_WORKING_DIR}}/{{.PROJECT_NAME}}"
+    silent: true
+    cmds:
+      - echo "📦 Installing project dependencies..."
+      - npm install
+      - echo "🔧 Installing additional dependencies..."
+      - npm install nativewind tailwindcss react-native-reanimated react-native-safe-area-context
+  setup:tailwind:
+    desc: "Setup Tailwind CSS"
+    dir: "{{.USER_WORKING_DIR}}/{{.PROJECT_NAME}}"
+    silent: true
+    cmds:
+      - echo "🎨 Initializing Tailwind configuration..."
+      - npx tailwindcss init
+      - echo "⚙️  Updating Tailwind configuration..."
+      - |
+        sed -i '' 's/content: \[\],/content: \["\.\/app\/\*\*\/\*\.\{js,jsx,ts,tsx\}", \
+        "\.\/components\/\*\*\/\*\.\{js,jsx,ts,tsx\}"\],\n  presets: \[require("nativewind\/preset")\],/' tailwind.config.js
+      - echo "📝 Creating global CSS file..."
+      - touch global.css
+      - printf '@tailwind base;\n@tailwind components;\n@tailwind utilities;\n' > global.css
+  setup:metro:
+    desc: "Setup Metro configuration and babel"
+    dir: "{{.USER_WORKING_DIR}}/{{.PROJECT_NAME}}"
+    silent: true
+    cmds:
+      - echo "⚙️  Creating Metro configuration..."
+      - |
+        cat > metro.config.js << 'EOF'
+        const { getDefaultConfig } = require("expo/metro-config");
+        const { withNativeWind } = require('nativewind/metro');
+        const config = getDefaultConfig(__dirname)
+        module.exports = withNativeWind(config, { input: './global.css' })
+        EOF
+      - echo "🔗 Updating imports..."
+      - |
+        sed -i '' '/ThemedView/a\
+        import "../../global.css";\
+        ' app/\(tabs\)/index.tsx
+      - echo "✨ Setup complete! The project is ready to go!"
+  setup:babel:
+    desc: "Setup Babel configuration"
+    dir: "{{.USER_WORKING_DIR}}/{{.PROJECT_NAME}}"
+    silent: true
+    cmds:
+      - echo "⚙️  Creating Babel configuration..."
+      - |
+        cat > babel.config.js << 'EOF'
+        module.exports = function (api) {
+          api.cache(true);
+          return {
+            presets: [
+              ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+              "nativewind/babel",
+            ],
+          };
+        };
+        EOF
+  setup:gitignore:
+    desc: "Setup .gitignore"
+    dir: "{{.USER_WORKING_DIR}}/{{.PROJECT_NAME}}"
+    silent: true
+    cmds:
+      - echo ".env\n" >> .gitignore
