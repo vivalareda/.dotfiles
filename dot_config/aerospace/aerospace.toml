@@ -81,6 +81,7 @@ outer.right =      15
 D = 'main'
 O = 'main'
 B = 'main'
+# T = 'main'
 
 6 = ['secondary']
 7 = ['secondary']
@@ -153,6 +154,7 @@ cmd-9 = 'workspace 9'
 cmd-d = 'workspace D'
 cmd-o = 'workspace O'
 cmd-b = 'workspace B'
+# cmd-t = 'workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
@@ -168,6 +170,7 @@ cmd-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
 cmd-shift-d = 'move-node-to-workspace D --focus-follows-window'
 cmd-shift-o = 'move-node-to-workspace O --focus-follows-window'
 cmd-shift-b = 'move-node-to-workspace B --focus-follows-window'
+# cmd-shift-t = 'move-node-to-workspace T --focus-follows-window'
 
 
 cmd-e = 'exec-and-forget open -n "/Applications/BorderLess Arc.app"'
@@ -189,6 +192,7 @@ r = ['reload-config', 'mode main']
 enter = ['reload-config', 'mode main']
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
+s = ['exec-and-forget sketchybar --reload', 'mode main']
 
 1 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 1', "mode main"]
 2 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 2', "mode main"]
