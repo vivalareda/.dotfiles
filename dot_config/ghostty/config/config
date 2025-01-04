@@ -1,0 +1,9 @@
+keybind = alt+shift+o=toggle_quick_terminal
+font-size = 18.0
+background-opacity = 0.90
+background-blur-radius = 20
+cursor-style = block
+cursor-style-blink = false
+clipboard-read = allow
+shell-integration-features = no-cursor
+font-family = JetBrains Mono

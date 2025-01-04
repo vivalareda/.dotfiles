@@ -4,6 +4,10 @@ return {
   config = function()
     local ls = require "luasnip"
 
+    ls.setup {
+      enable_autosnippets = true,
+    }
+
     -- Load existing friendly-snippets
     require("luasnip.loaders.from_vscode").lazy_load()
 

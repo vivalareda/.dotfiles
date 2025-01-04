@@ -65,14 +65,32 @@ return {
         prompts = {
           DiagnosticError = {
             selection = select.visual,
-            prompt = "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provid the missing character or line to change with the line number",
+            prompt = "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provid the missing character",
             description = "Fix diagnostic error",
+            context = "file",
+          },
+          InDepthDiagnostic = {
+            selection = select.visual,
+            prompt = "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
+            description = "Fix in depth diagnostic error",
+            context = "file",
+          },
+          FixBloc = {
+            selection = select.visual,
+            prompt = "This block of code has an error, fix the error and give me back only the fixed block without line number so that I can directly replace it in the file",
+            description = "Fix block error",
+            context = "file",
+          },
+          FeatureRequest = {
+            selection = select.visual,
+            prompt = "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line number, just the code so that I can directly replace it in the file",
+            description = "Implement feature",
             context = "file",
           },
         },
         mappings = {
           reset = {
-            normal = "<C-u>",
+            normal = "<C-r>",
           },
         },
         -- window = {
