@@ -7,7 +7,7 @@ selected=$(echo -e "$languages\n$core_utils" | fzf)
 read -p "GIMME QUERY: " query
 
 if echo $languages | grep -qs $selected; then
-  tmux split-window -v bash -c "curl cht.sh/$selected/$(echo "$query" | tr " " "+") | bat --paging=always "
+  tmux split-window -v bash -c "curl cht.sh/$selected/$(echo "$query" | tr " " "+") | bat --paging=always --style=plain"
 else
   tmux split-window -v bash -c "curl cht.sh/$selected~$query/$(echo "$query" | tr " " "+") | less "
 fi
