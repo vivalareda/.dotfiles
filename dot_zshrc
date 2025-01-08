@@ -1,4 +1,8 @@
 # Determine the operating system
+#
+#
+#
+#
 OS=$(uname -s)
 case "$OS" in
   Linux*)
@@ -81,12 +85,14 @@ fi
 # macOS-specific configuration
 if [[ "$CONFIG" == "mac" ]]; then
 
-  ff() {
-    aerospace list-windows -all | fzf --bind 'enter:execute(bash -c "aerospace focus -window-id {1}")+abort'
-  }
-
+  alias finder='open .'
   alias github='cd ~/Documents/GitHub'
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  source $HOME/.cargo/env
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
 fi
 
 # WSL-specific configuration
@@ -153,10 +159,17 @@ setobspath() {
   source ~/.zshrc
 }
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Use bat for man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 source <(fzf --zsh)
 
 # Load p10k configuration if available
 [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
 
