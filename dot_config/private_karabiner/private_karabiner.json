@@ -30,7 +30,7 @@
               {
                 "conditions": [
                   {
-                    "bundle_identifiers": ["^com\\.aerospace\\.yourapp"],
+                    "bundle_identifiers": ["^dev\\.nikitabobko\\.aerospace"],
                     "type": "frontmost_application_unless"
                   }
                 ],
@@ -63,21 +63,21 @@
             ]
           },
           {
-            "description": "Remap left Ctrl+C/V and right Ctrl+C/V to Cmd+C/V on Ergodox EZ",
+            "description": "Remap Ctrl + Shift + C/Z to Ctrl + C/Z in terminal apps for Ergo keyboard",
             "manipulators": [
               {
                 "type": "basic",
                 "from": {
                   "key_code": "c",
                   "modifiers": {
-                    "mandatory": ["control"],
+                    "mandatory": ["control", "shift"],
                     "optional": ["any"]
                   }
                 },
                 "to": [
                   {
                     "key_code": "c",
-                    "modifiers": ["command"]
+                    "modifiers": ["control"]
                   }
                 ],
                 "conditions": [
@@ -89,22 +89,32 @@
                         "product_id": 18804
                       }
                     ]
+                  },
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Terminal$",
+                      "^com\\.googlecode\\.iterm2$",
+                      "^co\\.zeit\\.hyper$",
+                      "^io\\.alacritty$",
+                      "^com\\.mitchellh\\.ghostty$"
+                    ]
                   }
                 ]
               },
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "v",
+                  "key_code": "z",
                   "modifiers": {
-                    "mandatory": ["control"],
+                    "mandatory": ["control", "shift"],
                     "optional": ["any"]
                   }
                 },
                 "to": [
                   {
-                    "key_code": "v",
-                    "modifiers": ["command"]
+                    "key_code": "z",
+                    "modifiers": ["control"]
                   }
                 ],
                 "conditions": [
@@ -116,59 +126,15 @@
                         "product_id": 18804
                       }
                     ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": ["control"],
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
+                  },
                   {
-                    "key_code": "f",
-                    "modifiers": ["command"]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "vendor_id": 12951,
-                        "product_id": 18804
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "mandatory": ["control"],
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "a",
-                    "modifiers": ["command"]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "vendor_id": 12951,
-                        "product_id": 18804
-                      }
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Terminal$",
+                      "^com\\.googlecode\\.iterm2$",
+                      "^co\\.zeit\\.hyper$",
+                      "^io\\.alacritty$",
+                      "^com\\.mitchellh\\.ghostty$"
                     ]
                   }
                 ]
