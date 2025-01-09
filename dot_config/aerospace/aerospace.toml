@@ -1,5 +1,7 @@
 # Place a copy of this config to ~/.aerospace.toml
 
+
+
 # After that, you can edit ~/.aerospace.toml to your liking
 
 # You can use it to add commands that run after login to macOS user session.
@@ -66,23 +68,22 @@ preset = 'qwerty'
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
 inner.horizontal = 15
-inner.vertical =   15
-outer.left =       15
+inner.vertical = 15
+outer.left = 15
 outer.bottom = [{ monitor.main = 18 }, { monitor.secondary = 22 }, 22]
 outer.top = [{ monitor.main = 30 }, { monitor.secondary = 62 }, 62]
-outer.right =      15
+outer.right = 15
 
 [workspace-to-monitor-force-assignment]
-1 = 'main'         
-2 = 'main'         
-3 = 'main'
-4 = 'main'
-5 = 'main'
-D = 'main'
-O = 'main'
-B = 'main'
-# T = 'main'
-
+1 = ['main']         
+2 = ['main']         
+3 = ['main']
+4 = ['main']
+5 = ['main']
+# D = ['main']
+# O = ['main']
+# # T = ['secondary']
+#
 6 = ['secondary']
 7 = ['secondary']
 8 = ['secondary']
@@ -113,13 +114,7 @@ B = 'main'
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with cmd + enter shortcut (like in i3)
 # alt-enter = 'exec-and-forget open -n "/Applications/WezTerm.app"'
-# cmd-enter = '''exec-and-forget osascript -e '
-# tell application "Terminal"
-#     do script 
-#       hello world
-#     activate
-# end tell'
-# '''
+cmd-alt-tab = 'move-workspace-to-monitor --wrap-around next'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
@@ -131,10 +126,10 @@ cmd-h = 'focus left'
 cmd-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-cmd-shift-j = 'move-node-to-monitor --wrap-around next'
-cmd-shift-k = 'move-node-to-monitor --wrap-around prev'
-cmd-j= 'focus-monitor --wrap-around next'
-cmd-k= 'focus-monitor --wrap-around prev'
+cmd-shift-j = 'move-workspace-to-monitor --wrap-around next'
+cmd-shift-k = 'move-workspace-to-monitor --wrap-around prev'
+cmd-j = 'focus-monitor --wrap-around next'
+cmd-k = 'focus-monitor --wrap-around prev'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 cmd-shift-minus = 'resize smart -50'
@@ -154,6 +149,7 @@ cmd-9 = 'workspace 9'
 cmd-d = 'workspace D'
 cmd-o = 'workspace O'
 cmd-b = 'workspace B'
+cmd-m = 'workspace M'
 # cmd-t = 'workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -170,11 +166,13 @@ cmd-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
 cmd-shift-d = 'move-node-to-workspace D --focus-follows-window'
 cmd-shift-o = 'move-node-to-workspace O --focus-follows-window'
 cmd-shift-b = 'move-node-to-workspace B --focus-follows-window'
+cmd-shift-m = 'move-node-to-workspace M --focus-follows-window'
 # cmd-shift-t = 'move-node-to-workspace T --focus-follows-window'
 
-
+alt-enter = 'exec-and-forget bash ~/.config/script/move-workspace-to-monitor.sh'
+cmd-enter = 'exec-and-forget open ~/github'
 cmd-e = 'exec-and-forget open -n "/Applications/BorderLess Arc.app"'
-cmd-m = 'macos-native-minimize'
+cmd-alt-m = 'macos-native-minimize'
 cmd-alt-f = 'macos-native-fullscreen'
 cmd-alt-l = 'layout tiles tiling'
 cmd-alt-o = 'layout tiles tiling'
@@ -225,6 +223,22 @@ run = ['move-node-to-workspace D']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
+run = ['move-node-to-workspace O']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['move-node-to-workspace M']
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = ['move-node-to-workspace B']
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = ['move-node-to-workspace O']
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
 run = ['move-node-to-workspace O']
 
 [[on-window-detected]]
