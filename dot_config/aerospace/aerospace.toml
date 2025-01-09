@@ -128,6 +128,8 @@ cmd-l = 'focus right'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 cmd-shift-j = 'move-workspace-to-monitor --wrap-around next'
 cmd-shift-k = 'move-workspace-to-monitor --wrap-around prev'
+cmd-alt-j = 'move-node-to-monitor --wrap-around next'
+cmd-alt-k = 'move-node-to-monitor --wrap-around prev'
 cmd-j = 'focus-monitor --wrap-around next'
 cmd-k = 'focus-monitor --wrap-around prev'
 
@@ -186,11 +188,12 @@ cmd-comma = 'mode service'
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-r = ['reload-config', 'mode main']
+r = ['reload-config', 'exec-and-forget sketchybar --reload', 'mode main']
 enter = ['reload-config', 'mode main']
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
-s = ['exec-and-forget sketchybar --reload', 'mode main']
+a = ['layout accordion']
+q = ['mode main']
 
 1 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 1', "mode main"]
 2 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 2', "mode main"]
