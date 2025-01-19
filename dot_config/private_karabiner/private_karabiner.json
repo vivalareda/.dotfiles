@@ -25,44 +25,6 @@
             ]
           },
           {
-            "description": "Disable Cmd + Tab system shortcut for macOS but keep it available for applications",
-            "manipulators": [
-              {
-                "conditions": [
-                  {
-                    "bundle_identifiers": ["^dev\\.nikitabobko\\.aerospace"],
-                    "type": "frontmost_application_unless"
-                  }
-                ],
-                "from": {
-                  "key_code": "tab",
-                  "modifiers": { "mandatory": ["left_command"] }
-                },
-                "to": [
-                  {
-                    "key_code": "tab",
-                    "modifiers": ["left_command"]
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
-                },
-                "to": [{ "key_code": "left_control" }],
-                "to_if_alone": [{ "key_code": "escape" }],
-                "type": "basic"
-              }
-            ]
-          },
-          {
             "description": "Remap Ctrl + Shift + C/Z to Ctrl + C/Z in terminal apps for Ergo keyboard",
             "manipulators": [
               {
@@ -135,6 +97,140 @@
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
                       "^com\\.mitchellh\\.ghostty$"
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "shift",
+                  "modifiers": {
+                    "mandatory": ["control", "shift"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "shift",
+                    "modifiers": ["control"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 12951,
+                        "product_id": 18804
+                      }
+                    ]
+                  },
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Terminal$",
+                      "^com\\.googlecode\\.iterm2$",
+                      "^co\\.zeit\\.hyper$",
+                      "^io\\.alacritty$",
+                      "^com\\.mitchellh\\.ghostty$"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Disable Cmd + Tab system shortcut for macOS but keep it available for applications",
+            "manipulators": [
+              {
+                "conditions": [
+                  {
+                    "bundle_identifiers": ["^dev\\.nikitabobko\\.aerospace"],
+                    "type": "frontmost_application_unless"
+                  }
+                ],
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": { "mandatory": ["left_command"] }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": ["left_command"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "left_control" }],
+                "to_if_alone": [{ "key_code": "escape" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Remap Ctrl + C/V to Cmd + C/V globally for Ergo keyboard",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "c",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "c",
+                    "modifiers": ["command"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 12951,
+                        "product_id": 18804
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "v",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "v",
+                    "modifiers": ["command"]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 12951,
+                        "product_id": 18804
+                      }
                     ]
                   }
                 ]
