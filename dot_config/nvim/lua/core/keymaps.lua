@@ -18,7 +18,7 @@ end, { silent = true })
 -- Exit keymaps
 keymap("n", "<leader>wq", ":wqa<CR>") -- save and quit
 keymap("n", "<leader>qq", ":qa!<CR>") -- quit without saving
-keymap("n", "<leader>ww", ":w<CR>") -- save
+keymap("n", "<leader>ww", ":wa<CR>") -- save
 
 -- Basic keymaps
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -43,12 +43,18 @@ keymap("n", "k", [[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'k' : 'gk']]
 
 -- Keymaps functions
 keymap("n", "<leader>ya", function()
-  vim.cmd 'normal! ggVG"+y'
+  local save_cursor = vim.fn.getpos(".")
+  vim.cmd('normal! ggVG"+y')
+  vim.fn.setpos(".", save_cursor)
 end, { noremap = true, silent = true })
 
 keymap("n", "<leader>ca", function()
   vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
   vim.cmd "startinsert"
+end, { noremap = true, silent = true })
+
+keymap("n", "dab", function()
+  vim.cmd "normal! V%d"
 end, { noremap = true, silent = true })
 
 -- Copilot Keymaps

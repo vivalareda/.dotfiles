@@ -45,8 +45,8 @@ return {
           enable = true,
           keymaps = {
             init_selection = "ss", -- Start incremental selection
-            node_incremental = "sn", -- Increment to the next node
-            scope_incremental = "sc", -- Increment to the next scope (e.g., function or class)
+            node_incremental = "es", -- Increment to the next node
+            scope_incremental = "ef", -- Increment to the next scope (e.g., function or class)
             node_decremental = "ds", -- Decrement selection
           },
         },
@@ -60,34 +60,34 @@ return {
               ["<leader>A"] = "@parameter.inner",
             },
           },
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["ae"] = { query = "@assignment.outer", desc = "Select assignment with the declaration" },
-              ["ie"] = { query = "@assignment.inner", desc = "Select assignment without the declaration" },
-              ["le"] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
-              ["re"] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
-
-              ["ap"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
-              ["ip"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
-
-              ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
-              ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
-
-              ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
-              ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
-
-              ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
-              ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
-
-              ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
-              ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
-
-              ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
-              ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
-            },
-          },
+          -- select = {
+          --   enable = true,
+          --   lookahead = true,
+          --   keymaps = {
+          --     ["ae"] = { query = "@assignment.outer", desc = "Select assignment with the declaration" },
+          --     ["ie"] = { query = "@assignment.inner", desc = "Select assignment without the declaration" },
+          --     ["le"] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+          --     ["re"] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+          --
+          --     ["ap"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
+          --     ["ip"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
+          --
+          --     ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
+          --     ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
+          --
+          --     ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
+          --     ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+          --
+          --     ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
+          --     ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+          --
+          --     ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
+          --     ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
+          --
+          --     ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
+          --     ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+          --   },
+          -- },
         },
       }
 

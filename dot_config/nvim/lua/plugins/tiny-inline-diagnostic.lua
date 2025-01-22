@@ -5,6 +5,14 @@ return {
   config = function()
     require("tiny-inline-diagnostic").setup {
       preset = "powerline",
+      overflow = {
+        mode = "wrap",
+      },
+      multiple_diag_under_cursor = false,
+      multilines = {
+        enabled = true,
+        always_show = false,
+      },
     }
   end,
 }
