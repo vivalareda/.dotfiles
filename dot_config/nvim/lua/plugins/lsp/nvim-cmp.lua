@@ -44,15 +44,30 @@ return {
         ['<C-k>'] = cmp.mapping.select_prev_item(), -- keep for previous suggestion with Ctrl+k
         ['<C-j>'] = cmp.mapping.select_next_item(), -- keep for next suggestion with Ctrl+j
 
+        -- ['<Tab>'] = cmp.mapping(function(fallback)
+        --   if cmp.visible() then
+        --     cmp.select_next_item() -- navigate to next suggestion
+        --   elseif require('luasnip').expand_or_jumpable() then
+        --     require('luasnip').expand_or_jump() -- jump in snippet if available
+        --   else
+        --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
+        --   end
+        -- end, { 'i', 's' }),
         ['<Tab>'] = cmp.mapping(function(fallback)
+          local col = vim.fn.col('.') -- Get the cursor's column position
           if cmp.visible() then
-            cmp.select_next_item() -- navigate to next suggestion
+            cmp.select_next_item() -- Navigate to the next completion item
           elseif require('luasnip').expand_or_jumpable() then
-            require('luasnip').expand_or_jump() -- jump in snippet if available
+            require('luasnip').expand_or_jump() -- Expand or jump to the next snippet placeholder
+          elseif col == 1 or vim.fn.getline('.'):match('^%s*$') then
+            -- If at the beginning of the line or on an empty line, insert a literal tab
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
           else
-            fallback() -- fall back to default behavior if no suggestion or snippet
-          end
-        end, { 'i', 's' }),
+              print("Fallback function triggered")
+              print(vim.inspect(fallback))
+              fallback() -- Delegate to fallback for other scenarios
+            end
+          end, { 'i', 's' }),
 
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -60,7 +75,7 @@ return {
           elseif require('luasnip').jumpable(-1) then
             require('luasnip').jump(-1) -- jump backwards in snippet if available
           else
-            fallback() -- fall back to default behavior if no suggestion or snippet
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
           end
         end, { 'i', 's' }),
 
