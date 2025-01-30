@@ -20,6 +20,7 @@
       - zoxide
       - wget
       - tmux
+      - yt-dlp
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
