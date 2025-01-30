@@ -133,6 +133,7 @@ alias mkdir='mkdir -p'
 alias nv='nvim'
 alias vim='nvim'
 alias nvconfig='cd ~/.config/nvim && nvim'
+alias dl='yt-dlp'
 
 # GITHUB ALIASES
 alias gcm='git commit -m'
@@ -165,7 +166,21 @@ eval "$(pyenv virtualenv-init -)"
 # Use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# Set path
+export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+export PATH="/Users/lilflare/go/bin:$PATH"
+
+
+#fzf and yazi config
 source <(fzf --zsh)
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # Load p10k configuration if available
 [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
@@ -173,3 +188,8 @@ source <(fzf --zsh)
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 
+
+[ -f "/Users/lilflare/.ghcup/env" ] && . "/Users/lilflare/.ghcup/env" # ghcup-env
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/lilflare/.lmstudio/bin"
