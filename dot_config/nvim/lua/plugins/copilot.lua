@@ -38,6 +38,18 @@ return {
         end,
         desc = "Copilot Quick Chat",
       },
+      {
+        "<leader>cpt",
+        function()
+          local copilot_status = vim.fn["copilot#Enabled"]()
+          if copilot_status == 0 then
+            vim.fn["copilot#Enable"]()
+          else
+            vim.fn["copilot#Disable"]()
+          end
+        end,
+        desc = "Toggle Copilot",
+      },
       window = {
         layout = "float",
         width = 0.4,
@@ -77,13 +89,13 @@ return {
           },
           FixBloc = {
             selection = select.visual,
-            prompt = "This block of code has an error, fix the error and give me back only the fixed block without line number so that I can directly replace it in the file",
+            prompt = "This block of code has an error, fix the error and give me back only the fixed block without line Expression so that I can directly replace it in the file",
             description = "Fix block error",
             context = "file",
           },
           FeatureRequest = {
             selection = select.visual,
-            prompt = "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line number, just the code so that I can directly replace it in the file",
+            prompt = "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line Expression, just the code so that I can directly replace it in the file",
             description = "Implement feature",
             context = "file",
           },
