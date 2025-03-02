@@ -153,10 +153,14 @@ else
 	echo "obsidian path not set homie run setobspath if u wanna set it"
 fi
 
-tmux () {
-  print -n "wus the session name homie? "
-  read SESSION_NAME
-  command tmux new-session -A -s "$SESSION_NAME"
+tmux() {
+  if [ $# -eq 0 ]; then
+    print -n "wus the session name homie? "
+    read SESSION_NAME
+    command tmux new-session -A -s "$SESSION_NAME"
+  else
+    command tmux "$@"
+  fi
 }
 
 setobspath() {
