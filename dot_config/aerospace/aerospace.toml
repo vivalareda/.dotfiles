@@ -84,7 +84,7 @@ outer.right = 15
 # O = ['main']
 # # T = ['secondary']
 #
-6 = ['secondary']
+6 = ['main']
 7 = ['secondary']
 8 = ['secondary']
 9 = ['secondary']
@@ -192,7 +192,7 @@ r = ['reload-config', 'exec-and-forget sketchybar --reload', 'mode main']
 enter = ['reload-config', 'mode main']
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
-a = ['layout accordion']
+a = ['layout accordion', 'mode main']
 q = ['mode main']
 
 1 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 1', "mode main"]
@@ -262,4 +262,8 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Terminal'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.QuickTimePlayerX'
 run = 'layout floating'

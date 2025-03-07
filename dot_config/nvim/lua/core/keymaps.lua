@@ -23,19 +23,18 @@ keymap("n", "<leader>ww", ":wa<CR>") -- save
 -- Basic keymaps
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
 keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
+keymap("i", "JJ", "<Esc>", { noremap = true, silent = true })
 keymap({ "o", "n", "v" }, "H", "^")
 keymap({ "o", "n", "v" }, "L", "$")
 keymap("v", "<leader>y", '"+y', { noremap = true, silent = true })
 keymap("n", "<leader>v", '"+p', { noremap = true, silent = true })
 keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })
-keymap("n", "<S-CR>", "o<Esc>j", { noremap = true, silent = true })
-keymap("n", "<C-c>", "ciw", { noremap = true, silent = true })
+keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
+keymap("n", "C", "ciw", { noremap = true, silent = true })
 
 -- Shortcut to use blackhole register by default
 keymap("v", "c", '"_c', { noremap = true, silent = true })
-keymap("v", "C", '"_C', { noremap = true, silent = true })
 keymap("n", "c", '"_c', { noremap = true, silent = true })
-keymap("n", "C", '"_C', { noremap = true, silent = true })
 
 -- Add vertical mouvement to jumps
 keymap("n", "j", [[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'j' : 'gj']], { noremap = true, expr = true })
@@ -43,8 +42,8 @@ keymap("n", "k", [[v:count ? (v:count >= 3 ? "m'" . v:count : '') . 'k' : 'gk']]
 
 -- Keymaps functions
 keymap("n", "<leader>ya", function()
-  local save_cursor = vim.fn.getpos(".")
-  vim.cmd('normal! ggVG"+y')
+  local save_cursor = vim.fn.getpos "."
+  vim.cmd 'normal! ggVG"+y'
   vim.fn.setpos(".", save_cursor)
 end, { noremap = true, silent = true })
 
