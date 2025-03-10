@@ -107,12 +107,12 @@ end
 -- lsp_map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 local function lsp_keymaps(bufnr)
   local buf_opts = { noremap = true, silent = true, buffer = bufnr }
-  keymap(
-    "n",
-    "gd",
-    require("telescope.builtin").lsp_definitions,
-    vim.tbl_extend("force", buf_opts, { desc = "[G]oto [D]efinition" })
-  )
+  keymap("n", "gd", function()
+    require("telescope.builtin").lsp_definitions()
+    vim.defer_fn(function()
+      vim.cmd "normal! zz"
+    end, 100)
+  end, vim.tbl_extend("force", buf_opts, { desc = "[G]oto [D]efinition and Center" }))
   keymap(
     "n",
     "gr",
