@@ -1,5 +1,5 @@
 ---
-- name: Install system 
+- name: Install system
   hosts: localhost
   connection: local
   become: false
@@ -21,6 +21,7 @@
       - wget
       - tmux
       - yt-dlp
+      - repomix
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
@@ -47,7 +48,7 @@
         upgrade_all: yes
 
     - name: Clone TMP
-      shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+      shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
       ignore_errors: true
 
     - name: Clone p10k theme
@@ -60,4 +61,3 @@
         dest: "{{ ZSH_CUSTOM | default('~/.oh-my-zsh/custom') }}/plugins/{{ item.name }}"
         update: yes
       loop: "{{ oh_my_zsh_plugins }}"
- 
