@@ -80,6 +80,7 @@ if [[ "$CONFIG" == "arch" ]]; then
   alias pc='$aurhelper -Sc'
   alias po='$aurhelper -Qtdq | $aurhelper -Rns -'
   alias github='cd ~/github'
+  alias rpm='repomix'
 fi
 
 # macOS-specific configuration
@@ -133,13 +134,13 @@ alias mkdir='mkdir -p'
 alias nv='nvim'
 alias vim='nvim'
 alias nvconfig='cd ~/.config/nvim && nvim'
+alias obs='cd ~/obsidian/obsidian && nvim'
 alias dl='yt-dlp'
 
 # GITHUB ALIASES
 alias gcm='git commit -m'
 alias ga='git add .'
 alias gp='git push'
-alias gh-create='gh repo create --private --source=. --remote=origin && git push -u --all && gh browse'
 
 # Separate zoxide config
 if command -v zoxide &> /dev/null; then
@@ -162,6 +163,29 @@ tmux() {
   else
     command tmux "$@"
   fi
+}
+
+repomix() {
+  if [ $# -eq 0 ]; then
+    command repomix --global
+  else
+    command repomix "$@"
+  fi
+}
+
+gh-create() {
+    VISIBILITY=$(echo -e "public\nprivate" | fzf --prompt="Select visibility: ")
+    if [ ! -d ".git" ]; then
+      command git init && git add . && git commit -m "initial commit"
+    fi
+
+    if [ "$VISIBILITY" = "public" ]; then
+      command gh repo create --public --source=. --remote=origin && git push -u --all && gh browse
+    elif [ "$VISIBILITY" = "private" ]; then
+      command gh repo create --private --source=. --remote=origin && git push -u --all && gh browse
+    else
+      echo "wrong command"
+    fi
 }
 
 setobspath() {
