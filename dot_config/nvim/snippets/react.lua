@@ -8,6 +8,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local rep = extras.rep
 
+-- typescriptreact(.tsx) snippets
 return {
   ls.add_snippets("typescriptreact", {
     s("sfc", {
@@ -48,6 +49,22 @@ return {
       t ", [",
       i(2),
       t "]);",
+    }),
+  }),
+
+  ls.add_snippets("typescriptreact", {
+    s({ trig = "print", snippetType = "autosnippet" }, {
+      t "console.log(",
+      i(1),
+      t ");",
+    }),
+  }),
+
+  ls.add_snippets("typescript", {
+    s({ trig = "print", snippetType = "autosnippet" }, {
+      t "console.log(",
+      i(1),
+      t ");",
     }),
   }),
 }

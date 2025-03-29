@@ -31,6 +31,31 @@ keymap("n", "<leader>v", '"+p', { noremap = true, silent = true })
 keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })
 keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
 keymap("n", "C", "ciw", { noremap = true, silent = true })
+keymap("n", "p", '"0p', { noremap = true, silent = true })
+keymap("n", "<leader>k", function()
+  vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR })
+end, { desc = "open floating diagnostic" }, { noremap = true, silent = true })
+
+-- Yanking keymap to save cursor position
+local cursorPreYank
+vim.keymap.set({ "n", "x" }, "y", function()
+  cursorPreYank = vim.api.nvim_win_get_cursor(0)
+  return "y"
+end, { expr = true })
+
+keymap("n", "Y", function()
+  cursorPreYank = vim.api.nvim_win_get_cursor(0)
+  return "y$"
+end, { expr = true })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    if vim.v.event.operator == "y" and cursorPreYank then
+      vim.api.nvim_win_set_cursor(0, cursorPreYank)
+      cursorPreYank = nil -- Clear the saved position after restoring it
+    end
+  end,
+})
 
 -- Shortcut to use blackhole register by default
 keymap("v", "c", '"_c', { noremap = true, silent = true })
@@ -61,6 +86,19 @@ vim.keymap.set("i", "<C-R>", 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false,
 })
+
+function ToggleCopilot()
+  local status = vim.g.copilot_enabled
+  if status == 1 then
+    vim.cmd "Copilot disable"
+    print "Copilot disabled"
+  else
+    vim.cmd "Copilot enable"
+    print "Copilot enabled"
+  end
+end
+
+keymap("n", "<leader>cpt", ToggleCopilot, { desc = "Toggle Copilot" }, { noremap = true, silent = true })
 vim.g.copilot_no_tab_map = true
 
 -- Telescope Keymaps

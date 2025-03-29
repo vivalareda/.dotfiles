@@ -38,18 +38,6 @@ return {
         end,
         desc = "Copilot Quick Chat",
       },
-      {
-        "<leader>cpt",
-        function()
-          local copilot_status = vim.fn["copilot#Enabled"]()
-          if copilot_status == 0 then
-            vim.fn["copilot#Enable"]()
-          else
-            vim.fn["copilot#Disable"]()
-          end
-        end,
-        desc = "Toggle Copilot",
-      },
       window = {
         layout = "float",
         width = 0.4,
