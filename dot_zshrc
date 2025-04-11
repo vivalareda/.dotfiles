@@ -112,10 +112,11 @@ source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k
 
 # Plugin setup
 plugins=(git sudo zsh-256color zsh-interactive-cd)
+
+# Autosuggestions configuration
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Autosuggestions configuration
 bindkey 'jk' autosuggest-accept
 bindkey 'jj' autosuggest-execute
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg-cyan'
@@ -193,6 +194,13 @@ setobspath() {
   read OBSIDIAN_PATH
   echo "export OBSIDIAN_PATH=\"$OBSIDIAN_PATH\"" > ~/.obsidian_env
   source ~/.zshrc
+}
+
+pbcopy() {
+  if [ $# -eq 0 ]; then
+    selected_file=$(find . -maxdepth 1 -type f | fzf --prompt="Select file: ")
+    [[ -n "$selected_file" ]] && cat $selected_file | command pbcopy
+  fi
 }
 
 eval "$(pyenv init -)"
