@@ -22,6 +22,9 @@
       - tmux
       - yt-dlp
       - repomix
+      - node
+      - oven-sh/bun/bun
+      - pnpm
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
@@ -61,3 +64,36 @@
         dest: "{{ ZSH_CUSTOM | default('~/.oh-my-zsh/custom') }}/plugins/{{ item.name }}"
         update: yes
       loop: "{{ oh_my_zsh_plugins }}"
+
+    - name: Tap FelixKratz/formulae
+      community.general.homebrew_tap:
+        name: FelixKratz/formulae
+      when: os_type == 'Darwin'
+
+    - name: Tap nikitabobko/tap
+      community.general.homebrew_tap:
+        name: nikitabobko/tap
+      when: os_type == 'Darwin'
+
+    - name: Install aerospace (cask)
+      community.general.homebrew:
+        name: nikitabobko/tap/aerospace
+        state: present
+        install_options: ["--cask"]
+      when: os_type == 'Darwin'
+
+    - name: Install sketchybar and borders
+      community.general.homebrew:
+        name:
+          - sketchybar
+          - borders
+        state: present
+      when: os_type == 'Darwin'
+
+    - name: Start aerospace service
+      shell: brew services start aerospace
+      when: os_type == 'Darwin'
+
+    - name: Start borders service
+      shell: brew services start borders
+      when: os_type == 'Darwin'
