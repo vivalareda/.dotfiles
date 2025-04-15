@@ -14,6 +14,7 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
     'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
+    'exec-and-forget /opt/homebrew/opt/borders/bin/borders'
 ]
 
 exec-on-workspace-change = [
@@ -84,11 +85,11 @@ outer.right = 15
 # O = ['main']
 # # T = ['secondary']
 #
-6 = ['main']
+6 = ['secondary']
 7 = ['secondary']
 8 = ['secondary']
 9 = ['secondary']
-0 = ['secondary']
+0 = ['main']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -152,6 +153,7 @@ cmd-d = 'workspace D'
 cmd-o = 'workspace O'
 cmd-b = 'workspace B'
 cmd-m = 'workspace M'
+cmd-g = 'workspace G'
 # cmd-t = 'workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -169,10 +171,11 @@ cmd-shift-d = 'move-node-to-workspace D --focus-follows-window'
 cmd-shift-o = 'move-node-to-workspace O --focus-follows-window'
 cmd-shift-b = 'move-node-to-workspace B --focus-follows-window'
 cmd-shift-m = 'move-node-to-workspace M --focus-follows-window'
+cmd-shift-g = 'move-node-to-workspace G --focus-follows-window'
 # cmd-shift-t = 'move-node-to-workspace T --focus-follows-window'
 
 alt-enter = 'exec-and-forget bash ~/.config/script/move-workspace-to-monitor.sh'
-# cmd-enter = 'exec-and-forget open ~/github'
+# cmd-enter = 'macos-native-fullscreen'
 cmd-e = 'exec-and-forget open -n "/Applications/BorderLess Arc.app"'
 cmd-alt-m = 'macos-native-minimize'
 cmd-alt-f = 'macos-native-fullscreen'
@@ -191,6 +194,7 @@ cmd-comma = 'mode service'
 r = ['reload-config', 'exec-and-forget sketchybar --reload', 'mode main']
 enter = ['reload-config', 'mode main']
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+t = ['layout v_tiles', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
 a = ['layout accordion', 'mode main']
 q = ['mode main']
@@ -245,6 +249,10 @@ if.app-id = 'com.openai.chat'
 run = ['move-node-to-workspace O']
 
 [[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run = ['move-node-to-workspace G']
+
+[[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = ['layout tiling']
 
@@ -267,3 +275,4 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.apple.QuickTimePlayerX'
 run = 'layout floating'
+
