@@ -26,6 +26,13 @@
       - oven-sh/bun/bun
       - pnpm
 
+    homebrew_cask_packages:
+      - sketchybar
+      - borders
+      - karabiner-elements
+      - arc
+      - zen-browser
+
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
         repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -79,19 +86,9 @@
         install_options: ["cask"]
       when: os_type == 'Darwin'
 
-    - name: Install sketchybar and borders
+    - name: Install Homebrew cask pacakges
       community.general.homebrew:
-        name:
-          - sketchybar
-          - borders
+        name: "{{ homebrew_cask_packages }}"
         state: present
         install_options: ["cask"]
-      when: os_type == 'Darwin'
-
-    - name: Start sketchybar service
-      shell: brew services start sketchybar
-      when: os_type == 'Darwin'
-
-    - name: Start borders service
-      shell: brew services start borders
       when: os_type == 'Darwin'
