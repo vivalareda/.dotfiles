@@ -40,6 +40,6 @@ else
   echo "ansible already installed, starting setup"
 fi
 
-ansible-playbook ~/.bootstrap/setup.yml --ask-become-pass -e -v "os_type=$OS"
+ansible-playbook ~/.bootstrap/setup.yml --ask-become-pass -e "os_type=$OS" -v
 
 echo "Ansible installation complete."
