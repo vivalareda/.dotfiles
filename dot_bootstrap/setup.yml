@@ -41,6 +41,17 @@
       community.general.homebrew:
         update_homebrew: yes
 
+    - name: Tap Homebrew mac formulaes
+      community.general.homebrew_tap:
+        name:
+          - FelixKratz/formulae
+          - nikitabobko/tap
+      when: os_type == 'Darwin'
+
+    - name: Tap oven-sh/bun
+      community.general.homebrew_tap:
+        name: oven-sh/bun
+
     - name: Install Homebrew packages
       community.general.homebrew:
         name: "{{ homebrew_packages }}"
@@ -64,16 +75,6 @@
         dest: "{{ ZSH_CUSTOM | default('~/.oh-my-zsh/custom') }}/plugins/{{ item.name }}"
         update: yes
       loop: "{{ oh_my_zsh_plugins }}"
-
-    - name: Tap FelixKratz/formulae
-      community.general.homebrew_tap:
-        name: FelixKratz/formulae
-      when: os_type == 'Darwin'
-
-    - name: Tap nikitabobko/tap
-      community.general.homebrew_tap:
-        name: nikitabobko/tap
-      when: os_type == 'Darwin'
 
     - name: Install aerospace (cask)
       community.general.homebrew:
