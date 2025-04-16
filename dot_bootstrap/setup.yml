@@ -25,6 +25,10 @@
       - node
       - oven-sh/bun/bun
       - pnpm
+      - docker
+      - docker-buildx
+      - vivid
+      - node
 
     homebrew_cask_packages:
       - sketchybar
@@ -32,6 +36,17 @@
       - karabiner-elements
       - arc
       - zen-browser
+      - raycast
+      - cleanshot
+      - 1password
+      - claude
+      - ghostty
+      - chatgpt
+      - aldente
+      - visual-studio-code
+      - cursor
+      - discors
+      - obsidian
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
