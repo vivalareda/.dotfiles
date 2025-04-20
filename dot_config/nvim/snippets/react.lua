@@ -67,4 +67,38 @@ return {
       t ");",
     }),
   }),
+
+  ls.add_snippets("typescript", {
+    s("nextapi", {
+      t 'import { NextRequest, NextResponse } from "next/server";',
+      t "\n",
+      t "export async function POST(req: NextRequest) {",
+      t "  try {",
+      t "    const body = await req.json();",
+      t "    const { ",
+      i(1, "data"), -- Data variable name
+    }),
+  }),
+
+  ls.add_snippets("typescript", {
+    s("ctor", {
+      t "constructor(",
+      f(function(_, snip)
+        return snip.env.LS_SELECT_RAW
+      end, {}),
+      t ") {\n",
+      f(function(_, snip)
+        local params = snip.env.LS_SELECT_RAW:split ", "
+        local assignments = {}
+        for _, param in ipairs(params) do
+          local name = param:match "(%w+):"
+          if name then
+            table.insert(assignments, "    this." .. name .. " = " .. name .. ";\n")
+          end
+        end
+        return table.concat(assignments)
+      end, {}),
+      t "  }\n",
+    }),
+  }),
 }

@@ -52,7 +52,7 @@ return {
         },
         textobjects = {
           swap = {
-            enable = false,
+            enable = true,
             swap_next = {
               ["<leader>a"] = "@parameter.inner",
             },

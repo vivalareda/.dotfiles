@@ -28,7 +28,7 @@ return {
     -- Mason LSPConfig setup
     mason_lspconfig.setup {
       ensure_installed = {
-        "pyright",
+        -- "pyright",
         "lua_ls",
         "ts_ls",
         "html",
@@ -38,6 +38,7 @@ return {
         "graphql",
         "prismals",
         "terraformls",
+        "yamlls",
       },
     }
 
@@ -89,6 +90,24 @@ return {
           },
         }
       end,
+      -- ["pylsp"] = function()
+      --   lspconfig.pylsp.setup {
+      --     on_attach = on_attach,
+      --     capabilities = capabilities,
+      --     settings = {
+      --       pylsp = {
+      --         plugins = {
+      --           rope_rename = { enabled = false },
+      --           pycodestyle = { enabled = false }, -- Disable pycodestyle
+      --           flake8 = { enabled = false }, -- Disable flake8
+      --           pylint = { enabled = true }, -- Enable pylint
+      --           black = { enabled = true }, -- Enable black
+      --           isort = { enabled = true }, -- Enable isort
+      --         },
+      --       },
+      --     },
+      --   }
+      -- end,
       ["pyright"] = function()
         lspconfig.pyright.setup {
           on_attach = on_attach,
@@ -96,23 +115,99 @@ return {
           settings = {
             python = {
               analysis = {
-                autoSearchPaths = true,
-                useLibraryCodeForTypes = true,
-                diagnosticMode = "workspace",
+                diagnosticSeverityOverrides = {
+                  reportUnknownMemberType = "none",
+                  reportAttributeAccessIssue = "none", -- Add this line
+                },
               },
             },
           },
         }
       end,
-      require("lspconfig").rust_analyzer.setup {
-        settings = {
-          ["rust-analyzer"] = {
-            diagnostics = {
-              disabled = { "unused" },
+      ["rust_analyzer"] = function()
+        lspconfig.rust_analyzer.setup {
+          settings = {
+            ["rust-analyzer"] = {
+              diagnostics = {
+                disabled = { "unused" },
+              },
             },
           },
-        },
-      },
+        }
+      end,
+      ["yamlls"] = function()
+        lspconfig.yamlls.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = true,
+              },
+              schemas = {
+                ["https://d1uauaxba7bl26.cloudfront.net/latest/gzip/CloudFormationResourceSpecification.json"] = {
+                  "cloud-formation-*.yaml",
+                  "cloud-formation-*.yml",
+                  "*.cf.yaml",
+                  "*.cf.yml",
+                  "cloudformation/*.yaml",
+                  "cloudformation/*.yml",
+                },
+              },
+              customTags = {
+                "!And scalar",
+                "!And mapping",
+                "!And sequence",
+                "!If scalar",
+                "!If mapping",
+                "!If sequence",
+                "!Not scalar",
+                "!Not mapping",
+                "!Not sequence",
+                "!Equals scalar",
+                "!Equals mapping",
+                "!Equals sequence",
+                "!Or scalar",
+                "!Or mapping",
+                "!Or sequence",
+                "!FindInMap scalar",
+                "!FindInMap mapping",
+                "!FindInMap sequence",
+                "!Base64 scalar",
+                "!Base64 mapping",
+                "!Base64 sequence",
+                "!Cidr scalar",
+                "!Cidr mapping",
+                "!Cidr sequence",
+                "!Ref scalar",
+                "!Ref mapping",
+                "!Ref sequence",
+                "!Sub scalar",
+                "!Sub mapping",
+                "!Sub sequence",
+                "!GetAtt scalar",
+                "!GetAtt mapping",
+                "!GetAtt sequence",
+                "!GetAZs scalar",
+                "!GetAZs mapping",
+                "!GetAZs sequence",
+                "!ImportValue scalar",
+                "!ImportValue mapping",
+                "!ImportValue sequence",
+                "!Select scalar",
+                "!Select mapping",
+                "!Select sequence",
+                "!Split scalar",
+                "!Split mapping",
+                "!Split sequence",
+                "!Join scalar",
+                "!Join mapping",
+                "!Join sequence",
+              },
+            },
+          },
+        }
+      end,
     }
   end,
 }

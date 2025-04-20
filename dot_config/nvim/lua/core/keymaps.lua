@@ -31,7 +31,7 @@ keymap("n", "<leader>v", '"+p', { noremap = true, silent = true })
 keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })
 keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
 keymap("n", "C", "ciw", { noremap = true, silent = true })
-keymap("n", "p", '"0p', { noremap = true, silent = true })
+keymap("n", "==", "ggvG=/", { noremap = true, silent = true })
 keymap("n", "<leader>k", function()
   vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR })
 end, { desc = "open floating diagnostic" }, { noremap = true, silent = true })
@@ -72,6 +72,12 @@ keymap("n", "<leader>ya", function()
   vim.fn.setpos(".", save_cursor)
 end, { noremap = true, silent = true })
 
+keymap("n", "==", function()
+  local save_cursor = vim.fn.getpos "."
+  vim.cmd "normal! gg=G"
+  vim.fn.setpos(".", save_cursor)
+end, { desc = "Indent whole file" }, { noremap = true, silent = true })
+
 keymap("n", "<leader>ca", function()
   vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
   vim.cmd "startinsert"
@@ -101,48 +107,7 @@ end
 keymap("n", "<leader>cpt", ToggleCopilot, { desc = "Toggle Copilot" }, { noremap = true, silent = true })
 vim.g.copilot_no_tab_map = true
 
--- Telescope Keymaps
-local builtin = require "telescope.builtin"
-keymap("n", "<leader>fh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-keymap("n", "<leader>fk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-keymap("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
-keymap("n", "<leader>fs", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-keymap("n", "<leader>fcw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-keymap("n", "<leader>fg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-keymap("n", "<leader>fd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-keymap("n", "<leader>fr", builtin.resume, { desc = "[S]earch [R]esume" })
-keymap("n", "<leader>f.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-keymap("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-keymap("n", "<leader>/", function()
-  builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = "[/] Fuzzily search in current buffer" })
-keymap("n", "<leader>s/", function()
-  builtin.live_grep {
-    grep_open_files = true,
-    prompt_title = "Live Grep in Open Files",
-  }
-end, { desc = "[S]earch [/] in Open Files" })
-keymap("n", "<leader>fn", function()
-  builtin.find_files { cwd = vim.fn.stdpath "config" }
-end, { desc = "[S]earch [N]eovim files" })
-
 -- LSP Keymaps
-local lsp_map = function(keys, func, desc)
-  keymap("n", keys, func, { desc = "LSP: " .. desc })
-end
-
--- lsp_map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
--- lsp_map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
--- lsp_map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
--- lsp_map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
--- lsp_map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
--- lsp_map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
--- lsp_map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
--- lsp_map("<leader>ac", vim.lsp.buf.code_action, "[C]ode [A]ction")
--- lsp_map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 local function lsp_keymaps(bufnr)
   local buf_opts = { noremap = true, silent = true, buffer = bufnr }
   keymap("n", "gd", function()
