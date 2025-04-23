@@ -5,9 +5,15 @@ return {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
+    "debugloop/telescope-undo.nvim",
   },
   config = function()
     require("telescope").setup {
+      extensions = {
+        undo = {
+          "debugloop/telescope-undo.nvim",
+        },
+      },
       defaults = {
         file_ignore_patterns = { "node_modules", "*flask-app/*" },
         mappings = {
@@ -24,6 +30,7 @@ return {
     }
 
     require("telescope").load_extension "fzf"
+    require("telescope").load_extension "undo"
 
     -- Telescope key mappings
     local builtin = require "telescope.builtin"
@@ -57,5 +64,7 @@ return {
     vim.keymap.set("n", "<leader>fn", function()
       builtin.find_files { cwd = vim.fn.stdpath "config" }
     end, { desc = "[S]earch [N]eovim files" })
+
+    vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>")
   end,
 }
