@@ -149,6 +149,23 @@ end
 -- Super secret keymap
 keymap("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "Make it rain animation" })
 
+local open_split_view = function()
+  require("telescope.builtin").find_files {
+    attach_mappings = function(prompt_bufnr, map)
+      require("telescope.actions").select_default:replace(function()
+        require("telescope.actions").close(prompt_bufnr)
+        local selection = require("telescope.actions.state").get_selected_entry()
+        if selection then
+          vim.cmd("vsplit " .. selection.path)
+        end
+      end)
+      return true
+    end,
+  }
+end
+
+keymap("n", "<leader>vs", open_split_view, { desc = "Open split view" }) -- Open split view with telescope
+
 return {
   lsp_keymaps = lsp_keymaps, -- Function for LSP keymaps to be used in `on_attach`
 }
