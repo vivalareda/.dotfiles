@@ -5,6 +5,8 @@
   become: false
 
   vars:
+    os_type: "{{ ansible_os_family }}"
+
     homebrew_packages:
       - neovim
       - fzf
@@ -22,17 +24,16 @@
       - tmux
       - yt-dlp
       - repomix
-      - node
       - oven-sh/bun/bun
       - pnpm
       - docker
       - docker-buildx
       - vivid
       - node
-
-    homebrew_cask_packages:
       - sketchybar
       - borders
+
+    homebrew_cask_packages:
       - karabiner-elements
       - arc
       - zen-browser
@@ -45,7 +46,7 @@
       - aldente
       - visual-studio-code
       - cursor
-      - discors
+      - discord
       - obsidian
 
     oh_my_zsh_plugins:
@@ -57,6 +58,10 @@
         repo: https://github.com/chrissicool/zsh-256color.git
       - name: zsh-interactive-cd
         repo: https://github.com/mrjohannchang/zsh-interactive-cd.git
+
+    sketchybar_dependencies:
+      - curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+      - curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.20/icon_map_fn.sh -o ~/.config/sketchybar/plugins/icon_map_fn.sh
 
   tasks:
     - name: Update Homebrew
@@ -106,4 +111,9 @@
         name: "{{ homebrew_cask_packages }}"
         state: present
         install_options: ["cask"]
+      when: os_type == 'Darwin'
+
+    - name: Install Sketchybar dependencies
+      shell: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+      loop: "{{ sketchybar_dependencies }}"
       when: os_type == 'Darwin'
