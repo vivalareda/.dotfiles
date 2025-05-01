@@ -48,6 +48,7 @@
       - cursor
       - discord
       - obsidian
+      - sf-symbols
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
