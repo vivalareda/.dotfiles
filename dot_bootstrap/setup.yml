@@ -76,7 +76,6 @@
         name:
           - FelixKratz/formulae
           - nikitabobko/tap
-          - homebrew/cask-fonts
           - oven-sh/bun
       when: os_type == 'Darwin'
 
