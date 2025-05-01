@@ -32,6 +32,7 @@
       - node
       - sketchybar
       - borders
+      - jq
 
     homebrew_cask_packages:
       - karabiner-elements
@@ -49,6 +50,7 @@
       - discord
       - obsidian
       - sf-symbols
+      - font-hack-nerd-font
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
@@ -61,8 +63,8 @@
         repo: https://github.com/mrjohannchang/zsh-interactive-cd.git
 
     sketchybar_dependencies:
-      - curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
-      - curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.20/icon_map_fn.sh -o ~/.config/sketchybar/plugins/icon_map_fn.sh
+      - command: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+      - command: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.20/icon_map_fn.sh -o ~/.config/sketchybar/plugins/icon_map_fn.sh
 
   tasks:
     - name: Update Homebrew
@@ -74,11 +76,9 @@
         name:
           - FelixKratz/formulae
           - nikitabobko/tap
+          - homebrew/cask-fonts
+          - oven-sh/bun
       when: os_type == 'Darwin'
-
-    - name: Tap oven-sh/bun
-      community.general.homebrew_tap:
-        name: oven-sh/bun
 
     - name: Install Homebrew packages
       community.general.homebrew:
@@ -100,14 +100,14 @@
         update: yes
       loop: "{{ oh_my_zsh_plugins }}"
 
-    - name: Install aerospace (cask)
-      community.general.homebrew:
-        name: nikitabobko/tap/aerospace
-        state: present
-        install_options: ["cask"]
-      when: os_type == 'Darwin'
+    # - name: Install aerospace (cask)
+    #   community.general.homebrew:
+    #     name: nikitabobko/tap/aerospace
+    #     state: present
+    #     install_options: ["cask"]
+    #   when: os_type == 'Darwin'
 
-    - name: Install Homebrew cask pacakges
+    - name: Install Homebrew cask packages
       community.general.homebrew:
         name: "{{ homebrew_cask_packages }}"
         state: present
@@ -115,6 +115,6 @@
       when: os_type == 'Darwin'
 
     - name: Install Sketchybar dependencies
-      shell: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+      shell: "{{ item.command }}"
       loop: "{{ sketchybar_dependencies }}"
       when: os_type == 'Darwin'
