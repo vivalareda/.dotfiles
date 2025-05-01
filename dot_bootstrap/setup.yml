@@ -78,6 +78,7 @@
           - nikitabobko/tap
           - oven-sh/bun
       when: os_type == 'Darwin'
+      ignore_errors: true
 
     - name: Install Homebrew packages
       community.general.homebrew:
