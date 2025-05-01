@@ -100,12 +100,12 @@
         update: yes
       loop: "{{ oh_my_zsh_plugins }}"
 
-    # - name: Install aerospace (cask)
-    #   community.general.homebrew:
-    #     name: nikitabobko/tap/aerospace
-    #     state: present
-    #     install_options: ["cask"]
-    #   when: os_type == 'Darwin'
+    - name: Install aerospace (cask)
+      community.general.homebrew:
+        name: nikitabobko/tap/aerospace
+        state: present
+        install_options: ["cask"]
+      when: os_type == 'Darwin'
 
     - name: Install Homebrew cask packages
       community.general.homebrew:
