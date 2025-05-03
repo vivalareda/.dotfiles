@@ -51,6 +51,8 @@
       - obsidian
       - sf-symbols
       - font-hack-nerd-font
+        font-jetbrains-mono-nerd-font
+      - webcatalog
 
     oh_my_zsh_plugins:
       - name: zsh-syntax-highlighting
