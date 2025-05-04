@@ -6,11 +6,24 @@ return {
 
     ls.setup {
       enable_autosnippets = true,
+      updateevents = "TextChanged,TextChangedI",
     }
 
     -- Load existing friendly-snippets
     require("luasnip.loaders.from_vscode").lazy_load()
 
     require("luasnip.loaders.from_lua").load { paths = "~/.config/nvim/snippets/" }
+
+    vim.keymap.set({ "i", "n" }, "<C-k>", function()
+      if ls.choice_active() then
+        ls.change_choice(1)
+      end
+    end)
+
+    vim.keymap.set({ "i", "n" }, "<C-j>", function()
+      if ls.choice_active() then
+        ls.change_choice(-1)
+      end
+    end)
   end,
 }

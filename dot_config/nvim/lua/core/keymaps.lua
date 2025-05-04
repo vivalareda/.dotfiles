@@ -6,15 +6,6 @@ keymap("n", "<leader>nh", function()
   require("snacks").notifier.show_history()
 end, { desc = "Show Notification History" })
 
--- keymap({ "i" }, "<Tab>", function()
---   local ls = require "luasnip"
---   if ls.expand_or_jumpable() then
---     ls.expand_or_jump()
---   else
---     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-n>", true, false, true), "n", false)
---   end
--- end, { silent = true })
-
 -- Exit keymaps
 keymap("n", "<leader>wq", ":wqa<CR>") -- save and quit
 keymap("n", "<leader>qq", ":qa!<CR>") -- quit without saving
@@ -32,6 +23,9 @@ keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })
 keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
 keymap("n", "C", "ciw", { noremap = true, silent = true })
 keymap("n", "==", "ggvG=/", { noremap = true, silent = true })
+keymap("n", "<leader>x", function()
+  vim.cmd "luafile %"
+end, { noremap = true, silent = true })
 keymap("n", "<leader>k", function()
   vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR })
 end, { desc = "open floating diagnostic" }, { noremap = true, silent = true })
@@ -81,14 +75,19 @@ end, { desc = "Indent whole file" }, { noremap = true, silent = true })
 keymap("n", "<leader>ca", function()
   vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
   vim.cmd "startinsert"
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true }, { desc = "Clear all lines and start insert mode" })
 
 keymap("n", "dab", function()
   vim.cmd "normal! V%d"
-end, { noremap = true, silent = true })
+end, { noremap = true, silent = true }, { desc = "Delete all brackets" })
 
 -- Copilot Keymaps
-vim.keymap.set("i", "<C-R>", 'copilot#Accept("\\<CR>")', {
+vim.keymap.set("i", "jk", 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+
+vim.keymap.set("i", "<C-r>", 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false,
 })
@@ -129,7 +128,6 @@ local function lsp_keymaps(bufnr)
     vim.tbl_extend("force", buf_opts, { desc = "[G]oto [I]mplementation" })
   )
   keymap("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", buf_opts, { desc = "[R]e[n]ame" }))
-  -- keymap("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", buf_opts, { desc = "[C]ode [A]ction" }))
   keymap("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", buf_opts, { desc = "Hover Documentation" }))
   keymap("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", buf_opts, { desc = "[G]oto [D]eclaration" }))
   keymap(
