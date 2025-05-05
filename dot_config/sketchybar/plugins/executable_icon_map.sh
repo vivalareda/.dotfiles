@@ -93,8 +93,11 @@ function __icon_map() {
    "Brave Browser")
         icon_result=":brave_browser:"
         ;;
-   "Calculator" | "Calculette")
+   "Calculator" | "Calculette" | "TI-Nspire")
         icon_result=":calculator:"
+        ;;
+   "Cursor")
+        icon_result=":cursor:"
         ;;
    "Calendar" | "日历" | "Fantastical" | "Cron" | "Amie" | "Calendrier" | "Notion Calendar")
         icon_result=":calendar:"
@@ -626,6 +629,18 @@ function __icon_map() {
         ;;
    "Zulip")
         icon_result=":zulip:"
+        ;;
+   "Zen")
+        icon_result=":zen_browser:"
+        ;;
+   "Ghostty")
+        icon_result=":ghostty:"
+        ;;
+   "T3 Chat")
+        icon_result=":t3chat:"
+        ;;
+   "Claude")
+        icon_result=":claude:"
         ;;
     *)
         icon_result=":default:"
