@@ -23,15 +23,14 @@ return {
       ensure_installed = {
         "lua_ls",
         "ts_ls",
-        -- "html",
-        -- "cssls",
-        -- "tailwindcss",
-        -- "svelte",
-        -- "graphql",
-        -- "emmet_ls",
-        -- "prismals",
-        -- "pyright",
-        -- "terraformls",
+        "html",
+        "cssls",
+        "tailwindcss",
+        "svelte",
+        "graphql",
+        "prismals",
+        "pyright",
+        "terraformls",
       },
     }
 

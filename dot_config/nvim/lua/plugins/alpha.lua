@@ -101,11 +101,6 @@ return {
     local selected_header = headers[math.random(#headers)]
     dashboard.section.header.val = selected_header
 
-    -- If you want to append neovim ASCII art after the selected header
-    for _, line in ipairs(neovim) do
-      table.insert(dashboard.section.header.val, line)
-    end
-
     -- Set menu buttons
     dashboard.section.buttons.val = {
       dashboard.button("Ctrl n", "  > Toggle file explorer", "<cmd>NvimTreeToggle<CR>"),
