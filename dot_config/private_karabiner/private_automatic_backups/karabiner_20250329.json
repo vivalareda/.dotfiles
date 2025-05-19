@@ -4,16 +4,23 @@
       "complex_modifications": {
         "rules": [
           {
-            "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
+            "description": "Map Ctrl + W to Option + Delete",
             "manipulators": [
               {
+                "type": "basic",
                 "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": { "optional": ["any"] }
+                  "key_code": "w",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": ["any"]
+                  }
                 },
-                "to": [{ "key_code": "left_control" }],
-                "to_if_alone": [{ "key_code": "escape" }],
-                "type": "basic"
+                "to": [
+                  {
+                    "key_code": "delete_or_backspace",
+                    "modifiers": ["option"]
+                  }
+                ]
               }
             ]
           },
@@ -21,31 +28,7 @@
             "description": "Remap Ctrl + Shift + C/Z to Ctrl + C/Z in terminal apps for Ergo keyboard",
             "manipulators": [
               {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "product_id": 18804,
-                        "vendor_id": 12951
-                      },
-                      {
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                      }
-                    ],
-                    "type": "device_if"
-                  },
-                  {
-                    "bundle_identifiers": [
-                      "^com\\.apple\\.Terminal$",
-                      "^com\\.googlecode\\.iterm2$",
-                      "^co\\.zeit\\.hyper$",
-                      "^io\\.alacritty$",
-                      "^com\\.mitchellh\\.ghostty$"
-                    ],
-                    "type": "frontmost_application_if"
-                  }
-                ],
+                "type": "basic",
                 "from": {
                   "key_code": "c",
                   "modifiers": {
@@ -59,34 +42,30 @@
                     "modifiers": ["control"]
                   }
                 ],
-                "type": "basic"
-              },
-              {
                 "conditions": [
                   {
+                    "type": "device_if",
                     "identifiers": [
                       {
-                        "product_id": 18804,
-                        "vendor_id": 12951
-                      },
-                      {
-                        "product_id": 6505,
-                        "vendor_id": 12951
+                        "vendor_id": 12951,
+                        "product_id": 18804
                       }
-                    ],
-                    "type": "device_if"
+                    ]
                   },
                   {
+                    "type": "frontmost_application_if",
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
                       "^com\\.mitchellh\\.ghostty$"
-                    ],
-                    "type": "frontmost_application_if"
+                    ]
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
                 "from": {
                   "key_code": "z",
                   "modifiers": {
@@ -100,34 +79,30 @@
                     "modifiers": ["control"]
                   }
                 ],
-                "type": "basic"
-              },
-              {
                 "conditions": [
                   {
+                    "type": "device_if",
                     "identifiers": [
                       {
-                        "product_id": 18804,
-                        "vendor_id": 12951
-                      },
-                      {
-                        "product_id": 6505,
-                        "vendor_id": 12951
+                        "vendor_id": 12951,
+                        "product_id": 18804
                       }
-                    ],
-                    "type": "device_if"
+                    ]
                   },
                   {
+                    "type": "frontmost_application_if",
                     "bundle_identifiers": [
                       "^com\\.apple\\.Terminal$",
                       "^com\\.googlecode\\.iterm2$",
                       "^co\\.zeit\\.hyper$",
                       "^io\\.alacritty$",
                       "^com\\.mitchellh\\.ghostty$"
-                    ],
-                    "type": "frontmost_application_if"
+                    ]
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
                 "from": {
                   "key_code": "shift",
                   "modifiers": {
@@ -141,7 +116,27 @@
                     "modifiers": ["control"]
                   }
                 ],
-                "type": "basic"
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 12951,
+                        "product_id": 18804
+                      }
+                    ]
+                  },
+                  {
+                    "type": "frontmost_application_if",
+                    "bundle_identifiers": [
+                      "^com\\.apple\\.Terminal$",
+                      "^com\\.googlecode\\.iterm2$",
+                      "^co\\.zeit\\.hyper$",
+                      "^io\\.alacritty$",
+                      "^com\\.mitchellh\\.ghostty$"
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -170,24 +165,24 @@
             ]
           },
           {
+            "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [{ "key_code": "left_control" }],
+                "to_if_alone": [{ "key_code": "escape" }],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Remap Ctrl + C/V to Cmd + C/V globally for Ergo keyboard",
             "manipulators": [
               {
-                "conditions": [
-                  {
-                    "identifiers": [
-                      {
-                        "product_id": 18804,
-                        "vendor_id": 12951
-                      },
-                      {
-                        "product_id": 6505,
-                        "vendor_id": 12951
-                      }
-                    ],
-                    "type": "device_if"
-                  }
-                ],
+                "type": "basic",
                 "from": {
                   "key_code": "c",
                   "modifiers": {
@@ -201,24 +196,20 @@
                     "modifiers": ["command"]
                   }
                 ],
-                "type": "basic"
-              },
-              {
                 "conditions": [
                   {
+                    "type": "device_if",
                     "identifiers": [
                       {
-                        "product_id": 18804,
-                        "vendor_id": 12951
-                      },
-                      {
-                        "product_id": 6505,
-                        "vendor_id": 12951
+                        "vendor_id": 12951,
+                        "product_id": 18804
                       }
-                    ],
-                    "type": "device_if"
+                    ]
                   }
-                ],
+                ]
+              },
+              {
+                "type": "basic",
                 "from": {
                   "key_code": "v",
                   "modifiers": {
@@ -232,7 +223,17 @@
                     "modifiers": ["command"]
                   }
                 ],
-                "type": "basic"
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "vendor_id": 12951,
+                        "product_id": 18804
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -244,4 +245,3 @@
     }
   ]
 }
-

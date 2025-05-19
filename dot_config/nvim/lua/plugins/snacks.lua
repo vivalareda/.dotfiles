@@ -5,5 +5,5 @@ return {
   opts = {
     notifier = { enabled = true },
     picker = { enabled = true },
-  },
+  }
 }

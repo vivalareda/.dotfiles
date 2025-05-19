@@ -1,7 +1,6 @@
 local function switch_bool()
   local cursor = vim.api.nvim_win_get_cursor(0)
   local row = cursor[1] -- line number
-  local col = cursor[2] -- column number
   local word = vim.fn.expand "<cword>"
   local line = vim.api.nvim_buf_get_lines(0, row - 1, row, true)[1]
   if word == "true" then

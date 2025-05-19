@@ -8,7 +8,9 @@ return {
     "debugloop/telescope-undo.nvim",
   },
   config = function()
-    require("telescope").setup {
+    local telescope = require("telescope")
+    local actions = require("telescope.actions")
+    telescope.setup {
       extensions = {
         undo = {
           "debugloop/telescope-undo.nvim",
@@ -21,6 +23,7 @@ return {
             ["<C-h>"] = "which_key",
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
+            ["<esc>"] = actions.close,
           }, -- Example mapping for insert mode
         },
       },
@@ -29,8 +32,8 @@ return {
       },
     }
 
-    require("telescope").load_extension "fzf"
-    require("telescope").load_extension "undo"
+    telescope.load_extension "fzf"
+    telescope.load_extension "undo"
 
     -- Telescope key mappings
     local builtin = require "telescope.builtin"
@@ -69,3 +72,4 @@ return {
     vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>")
   end,
 }
+

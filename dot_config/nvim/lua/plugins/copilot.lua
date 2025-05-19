@@ -49,6 +49,7 @@ return {
     config = function(_, opts)
       local chat = require "CopilotChat"
       local select = require "CopilotChat.select"
+      vim.g.copilot_no_tab_map = true
 
       vim.api.nvim_create_autocmd("BufEnter", {
         callback = function()
@@ -101,4 +102,9 @@ return {
       }))
     end,
   },
+
+  vim.keymap.set("i", "jk", 'copilot#Accept("\\<CR>")', {
+    expr = true,
+    replace_keycodes = false,
+  })
 }

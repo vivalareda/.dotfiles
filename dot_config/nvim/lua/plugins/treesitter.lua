@@ -9,6 +9,9 @@ return {
     },
     config = function()
       require("nvim-treesitter.configs").setup {
+        autotag = {
+          enable = true
+        },
         modules = {}, -- Placeholder to avoid warning
         ignore_install = {}, -- Empty table if you don't want to ignore any parsers
         ensure_installed = {
@@ -51,6 +54,29 @@ return {
           },
         },
         textobjects = {
+          move = {
+            enable = true,
+            goto_next_start = {
+              ["]f"] = "@function.outer",
+              ["]c"] = "@class.outer",
+              ["]a"] = "@parameter.inner"
+            },
+            goto_next_end = {
+              ["]F"] = "@function.outer",
+              ["]C"] = "@class.outer",
+              ["]A"] = "@parameter.inner"
+            },
+            goto_previous_start = {
+              ["[f"] = "@function.outer",
+              ["[c"] = "@class.outer",
+              ["[a"] = "@parameter.inner"
+            },
+            goto_previous_end = {
+              ["[F"] = "@function.outer",
+              ["[C"] = "@class.outer",
+              ["[A"] = "@parameter.inner"
+            },
+          },
           swap = {
             enable = true,
             swap_next = {
@@ -60,55 +86,6 @@ return {
               ["<leader>A"] = "@parameter.inner",
             },
           },
-          -- select = {
-          --   enable = true,
-          --   lookahead = true,
-          --   keymaps = {
-          --     ["ae"] = { query = "@assignment.outer", desc = "Select assignment with the declaration" },
-          --     ["ie"] = { query = "@assignment.inner", desc = "Select assignment without the declaration" },
-          --     ["le"] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
-          --     ["re"] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
-          --
-          --     ["ap"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
-          --     ["ip"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
-          --
-          --     ["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
-          --     ["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
-          --
-          --     ["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
-          --     ["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
-          --
-          --     ["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
-          --     ["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
-          --
-          --     ["am"] = { query = "@function.outer", desc = "Select outer part of a method/function definition" },
-          --     ["im"] = { query = "@function.inner", desc = "Select inner part of a method/function definition" },
-          --
-          --     ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
-          --     ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
-          --   },
-          -- },
-        },
-      }
-
-      -- Separate setup for nvim-ts-autotag
-      require("nvim-ts-autotag").setup {
-        filetypes = {
-          "html",
-          "javascript",
-          "typescript",
-          "javascriptreact",
-          "typescriptreact",
-          "svelte",
-          "vue",
-          "tsx",
-          "jsx",
-          "rescript",
-          "css",
-          "lua",
-          "xml",
-          "php",
-          "markdown",
         },
       }
     end,

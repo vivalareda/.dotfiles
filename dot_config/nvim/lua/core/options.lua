@@ -1,4 +1,4 @@
-vim.cmd "let g:netrw_liststyle = 2"
+vim.cmd "let g:netrw_liststyle = 3"
 
 local opt = vim.opt
 
@@ -65,3 +65,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
