@@ -2,7 +2,18 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      'saghen/blink.cmp',
+      "saghen/blink.cmp",
+      {
+        "lukas-reineke/lsp-format.nvim",
+        config = function()
+          vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(args)
+              local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+              require("lsp-format").on_attach(client, args.buf)
+            end,
+          })
+        end
+      },
       {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
@@ -10,7 +21,7 @@ return {
           library = {
             -- See the configuration section for more details
             -- Load luvit types when the `vim.uv` word is found
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            { path = "${3rd}/luv/library",   words = { "vim%.uv" } },
             -- Add these to match your current config
             { path = vim.env.VIMRUNTIME },
             { path = "${3rd}/busted/library" },
@@ -34,10 +45,11 @@ return {
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
+        callback = function(args)
           -- Buffer local mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions
-          local opts = { buffer = ev.buf, silent = true }
+          local opts = { buffer = args.buf, silent = true }
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
 
           -- set keybinds
           opts.desc = "Go to declaration"
@@ -57,6 +69,13 @@ return {
 
           opts.desc = "Restart LSP"
           keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+          if client.supports_method("textDocument/formatting") then
+            opts.desc = "Format buffer"
+            keymap.set("n", "<leader>fm", function()
+              vim.lsp.buf.format({ async = true })
+            end, opts)
+          end
         end,
       })
     end,
