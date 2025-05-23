@@ -1,9 +1,29 @@
 return {
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestion = { 
+        enabled = false, 
+        auto_trigger = false, 
+        keymap = {
+          accept = "jk",
+        }},
+      panel = {
+        enabled = false 
+      },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    }
+  },
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
     dependencies = {
-      { "github/copilot.vim" },
+      { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
       { "nvim-telescope/telescope.nvim" },
     },
@@ -102,9 +122,5 @@ return {
       }))
     end,
   },
-
-  vim.keymap.set("i", "jk", 'copilot#Accept("\\<CR>")', {
-    expr = true,
-    replace_keycodes = false,
-  })
 }
+
