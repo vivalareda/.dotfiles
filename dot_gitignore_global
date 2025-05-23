@@ -3,11 +3,18 @@
 .task
 .tasks
 .repomix-output.xml
+repomix-output.xml
+**/.repomix-output.xml
+**/repomix-output.xml
 .DS_Store
 */.DS_Store
 flask-app/
 __pycache__/
 .venv/
+ignore/
+*/ignore/
+**/ignore/
+ignore/repomix-output.xml
 
 # General
 .AppleDouble

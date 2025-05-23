@@ -1,0 +1,12 @@
+[user]
+	email = tarzaltreda@gmail.com
+	name = Reda Tarzalt
+
+[core]
+    excludesfile = ~/.gitignore_global
+
+[credential "https://github.com"]
+    helper = /opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper = /opt/homebrew/bin/gh auth git-credential
