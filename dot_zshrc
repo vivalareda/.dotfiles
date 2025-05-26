@@ -80,7 +80,6 @@ if [[ "$CONFIG" == "arch" ]]; then
   alias pc='$aurhelper -Sc'
   alias po='$aurhelper -Qtdq | $aurhelper -Rns -'
   alias github='cd ~/github'
-  alias rpm='repomix'
 fi
 
 # macOS-specific configuration
@@ -89,7 +88,10 @@ if [[ "$CONFIG" == "mac" ]]; then
   alias finder='open .'
   alias github='cd ~/Documents/GitHub'
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  source $HOME/.cargo/env
+
+  if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+  fi
 
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
@@ -143,6 +145,9 @@ alias dl='yt-dlp'
 alias gc='git commit -m'
 alias ga='git add .'
 alias gp='git push'
+
+# REPOMIX
+alias rpm='repomix'
 
 # Separate zoxide config
 if command -v zoxide &> /dev/null; then
@@ -204,25 +209,19 @@ pbcopy() {
   fi
 }
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 # Use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Set path
 export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-export PATH="/Users/lilflare/go/bin:$PATH"
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/lilflare/.lmstudio/bin"
+export PATH="$HOME/go/bin:$PATH"
+source $HOME/.local/bin/env
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 # bun completions
-[ -s "/Users/lilflare/.bun/_bun" ] && source "/Users/lilflare/.bun/_bun"
-# java
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
-export PATH="$JAVA_HOME/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 
 #fzf and yazi config
@@ -240,5 +239,6 @@ function y() {
 [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && \
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-[ -f "/Users/lilflare/.ghcup/env" ] && . "/Users/lilflare/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
+. "$HOME/.local/bin/env"
