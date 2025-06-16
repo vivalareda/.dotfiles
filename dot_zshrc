@@ -142,7 +142,8 @@ alias obs='cd ~/obsidian/obsidian && nvim'
 alias dl='yt-dlp'
 
 # GITHUB ALIASES
-alias gc='git commit -m'
+alias gc='sh ~/.config/script/check-commit.sh && command git commit -m'
+alias gcs='command git commit -m'
 alias ga='git add .'
 alias gp='git push'
 
@@ -195,6 +196,13 @@ gh-create() {
     fi
 }
 
+git() {
+    if [ "$1" = "commit" ] && [[ ! " $* " =~ " --skip " ]]; then
+        ~/.config/script/check-commit.sh || return 1
+    fi
+    command git "$@"
+}
+
 setobspath() {
   print -n "What's the path? "
   read OBSIDIAN_PATH
@@ -202,12 +210,12 @@ setobspath() {
   source ~/.zshrc
 }
 
-pbcopy() {
-  if [ $# -eq 0 ]; then
-    selected_file=$(find . -maxdepth 1 -type f | fzf --prompt="Select file: ")
-    [[ -n "$selected_file" ]] && cat $selected_file | command pbcopy
-  fi
-}
+# pbcopy() {
+#   if [ $# -eq 0 ]; then
+#     selected_file=$(find . -maxdepth 1 -type f | fzf --prompt="Select file: ")
+#     [[ -n "$selected_file" ]] && cat $selected_file | command pbcopy
+#   fi
+# }
 
 # Use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
