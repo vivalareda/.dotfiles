@@ -1,19 +1,22 @@
 return {
   'saghen/blink.cmp',
+  version = '1.*',
   option = true,
   dependencies = {
     "fang2hou/blink-copilot",
+    "L3MON4D3/LuaSnip",
+    "rafamadriz/friendly-snippets",
   },
   -- optional: provides snippets for the snippet source
-  version = '1.*',
   opts = {
     keymap = {
-      preset = 'none' ,
+      preset = 'none',
       ['<C-k>'] = { 'select_prev', 'fallback' },
       ['<C-j>'] = { 'select_next', 'fallback' },
       ['<C-e>'] = { 'hide', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
-      ['<CR>'] = { 'select_and_accept', 'fallback'},
+      ['<CR>'] = { 'select_and_accept', 'fallback' },
+      -- ['<Tab>'] = { 'snippet_forward', 'fallback' },
     },
 
     appearance = {
@@ -23,13 +26,13 @@ return {
     snippets = { preset = 'luasnip' },
 
     -- (Default) Only show the documentation popup when manually triggered
-    completion = { 
+    completion = {
       list = {
         selection = {
-          preselect = false,   -- Automatically select the first item
+          preselect = false, -- Automatically select the first item
         }
       },
-       accept = {
+      accept = {
         -- experimental auto-brackets support
         auto_brackets = {
           enabled = true,
@@ -38,14 +41,14 @@ return {
       menu = {
         draw = {
           treesitter = { "lsp" },
-          columns = { 
-            { 'kind_icon' }, 
-            { 'label', 'label_description', gap = 1 },
-            { 'source_name' }  -- This will show the source of completions
+          columns = {
+            { 'kind_icon' },
+            { 'label',      'label_description', gap = 1 },
+            { 'source_name' } -- This will show the source of completions
           },
         },
       },
-      documentation = { 
+      documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
       },
@@ -57,7 +60,7 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot'},
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
       providers = {
         copilot = {
           name = "copilot",
@@ -81,7 +84,30 @@ return {
   opts_extend = { "sources.default" },
   config = function(_, opts)
     require("blink.cmp").setup(opts)
-    
+
+    vim.keymap.set("i", "<Tab>", function()
+      local cmp = require("blink.cmp")
+      if cmp.is_visible() then
+        return cmp.select_next()
+      elseif cmp.snippet_active() then
+        return cmp.snippet_forward()
+      else
+        return "<Tab>"
+      end
+    end, { expr = true, noremap = true, replace_keycodes = true })
+
+    -- Add Shift-Tab for backward navigation
+    vim.keymap.set("i", "<S-Tab>", function()
+      local cmp = require("blink.cmp")
+      if cmp.is_visible() then
+        return cmp.select_prev()
+      elseif cmp.snippet_active() then
+        return cmp.snippet_backward()
+      else
+        return "<S-Tab>"
+      end
+    end, { expr = true, noremap = true, replace_keycodes = true })
+
     -- Add this custom mapping for Enter key
     vim.keymap.set("i", "<CR>", function()
       local cmp = require("blink.cmp")
@@ -91,7 +117,7 @@ return {
         return "<CR>"
       end
     end, { expr = true, noremap = true, replace_keycodes = true })
-    
+
     -- Your existing mapping
     vim.keymap.set("i", "<C-j>", function()
       local cmp = require("blink.cmp")
@@ -103,4 +129,3 @@ return {
     end, { expr = true, noremap = true })
   end,
 }
-

@@ -1,6 +1,7 @@
 return {
   "echasnovski/mini.nvim",
-  config = function ()
+  config = function()
+    local spec_treesitter = require('mini.ai').gen_spec.treesitter
     require("mini.icons").setup {
       lazy = true,
       opts = {
@@ -14,6 +15,14 @@ return {
       },
     }
 
-    require("mini.ai").setup { n_lines = 500 }
+    require("mini.ai").setup {
+      n_lines = 500,
+      custom_textobjects = {
+        f = spec_treesitter({ 
+          a = { '@function.outer', '@lexical_declaration.outer' }, 
+          i = { '@function.inner', '@lexical_declaration.inner' }
+        }),
+      },
+    }
   end
 }

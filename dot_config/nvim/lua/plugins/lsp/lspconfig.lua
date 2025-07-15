@@ -70,12 +70,12 @@ return {
           opts.desc = "Restart LSP"
           keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-          if client.supports_method("textDocument/formatting") then
-            opts.desc = "Format buffer"
-            keymap.set("n", "<leader>fm", function()
-              vim.lsp.buf.format({ async = true })
-            end, opts)
-          end
+          -- if client.supports_method("textDocument/formatting") then
+          --   opts.desc = "Format buffer"
+          --   keymap.set("n", "<leader>fm", function()
+          --     vim.lsp.buf.format({ async = true })
+          --   end, opts)
+          -- end
         end,
       })
     end,

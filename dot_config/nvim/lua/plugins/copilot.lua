@@ -4,14 +4,15 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
-      suggestion = { 
-        enabled = false, 
-        auto_trigger = false, 
+      suggestion = {
+        enabled = false,
+        auto_trigger = false,
         keymap = {
           accept = "jk",
-        }},
+        }
+      },
       panel = {
-        enabled = false 
+        enabled = false
       },
       filetypes = {
         markdown = true,
@@ -71,6 +72,20 @@ return {
       local select = require "CopilotChat.select"
       vim.g.copilot_no_tab_map = true
 
+      local function ToggleCopilot()
+        local is_disabled = require("copilot.client").is_disabled()
+
+        if is_disabled then
+          vim.cmd "Copilot enable"
+          print "Copilot enabled"
+        else
+          vim.cmd "Copilot disable"
+          print "Copilot disabled"
+        end
+      end
+
+      vim.keymap.set("n", "<leader>cpt", ToggleCopilot, { desc = "Toggle Copilot", noremap = true, silent = true })
+
       vim.api.nvim_create_autocmd("BufEnter", {
         callback = function()
           -- Detect the project root using .git or fallback to the current directory
@@ -86,32 +101,36 @@ return {
         prompts = {
           DiagnosticError = {
             selection = select.visual,
-            prompt = "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provid the missing character",
+            prompt =
+            "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provid the missing character",
             description = "Fix diagnostic error",
             context = "file",
           },
           InDepthDiagnostic = {
             selection = select.visual,
-            prompt = "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
+            prompt =
+            "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
             description = "Fix in depth diagnostic error",
             context = "file",
           },
           FixBloc = {
             selection = select.visual,
-            prompt = "This block of code has an error, fix the error and give me back only the fixed block without line Expression so that I can directly replace it in the file",
+            prompt =
+            "This block of code has an error, fix the error and give me back only the fixed block without line Expression so that I can directly replace it in the file",
             description = "Fix block error",
             context = "file",
           },
           FeatureRequest = {
             selection = select.visual,
-            prompt = "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line Expression, just the code so that I can directly replace it in the file",
+            prompt =
+            "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line Expression, just the code so that I can directly replace it in the file",
             description = "Implement feature",
             context = "file",
           },
         },
         mappings = {
           reset = {
-            normal = "<C-r>",
+            normal = "<C-t>",
           },
         },
         -- window = {
@@ -123,4 +142,3 @@ return {
     end,
   },
 }
-

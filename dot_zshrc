@@ -82,21 +82,12 @@ if [[ "$CONFIG" == "arch" ]]; then
   alias github='cd ~/github'
 fi
 
-# macOS-specific configuration
-if [[ "$CONFIG" == "mac" ]]; then
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  alias finder='open .'
-  alias github='cd ~/Documents/GitHub'
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-
-  if [[ -f "$HOME/.cargo/env" ]]; then
-    source "$HOME/.cargo/env"
-  fi
-
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+if [[ -f "$HOME/.cargo/env" ]]; then
+  source "$HOME/.cargo/env"
 fi
+
 
 # WSL-specific configuration
 if [[ "$CONFIG" == "wsl" ]]; then
@@ -140,6 +131,10 @@ alias vim='nvim'
 alias nvconfig='cd ~/.config/nvim && nvim'
 alias obs='cd ~/obsidian/obsidian && nvim'
 alias dl='yt-dlp'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # GITHUB ALIASES
 alias gc='sh ~/.config/script/check-commit.sh && command git commit -m'
@@ -223,6 +218,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Set path
 export PATH="/opt/homebrew/anaconda3/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 source $HOME/.local/bin/env
 
 # bun
@@ -250,3 +246,7 @@ function y() {
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 . "$HOME/.local/bin/env"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

@@ -22,5 +22,10 @@ return {
         ls.change_choice(-1)
       end
     end)
+
+    vim.keymap.set({ "i", "s" }, "<Tab>", function()
+      local test = require("luasnip").expand_or_jumpable()
+      vim.notify("expand_or_jumpable: " .. vim.inspect(test), vim.log.levels.INFO)
+    end)
   end,
 }

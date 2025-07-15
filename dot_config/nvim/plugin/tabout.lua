@@ -11,6 +11,7 @@ local skip_closing_pairs = function()
       return
     end
   end
+  vim.api.nvim_feedkeys("\t", "n", true)
 end
 
 vim.keymap.set("i", "<Tab>", function()

@@ -21,6 +21,7 @@ return {
     -- Mason LSPconfig setup for managing LSP servers
     require("mason-lspconfig").setup {
       ensure_installed = {
+        "biome",
         "lua_ls",
         "ts_ls",
         "html",

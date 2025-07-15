@@ -4,15 +4,11 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
     dependencies = {
-      "windwp/nvim-ts-autotag", -- Autotag dependency
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
       require("nvim-treesitter.configs").setup {
-        autotag = {
-          enable = true
-        },
-        modules = {}, -- Placeholder to avoid warning
+        modules = {},        -- Placeholder to avoid warning
         ignore_install = {}, -- Empty table if you don't want to ignore any parsers
         ensure_installed = {
           "json",
@@ -37,7 +33,7 @@ return {
           "c",
         },
         sync_install = false, -- Install languages asynchronously
-        auto_install = true, -- Automatically install missing parsers
+        auto_install = true,  -- Automatically install missing parsers
 
         indent = { enable = true },
         highlight = {
@@ -47,10 +43,10 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "ss", -- Start incremental selection
-            node_incremental = "es", -- Increment to the next node
+            init_selection = "ss",    -- Start incremental selection
+            node_incremental = "es",  -- Increment to the next node
             scope_incremental = "ef", -- Increment to the next scope (e.g., function or class)
-            node_decremental = "ds", -- Decrement selection
+            node_decremental = "ds",  -- Decrement selection
           },
         },
         textobjects = {
