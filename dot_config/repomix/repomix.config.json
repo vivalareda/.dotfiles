@@ -1,6 +1,6 @@
 {
   "output": {
-    "filePath": "repomix-output.xml",
+    "filePath": "ignore/repomix-output.xml",
     "style": "xml",
     "parsableStyle": false,
     "fileSummary": false,
@@ -15,7 +15,13 @@
   "ignore": {
     "useGitignore": true,
     "useDefaultPatterns": true,
-    "customPatterns": ["bun.*", "nodes_modules"]
+    "customPatterns": [
+      "bun.*",
+      "nodes_modules",
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/ignore/repomix-output.xml"
+    ]
   },
   "security": {
     "enableSecurityCheck": true
@@ -24,4 +30,3 @@
     "encoding": "o200k_base"
   }
 }
-
