@@ -4,17 +4,6 @@ return {
     dependencies = {
       "saghen/blink.cmp",
       {
-        "lukas-reineke/lsp-format.nvim",
-        config = function()
-          vim.api.nvim_create_autocmd('LspAttach', {
-            callback = function(args)
-              local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-              require("lsp-format").on_attach(client, args.buf)
-            end,
-          })
-        end
-      },
-      {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
         opts = {
@@ -69,6 +58,9 @@ return {
 
           opts.desc = "Restart LSP"
           keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+          opts.desc = "Show LSP code actions"
+          keymap.set("n", "<leader>sa", vim.lsp.buf.code_action, opts) -- show code actions
 
           -- if client.supports_method("textDocument/formatting") then
           --   opts.desc = "Format buffer"

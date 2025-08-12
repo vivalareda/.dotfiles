@@ -19,6 +19,9 @@ keymap({ "o", "n", "v" }, "L", "$")
 keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })
 keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
 
+-- Unbind default 's' behavior for flash.nvim
+vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
+
 keymap("n", "<leader>fa", function()
   vim.lsp.buf.format()
 end, { noremap = true, silent = true })

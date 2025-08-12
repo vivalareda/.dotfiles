@@ -33,13 +33,12 @@ return {
       {
         "<leader>cpp",
         function()
-          local actions = require "CopilotChat.actions"
-          require("CopilotChat.integrations.telescope").pick(
-            actions.prompt_actions { selection = require("CopilotChat.select").visual }
-          )
+          -- Use the correct API from the documentation
+          local chat = require("CopilotChat")
+          chat.select_prompt()
         end,
         mode = { "n", "v" },
-        desc = "Prompt actions",
+        desc = "Select CopilotChat prompt",
       },
       {
         "<C-p>",
@@ -47,23 +46,17 @@ return {
           require("CopilotChat").toggle()
         end,
         mode = "n",
-        desc = "Open Copilot chat",
+        desc = "Toggle Copilot chat",
       },
       {
         "<leader>cpa",
         function()
-          local input = vim.fn.input "What's the question"
+          local input = vim.fn.input "What's the question: "
           if input ~= "" then
             require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
           end
         end,
         desc = "Copilot Quick Chat",
-      },
-      window = {
-        layout = "float",
-        width = 0.4,
-        height = 0.4,
-        border = "rounded",
       },
     },
 
@@ -98,46 +91,36 @@ return {
       })
 
       chat.setup(vim.tbl_deep_extend("force", opts, {
+        -- Custom prompts
         prompts = {
           DiagnosticError = {
-            selection = select.visual,
-            prompt =
-            "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provid the missing character",
+            prompt = "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provide the missing character",
             description = "Fix diagnostic error",
-            context = "file",
+            selection = select.visual,
           },
           InDepthDiagnostic = {
-            selection = select.visual,
-            prompt =
-            "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
+            prompt = "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
             description = "Fix in depth diagnostic error",
-            context = "file",
+            selection = select.visual,
           },
           FixBloc = {
-            selection = select.visual,
-            prompt =
-            "This block of code has an error, fix the error and give me back only the fixed block without line Expression so that I can directly replace it in the file",
+            prompt = "This block of code has an error, fix the error and give me back only the fixed block without line numbers so that I can directly replace it in the file",
             description = "Fix block error",
-            context = "file",
+            selection = select.visual,
           },
           FeatureRequest = {
-            selection = select.visual,
-            prompt =
-            "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line Expression, just the code so that I can directly replace it in the file",
+            prompt = "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line numbers, just the code so that I can directly replace it in the file",
             description = "Implement feature",
-            context = "file",
+            selection = select.visual,
           },
         },
+        
+        -- Mappings
         mappings = {
           reset = {
             normal = "<C-t>",
           },
         },
-        -- window = {
-        --   layout = "float",
-        --   width = 1,
-        --   height = 0.4,
-        -- },
       }))
     end,
   },

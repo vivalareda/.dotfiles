@@ -66,3 +66,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Real time edits without notification
+vim.opt.autoread = true
+vim.opt.updatetime = 100
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  pattern = "*",
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("silent! checktime")
+    end
+  end,
+})

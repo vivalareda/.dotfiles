@@ -15,7 +15,7 @@ return {
       ['<C-j>'] = { 'select_next', 'fallback' },
       ['<C-e>'] = { 'hide', 'fallback' },
       ['<C-y>'] = { 'select_and_accept' },
-      ['<CR>'] = { 'select_and_accept', 'fallback' },
+      ['<CR>'] = { 'accept', 'fallback' },
       -- ['<Tab>'] = { 'snippet_forward', 'fallback' },
     },
 
@@ -27,9 +27,13 @@ return {
 
     -- (Default) Only show the documentation popup when manually triggered
     completion = {
+      keyword = {
+        range = "full",
+      },
       list = {
         selection = {
           preselect = false, -- Automatically select the first item
+          auto_insert = true,
         }
       },
       accept = {
@@ -105,16 +109,6 @@ return {
         return cmp.snippet_backward()
       else
         return "<S-Tab>"
-      end
-    end, { expr = true, noremap = true, replace_keycodes = true })
-
-    -- Add this custom mapping for Enter key
-    vim.keymap.set("i", "<CR>", function()
-      local cmp = require("blink.cmp")
-      if cmp.snippet_active() then
-        return cmp.select_and_accept()
-      else
-        return "<CR>"
       end
     end, { expr = true, noremap = true, replace_keycodes = true })
 
