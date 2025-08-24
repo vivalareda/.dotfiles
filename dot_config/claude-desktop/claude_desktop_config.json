@@ -1,0 +1,87 @@
+{
+  "mcpServers": {
+    "word-document-server": {
+      "command": "/Users/reda/github/mcp-servers/Office-Word-MCP-Server/.venv/bin/python3",
+      "args": ["/Users/reda/github/mcp-servers/Office-Word-MCP-Server/word_mcp_server.py"]
+    },
+    "mcp_excalidraw": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "excalidraw-mcp"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "git-ocr": {
+      "command": "/Users/reda/.local/bin/uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/reda/github/ocr-text-toolkit-frontend"
+      ]
+    },
+    "git-calculator": {
+      "command": "/Users/reda/.local/bin/uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/reda/github/calculator-gpa"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/reda/Downloads/GTI700"
+      ]
+    },
+    "shadcn-ui-server": {
+      "command": "npx",
+      "args": [
+        "@heilgar/shadcn-ui-mcp-server"
+      ]
+    },
+    "mcp-obsidian": {
+      "command": "/Users/reda/.local/bin/uv",
+      "args": [
+        "--directory",
+        "/Users/reda/github/mcp-obsidian",
+        "run",
+        "mcp-obsidian"
+      ]
+    },
+    "mcp-server-firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": ""
+      }
+    },
+    "youtube-transcript": {
+      "command": "npx",
+      "args": ["-y", "@kimtaeyoon83/mcp-server-youtube-transcript"]
+    },
+    "ultracite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://www.ultracite.ai/api/mcp/mcp"
+      ]
+    },
+    "grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+      "enabled": true
+    }
+  }
+}
