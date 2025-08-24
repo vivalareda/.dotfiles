@@ -12,6 +12,6 @@ local function switch_bool()
   end
 end
 
-vim.keymap.set("n", "<leader>bs", function()
+vim.keymap.set("n", "<C-b>", function()
   switch_bool()
 end, { desc = "Switch boolean" })

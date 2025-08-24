@@ -44,7 +44,7 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "ss",    -- Start incremental selection
+            init_selection = "st",    -- Start incremental selection
             node_incremental = "es",  -- Increment to the next node
             scope_incremental = "ef", -- Increment to the next scope (e.g., function or class)
             node_decremental = "ds",  -- Decrement selection

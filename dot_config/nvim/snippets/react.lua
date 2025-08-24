@@ -40,30 +40,6 @@ ls.add_snippets("typescriptreact", {
     t { "", "}" },
   }),
 
-  s("ctor", {
-    t "constructor(",
-    f(function(_, snip)
-      return snip.env.LS_SELECT_RAW or ""
-    end, {}),
-    t ") {",
-    t { "", "  " },
-    f(function(_, snip)
-      local raw = snip.env.LS_SELECT_RAW or ""
-      if raw == "" then return "" end
-
-      local params = vim.split(raw, ",")
-      local assignments = {}
-      for _, param in ipairs(params) do
-        local trimmed = vim.trim(param)
-        local name = trimmed:match "([%w_]+)%s*:"
-        if name then
-          table.insert(assignments, "this." .. name .. " = " .. name .. ";")
-        end
-      end
-      return table.concat(assignments, "\n  ")
-    end, {}),
-    t { "", "}" },
-  }),
 
   s("todo", {
     c(1, {

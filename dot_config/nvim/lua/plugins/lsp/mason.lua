@@ -33,6 +33,18 @@ return {
         "pyright",
         "terraformls",
       },
+      handlers = {
+        function(server_name)
+          require("lspconfig")[server_name].setup({})
+        end,
+        biome = function()
+          require("lspconfig").biome.setup({
+            capabilities = {
+              positionEncodings = { 'utf-16' }
+            }
+          })
+        end,
+      }
     }
 
     require("mason-tool-installer").setup {
