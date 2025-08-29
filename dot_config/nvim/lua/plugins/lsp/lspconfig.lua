@@ -62,6 +62,17 @@ return {
           opts.desc = "Show LSP code actions"
           keymap.set("n", "<leader>sa", vim.lsp.buf.code_action, opts) -- show code actions
 
+          opts.desc = 'Select typescript version'
+          keymap.set('n', "<leader>cv", function()
+            local clients = vim.lsp.get_clients({ name = 'vtsls' })
+            if clients[1] then
+              clients[1]:exec_cmd({
+                command = "typescript.selectTypeScriptVersion",
+                title = "Select TypeScript Version"
+              })
+            end
+          end, opts)
+
           -- if client.supports_method("textDocument/formatting") then
           --   opts.desc = "Format buffer"
           --   keymap.set("n", "<leader>fm", function()

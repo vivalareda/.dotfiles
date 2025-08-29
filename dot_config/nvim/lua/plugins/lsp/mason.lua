@@ -23,7 +23,7 @@ return {
       ensure_installed = {
         "biome",
         "lua_ls",
-        "ts_ls",
+        "vtsls",
         "html",
         "cssls",
         "tailwindcss",
@@ -41,6 +41,15 @@ return {
           require("lspconfig").biome.setup({
             capabilities = {
               positionEncodings = { 'utf-16' }
+            }
+          })
+        end,
+        vtsls = function()
+          require('lspconfig').vtsls.setup({
+            settings = {
+              vtsls = {
+                autoUseWorkspaceTsdk = true,
+              }
             }
           })
         end,
