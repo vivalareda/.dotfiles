@@ -39,13 +39,23 @@ return {
           -- See `:help vim.lsp.*` for documentation on any of the below functions
           local opts = { buffer = args.buf, silent = true }
           local client = vim.lsp.get_client_by_id(args.data.client_id)
+          local function smart_goto_definition()
+            local filetype = vim.bo.filetype
+            if filetype == "typescript" or filetype == "typescriptreact" or
+                filetype == "javascript" or filetype == "javascriptreact" then
+              vim.lsp.buf.definition()
+            else
+              vim.lsp.buf.implementation()
+            end
+          end
+
 
           -- set keybinds
           opts.desc = "Go to declaration"
           keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
-          opts.desc = "Go to definition"
-          keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- go to definition
+          opts.desc = "Go to source definition"
+          keymap.set("n", "gd", smart_goto_definition, opts) -- go to source definition
 
           opts.desc = "Smart rename"
           keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
