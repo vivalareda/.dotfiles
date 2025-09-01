@@ -33,6 +33,7 @@
       - sketchybar
       - borders
       - jq
+      - fd
 
     homebrew_cask_packages:
       - karabiner-elements
