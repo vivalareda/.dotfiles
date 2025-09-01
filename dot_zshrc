@@ -170,7 +170,7 @@ tmux() {
 
 repomix() {
   if [ $# -eq 0 ]; then
-    command repomix --global
+    command repomix --global && rm ignore/repomix-output.xml
   else
     command repomix "$@"
   fi
@@ -246,7 +246,3 @@ function y() {
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 . "$HOME/.local/bin/env"
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
