@@ -205,6 +205,19 @@ setobspath() {
   source ~/.zshrc
 }
 
+killport() {
+  print -n "Port to kill? "
+  read PORT
+  PID=$(lsof -ti:${PORT})
+
+  if [ -z "$PID" ]; then
+    echo "No process is using port ${PORT}."
+    return 1
+  fi
+
+  kill -9 $PID
+}
+
 # pbcopy() {
 #   if [ $# -eq 0 ]; then
 #     selected_file=$(find . -maxdepth 1 -type f | fzf --prompt="Select file: ")
