@@ -32,7 +32,9 @@ return {
           "query",
           "vimdoc",
           "c",
+          "latex",
         },
+
         sync_install = false, -- Install languages asynchronously
         auto_install = true,  -- Automatically install missing parsers
 

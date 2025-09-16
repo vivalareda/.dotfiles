@@ -44,9 +44,20 @@ ls.add_snippets("typescript", {
     i(0),
   }),
 
-  s({ trig = "note", autosnippet = true }, {
+  s({ trig = "note", snippetType = 'autosnippet' }, {
     t "// NOTE: ",
     i(0)
   }),
 
+  s({ trig = 'yield ', snippetType = 'autosnippet' }, {
+    t "yield*"
+  }),
+
+  s({ trig = 'Effect.gen()', snippetType = 'autosnippet' }, fmt([[
+    Effect.gen(function* () {{
+      {}
+    }})
+    ]], {
+    i(1)
+  }))
 })
