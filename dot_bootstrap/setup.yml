@@ -1,4 +1,4 @@
----
+
 - name: Install system
   hosts: localhost
   connection: local
@@ -34,11 +34,11 @@
       - borders
       - jq
       - fd
+      -lazygit
 
     homebrew_cask_packages:
-      - karabiner-elements
       - arc
-      - zen-browser
+      - zen
       - raycast
       - cleanshot
       - 1password
@@ -50,20 +50,9 @@
       - cursor
       - discord
       - obsidian
-      - sf-symbols
       - font-hack-nerd-font
       - font-jetbrains-mono-nerd-font
       - webcatalog
-
-    oh_my_zsh_plugins:
-      - name: zsh-syntax-highlighting
-        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-      - name: zsh-autosuggestions
-        repo: https://github.com/zsh-users/zsh-autosuggestions.git
-      - name: zsh-256color
-        repo: https://github.com/chrissicool/zsh-256color.git
-      - name: zsh-interactive-cd
-        repo: https://github.com/mrjohannchang/zsh-interactive-cd.git
 
     sketchybar_dependencies:
       - command: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
@@ -92,17 +81,6 @@
       shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
       ignore_errors: true
 
-    - name: Clone p10k theme
-      shell: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-      ignore_errors: true
-
-    - name: Install plugins
-      git:
-        repo: "{{ item.repo }}"
-        dest: "{{ ZSH_CUSTOM | default('~/.oh-my-zsh/custom') }}/plugins/{{ item.name }}"
-        update: yes
-      loop: "{{ oh_my_zsh_plugins }}"
-
     - name: Install aerospace (cask)
       community.general.homebrew:
         name: nikitabobko/tap/aerospace
@@ -112,10 +90,20 @@
 
     - name: Install Homebrew cask packages
       community.general.homebrew:
-        name: "{{ homebrew_cask_packages }}"
+        name: "{{ item }}"
         state: present
         install_options: ["cask"]
       when: os_type == 'Darwin'
+      loop: "{{ homebrew_cask_packages }}"
+
+    - name: Install sudo-required cask packages
+      shell: "brew install --cask {{ item }}"
+      become: true
+      when: os_type == 'Darwin'
+      loop:
+        - karabiner-elements
+        - sf-symbols
+      ignore_errors: true
 
     - name: Install Sketchybar dependencies
       shell: "{{ item.command }}"
