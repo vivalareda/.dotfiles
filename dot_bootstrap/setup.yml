@@ -34,7 +34,7 @@
       - borders
       - jq
       - fd
-      -lazygit
+      - lazygit
 
     homebrew_cask_packages:
       - arc
@@ -53,6 +53,8 @@
       - font-hack-nerd-font
       - font-jetbrains-mono-nerd-font
       - webcatalog
+      - iina
+      - vivid-app
 
     sketchybar_dependencies:
       - command: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
