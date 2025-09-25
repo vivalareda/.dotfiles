@@ -35,6 +35,7 @@
       - jq
       - fd
       - lazygit
+      - rust
 
     homebrew_cask_packages:
       - arc
@@ -97,16 +98,6 @@
         install_options: ["cask"]
       when: os_type == 'Darwin'
       loop: "{{ homebrew_cask_packages }}"
-
-    - name: Install sudo-required cask packages
-      shell: "brew install --cask {{ item }}"
-      become: true
-      when: os_type == 'Darwin'
-      loop:
-        - karabiner-elements
-        - iina
-        - sf-symbols
-      ignore_errors: true
 
     - name: Install Sketchybar dependencies
       shell: "{{ item.command }}"
