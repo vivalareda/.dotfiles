@@ -58,10 +58,6 @@
       - vivid-app
       - superwhisper
 
-    sketchybar_dependencies:
-      - command: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
-      - command: curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.20/icon_map_fn.sh -o ~/.config/sketchybar/plugins/icon_map_fn.sh
-
   tasks:
     - name: Update Homebrew
       community.general.homebrew:
@@ -99,8 +95,3 @@
         install_options: ["cask"]
       when: os_type == 'Darwin'
       loop: "{{ homebrew_cask_packages }}"
-
-    - name: Install Sketchybar dependencies
-      shell: "{{ item.command }}"
-      loop: "{{ sketchybar_dependencies }}"
-      when: os_type == 'Darwin'
