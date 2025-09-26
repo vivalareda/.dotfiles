@@ -95,3 +95,8 @@
         install_options: ["cask"]
       when: os_type == 'Darwin'
       loop: "{{ homebrew_cask_packages }}"
+
+    - name: Run nix
+      shell: sudo nix run nix-darwin -- switch --flake ~/.config/nix#default
+      when: os_type == 'Darwin'
+

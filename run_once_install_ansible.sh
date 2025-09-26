@@ -2,6 +2,7 @@
 
 install_on_mac() {
   brew install ansible
+  curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
 }
 
 install_on_arch() {
@@ -14,9 +15,9 @@ install_on_ubuntu() {
 }
 
 DIRECTORY=$(which ansible)
+OS="$(uname -s)"
 
 if [ -z "$DIRECTORY" ]; then
-  OS="$(uname -s)"
   case "$OS" in
     Linux*)
       if [ -f /etc/arch-release ]; then
