@@ -36,6 +36,7 @@
       - fd
       - lazygit
       - rust
+      - uv
 
     homebrew_cask_packages:
       - arc
