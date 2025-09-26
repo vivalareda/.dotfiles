@@ -91,12 +91,18 @@
 
           # Dock settings
           dock = {
+            wvous-tl-corner = 1;  # Top left - disabled
+            wvous-tr-corner = 1;  # Top right - disabled
+            wvous-bl-corner = 1;  # Bottom left - disabled 
+            wvous-br-corner = 1;  # Bottom right - disabled
             autohide = true;                # Auto-hide the dock
             show-recents = false;           # Don't show recent apps
             tilesize = 48;                  # Dock icon size
           };
 
           trackpad = {
+            Clicking = true;
+            FirstClickThreshold = 0;
             SecondClickThreshold = 0;
             ActuationStrength = 1;
           };
@@ -117,6 +123,9 @@
 
           # Global system settings
           NSGlobalDomain = {
+
+            "com.apple.mouse.tapBehavior" = 1;
+            "com.apple.trackpad.forceClick" = false;
 
             # Appearance
             AppleInterfaceStyle = "Dark";   # Dark mode
