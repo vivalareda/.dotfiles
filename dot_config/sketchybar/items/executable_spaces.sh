@@ -33,17 +33,14 @@ for m in $(aerospace list-monitors | awk '{print $1}'); do
                --set space.$sid "${space[@]}" \
                --subscribe space.$sid mouse.clicked
 
+    source "$CONFIG_DIR/icon_map.sh"
     apps=$(aerospace list-windows --workspace $sid | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
     icon_strip=" "
     if [ "${apps}" != "" ]; then
       while read -r app
       do
-        if [ "$app" = "kitty" ]; then
-          app_icon=":kitty:" # Explicitly assign the icon for kitty
-        else
-          icon_strip+=" $($CONFIG_DIR/plugins/icon_map.sh "$app")"
-        fi
+        __icon_map "$app"
+        icon_strip+=" $icon_result"
       done <<< "${apps}"
     else
       icon_strip=" —"

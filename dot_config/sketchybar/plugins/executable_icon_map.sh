@@ -639,6 +639,9 @@ function __icon_map() {
    "T3 Chat")
         icon_result=":t3chat:"
         ;;
+    "IINA")
+      icon_result=":iina:"
+      ;;
    "Claude")
         icon_result=":claude:"
         ;;

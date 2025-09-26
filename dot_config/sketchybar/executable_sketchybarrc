@@ -16,8 +16,8 @@ AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspac
 # Setting up and starting the helper process
 HELPER=git.felix.helper
 killall helper
-(cd $CONFIG_DIR/helper && make)
-$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+(cd $CONFIG_DIR/helpers && make)
+$CONFIG_DIR/helpers/helper $HELPER > /dev/null 2>&1 &
 
 # Unload the macOS on screen indicator overlay for volume change
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
