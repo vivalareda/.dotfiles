@@ -51,7 +51,12 @@ end, { noremap = true, silent = true, desc = "Clear all lines and start insert m
 
 keymap("n", "dab", function()
   vim.cmd "normal! V%d"
-end, { noremap = true, silent = true,  desc = "Delete all brackets" })
+end, { noremap = true, silent = true, desc = "Delete all brackets" })
+
+keymap("n", "yab", function()
+  vim.cmd "normal! V%y"
+end, { noremap = true, silent = true, desc = "Yank all brackets" })
+
 
 -- Yanking keymap to save cursor position
 local cursorPreYank
