@@ -72,8 +72,9 @@
               AppleSymbolicHotKeys = {
                 # Disable 'Cmd + Space' for Spotlight Search
                 "64" = { enabled = false; };
-                "60" = { enabled = false; };  # Select previous input source
+                "60" = { enabled = false; };
                 "61" = { enabled = false; };
+                "65" = { enabled = false; };
               };
             };
 
