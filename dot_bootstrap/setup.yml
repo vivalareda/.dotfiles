@@ -37,6 +37,7 @@
       - lazygit
       - rust
       - uv
+      - opencode
 
     homebrew_cask_packages:
       - arc
