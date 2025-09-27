@@ -43,6 +43,18 @@
           iina
         ];
 
+        homebrew = {
+          enable = true;
+
+          masApps = {
+            "Excalidraw" = 6636493997;
+          };
+
+          # Optional: cleanup settings
+          onActivation.autoUpdate = true;
+          onActivation.upgrade = true;
+        };
+
         # macOS system preferences
         system.defaults = {
 
@@ -81,6 +93,7 @@
             "com.apple.finder" = {
               _FXSortFoldersFirst = true;
               FXDefaultSearchScope = "SCcf";
+              FXPreferredViewStyle = "Nlsv";
 
               # Remove Recents from sidebar
               ShowRecentTags = false;
@@ -127,6 +140,10 @@
 
             "com.apple.mouse.tapBehavior" = 1;
             "com.apple.trackpad.forceClick" = false;
+
+            # Turn off capitalisation and spell check
+            NSAutomaticCapitalizationEnabled = false;
+            NSAutomaticSpellingCorrectionEnabled = false;
 
             # Appearance
             AppleInterfaceStyle = "Dark";   # Dark mode
