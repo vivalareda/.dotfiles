@@ -76,8 +76,8 @@ outer.top = [{ monitor.main = 30 }, { monitor.secondary = 62 }, 62]
 outer.right = 15
 
 [workspace-to-monitor-force-assignment]
-1 = ['secondary']         
-2 = ['secondary']         
+1 = ['main']         
+2 = ['main']         
 3 = ['secondary']
 4 = ['secondary']
 5 = ['secondary']
@@ -229,10 +229,6 @@ if.app-id = 'com.hnc.Discord'
 run = ['move-node-to-workspace D']
 
 [[on-window-detected]]
-if.app-id = 'md.obsidian'
-run = ['move-node-to-workspace O']
-
-[[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace M']
 
@@ -276,8 +272,10 @@ run = 'layout floating'
 if.app-id = 'com.apple.ActivityMonitor'
 run = 'layout floating'
 
-
 [[on-window-detected]]
 if.app-id = 'com.apple.QuickTimePlayerX'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+run = 'layout floating'

@@ -95,3 +95,12 @@ local open_split_view = function()
 end
 
 keymap("n", "<leader>vs", open_split_view, { desc = "Open split view" }) -- Open split view with telescope
+
+keymap("n", "<leader>of", function()
+  os.execute('open .')
+end
+, { desc = "Open finder" })
+
+keymap("n", "<leader>rp", function()
+  os.execute('repomix')
+end, { desc = "Run repomix" })
