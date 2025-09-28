@@ -88,6 +88,10 @@
                 "60" = { enabled = false; };
                 "61" = { enabled = false; };
                 "65" = { enabled = false; };
+                "28" = { enabled = false; };
+                "29" = { enabled = false; };
+                "30" = { enabled = false; };
+                "31" = { enabled = false; };
               };
             };
 
