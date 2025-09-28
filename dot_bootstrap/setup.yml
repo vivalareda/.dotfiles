@@ -60,6 +60,7 @@
       - webcatalog
       - vivid-app
       - superwhisper
+      - pdf-expert
 
   tasks:
     - name: Update Homebrew
@@ -109,4 +110,17 @@
       shell: nix run nix-darwin -- switch --flake {{ ansible_env.HOME }}/.config/nix#default
       become: yes
       when: os_type == 'Darwin'
+
+    - name: Set PDF Expert as default PDF app
+      shell: nix run nixpkgs#duti -- -s com.readdle.PDFExpert-Mac pdf all
+      when: os_type == 'Darwin'
+
+    - name: Set IINA as default video app
+      shell: |
+        nix run nixpkgs#duti -- -s com.colliderli.iina mp4 all
+        nix run nixpkgs#duti -- -s com.colliderli.iina mov all
+        nix run nixpkgs#duti -- -s com.colliderli.iina avi all
+        nix run nixpkgs#duti -- -s com.colliderli.iina mkv all
+      when: os_type == 'Darwin'
+
 
