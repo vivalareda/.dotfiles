@@ -38,6 +38,7 @@
       - rust
       - uv
       - opencode
+      - defaultbrowser
 
     homebrew_cask_packages:
       - arc
@@ -82,6 +83,8 @@
     - name: Clone TMP
       shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
       ignore_errors: true
+      args:
+        creates: ~/.tmux/plugins/tpm
 
     - name: Install aerospace (cask)
       community.general.homebrew:
@@ -98,7 +101,12 @@
       when: os_type == 'Darwin'
       loop: "{{ homebrew_cask_packages }}"
 
+    - name: Set Arc as default browser
+      shell: defaultbrowser browser
+      when: os_type == 'Darwin'
+
     - name: Run nix
-      shell: sudo nix run nix-darwin -- switch --flake ~/.config/nix#default
+      shell: nix run nix-darwin -- switch --flake {{ ansible_env.HOME }}/.config/nix#default
+      become: yes
       when: os_type == 'Darwin'
 

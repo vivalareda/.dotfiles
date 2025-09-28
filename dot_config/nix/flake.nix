@@ -11,6 +11,7 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
     let
+
       configuration = { pkgs, ... }: {
         # Set the primary user (required for system defaults)
         system.primaryUser = "lilflare";
