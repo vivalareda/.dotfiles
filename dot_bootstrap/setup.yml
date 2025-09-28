@@ -39,6 +39,8 @@
       - uv
       - opencode
       - defaultbrowser
+      - bottom
+
 
     homebrew_cask_packages:
       - arc
