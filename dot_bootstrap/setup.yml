@@ -41,6 +41,7 @@
       - defaultbrowser
       - bottom
       - ffmpeg
+      - whisper
 
 
     homebrew_cask_packages:
@@ -64,6 +65,7 @@
       - vivid-app
       - superwhisper
       - pdf-expert
+      - macwhisper
 
   tasks:
     - name: Update Homebrew
