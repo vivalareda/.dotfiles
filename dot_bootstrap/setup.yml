@@ -40,6 +40,7 @@
       - opencode
       - defaultbrowser
       - bottom
+      - ffmpeg
 
 
     homebrew_cask_packages:
