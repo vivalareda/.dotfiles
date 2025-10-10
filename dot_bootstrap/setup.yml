@@ -42,6 +42,7 @@
       - bottom
       - ffmpeg
       - whisper
+      - 1password-cli
 
 
     homebrew_cask_packages:
