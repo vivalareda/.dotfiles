@@ -41,7 +41,7 @@
       - defaultbrowser
       - bottom
       - ffmpeg
-      - whisper
+      - openai-whisper
       - 1password-cli
 
 
