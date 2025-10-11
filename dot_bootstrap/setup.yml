@@ -67,6 +67,8 @@
       - superwhisper
       - pdf-expert
       - macwhisper
+      - the-unarchiver
+
 
   tasks:
     - name: Update Homebrew
