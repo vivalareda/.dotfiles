@@ -76,8 +76,8 @@ outer.top = [{ monitor.main = 30 }, { monitor.secondary = 62 }, 62]
 outer.right = 15
 
 [workspace-to-monitor-force-assignment]
-1 = ['main']         
-2 = ['main']         
+1 = ['secondary']  
+2 = ['secondary']  
 3 = ['secondary']
 4 = ['secondary']
 5 = ['secondary']
