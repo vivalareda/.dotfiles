@@ -43,6 +43,7 @@
       - ffmpeg
       - openai-whisper
       - 1password-cli
+      - unar
 
 
     homebrew_cask_packages:
