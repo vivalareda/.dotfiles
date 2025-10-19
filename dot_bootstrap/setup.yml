@@ -44,7 +44,7 @@
       - openai-whisper
       - 1password-cli
       - unar
-
+      - nvm
 
     homebrew_cask_packages:
       - arc
