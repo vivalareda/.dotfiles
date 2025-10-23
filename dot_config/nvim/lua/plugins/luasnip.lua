@@ -23,9 +23,8 @@ return {
       end
     end)
 
-    vim.keymap.set({ "i", "s" }, "<Tab>", function()
-      local test = require("luasnip").expand_or_jumpable()
-      vim.notify("expand_or_jumpable: " .. vim.inspect(test), vim.log.levels.INFO)
+    vim.keymap.set({ "i", "s" }, "<C-n>", function()
+      require("luasnip").jump(1)
     end)
   end,
 }

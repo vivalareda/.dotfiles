@@ -7,9 +7,6 @@ return {
       suggestion = {
         enabled = false,
         auto_trigger = false,
-        keymap = {
-          accept = "jk",
-        }
       },
       panel = {
         enabled = false
@@ -91,30 +88,36 @@ return {
       })
 
       chat.setup(vim.tbl_deep_extend("force", opts, {
+        model = 'claude-sonnet-4.5', -- Set Claude Sonnet 4.5 as default
+        temperature = 0.1,
         -- Custom prompts
         prompts = {
           DiagnosticError = {
-            prompt = "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provide the missing character",
+            prompt =
+            "This line of code has an error, based on the file and the message, fix the error. If the fix is a quick fix please provide the missing character",
             description = "Fix diagnostic error",
             selection = select.visual,
           },
           InDepthDiagnostic = {
-            prompt = "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
+            prompt =
+            "This line of code has an error, I need you to explain the error. I don't want you to just fix it, explain the error in depth and how the solution solves the issue",
             description = "Fix in depth diagnostic error",
             selection = select.visual,
           },
           FixBloc = {
-            prompt = "This block of code has an error, fix the error and give me back only the fixed block without line numbers so that I can directly replace it in the file",
+            prompt =
+            "This block of code has an error, fix the error and give me back only the fixed block without line numbers so that I can directly replace it in the file",
             description = "Fix block error",
             selection = select.visual,
           },
           FeatureRequest = {
-            prompt = "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line numbers, just the code so that I can directly replace it in the file",
+            prompt =
+            "I need you to implement a feature. You will give back the code unchanged other than what is needed to implement the feature. No line numbers, just the code so that I can directly replace it in the file",
             description = "Implement feature",
             selection = select.visual,
           },
         },
-        
+
         -- Mappings
         mappings = {
           reset = {

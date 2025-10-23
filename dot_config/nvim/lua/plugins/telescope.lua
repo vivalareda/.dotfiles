@@ -6,6 +6,7 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
     "debugloop/telescope-undo.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
   },
   config = function()
     local telescope = require("telescope")
@@ -14,6 +15,9 @@ return {
       extensions = {
         undo = {
           "debugloop/telescope-undo.nvim",
+        },
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown({})
         },
       },
       defaults = {
@@ -34,6 +38,7 @@ return {
 
     telescope.load_extension "fzf"
     telescope.load_extension "undo"
+    telescope.load_extension "ui-select"
 
     -- Telescope key mappings
     local builtin = require "telescope.builtin"
@@ -46,6 +51,24 @@ return {
     vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[S]earch [R]esume" })
     vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "[S]earch Recent Files ('repeat')" })
     vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+    vim.keymap.set("n", "<leader>fh", function()
+      builtin.help_tags {
+        cwd = vim.fn.stdpath "config"
+      }
+    end, { desc = "[S]earch [H]elp documentation" })
+
+    vim.keymap.set("n", "<leader>ep", function()
+      builtin.find_files {
+        cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+      }
+    end, { desc = "Search lazyvim plugin files" })
+
+    vim.keymap.set("n", "<leader>en", function()
+      builtin.find_files {
+        cwd = vim.fn.stdpath('config')
+      }
+    end, { desc = "[S]earch [N]eovim files" })
+
 
     -- Fuzzy search in current buffer
     vim.keymap.set("n", "<leader>/", function()

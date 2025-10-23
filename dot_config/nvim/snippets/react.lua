@@ -66,18 +66,6 @@ ls.add_snippets("typescriptreact", {
     })
   ),
 
-  s({ trig = "uS", snippetType = "autosnippet" }, {
-    t "const [",
-    i(1),
-    t ", set",
-    f(function(args)
-      return args[1][1]:gsub("^%l", string.upper)
-    end, { 1 }),
-    t "] = useState(",
-    i(2),
-    t ");",
-  }),
-
   s({ trig = "uE", snippetType = "autosnippet" }, {
     t "useEffect(() => {",
     t { "", "  " },
@@ -88,16 +76,28 @@ ls.add_snippets("typescriptreact", {
     t "]);",
   }),
 
-  s("sfc", {
-    t { "const " },
+  s({ trig = "uS", snippetType = "autosnippet" }, {
+    t "const [",
     i(1),
-    t { " = () => {" },
+    t ", set",
+    f(function(args)
+      return args[1][1]:gsub("^%l", string.upper)
+    end, { 1 }),
+    t "] = useState(",
+    i(2, ""),
+    t ");",
+  }),
+
+  s("sfc", {
+    t { "export function " },
+    i(1),
+    t { " () {" },
     t { "", "  return (" },
     t { "", "    " },
     i(2, ""),
     t { "", "  );" },
     t { "", "};" },
-    t { "", "", "export default " },
+    t { "", "", "export " },
     rep(1),
     t { ";" },
   }),

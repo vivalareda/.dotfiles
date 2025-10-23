@@ -23,6 +23,7 @@ return {
       ensure_installed = {
         "biome",
         "lua_ls",
+        "eslint",
         "vtsls",
         "html",
         "cssls",
@@ -53,16 +54,41 @@ return {
             }
           })
         end,
+        eslint = function()
+          require('lspconfig').eslint.setup({
+            flags = {
+              allow_incremental_sync = false,
+              debounce_text_changes = 1000,
+            },
+            on_attach = function(client, bufnr)
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                command = "EslintFixAll",
+              })
+            end,
+            root_dir = require("lspconfig.util").root_pattern(
+              "eslint.config.mjs",
+              "eslint.config.cjs",
+              "eslint.config.js",
+              ".eslintrc",
+              ".eslintrc.js",
+              "package.json"
+            ),
+            settings = {
+              workingDirectory = { mode = "auto" },
+            },
+          })
+        end,
       }
     }
 
     require("mason-tool-installer").setup {
       ensure_installed = {
-        -- "prettier", -- prettier formatter
+        "prettier", -- prettier formatter
         -- "stylua", -- lua formatter
         -- "isort", -- python formatter
         -- "black", -- python formatter
-        -- "eslint_d",
+        "eslint_d",
         -- "pylint",
         -- "tflint",
       },
