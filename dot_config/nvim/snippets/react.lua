@@ -88,17 +88,14 @@ ls.add_snippets("typescriptreact", {
     t ");",
   }),
 
-  s("sfc", {
-    t { "export function " },
+  s({ trig = "sfc", snippetType = "autosnippet" }, {
+    t "export function ",
     i(1),
-    t { " () {" },
+    t " () {",
     t { "", "  return (" },
     t { "", "    " },
     i(2, ""),
     t { "", "  );" },
     t { "", "};" },
-    t { "", "", "export " },
-    rep(1),
-    t { ";" },
   }),
 })

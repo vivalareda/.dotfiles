@@ -19,6 +19,15 @@ return {
       -- ['<Tab>'] = { 'snippet_forward', 'fallback' },
     },
 
+    cmdline = {
+      keymap = {
+        preset = 'cmdline',
+        ['<C-j>'] = { 'select_next', 'fallback' },
+        ['<C-k>'] = { 'select_prev', 'fallback' },
+      },
+    },
+
+
     appearance = {
       nerd_font_variant = 'mono',
     },
@@ -89,6 +98,8 @@ return {
   config = function(_, opts)
     require("blink.cmp").setup(opts)
 
+    vim.cmd('command! BlinkCmpStatus lua print(vim.inspect(require("blink.cmp").config))')
+
     vim.keymap.set("i", "<Tab>", function()
       local cmp = require("blink.cmp")
       if cmp.is_visible() then
@@ -111,15 +122,5 @@ return {
         return "<S-Tab>"
       end
     end, { expr = true, noremap = true, replace_keycodes = true })
-
-    -- Your existing mapping
-    vim.keymap.set("i", "<C-j>", function()
-      local cmp = require("blink.cmp")
-      if cmp.snippet_active() then
-        return ""
-      else
-        return "<C-j>"
-      end
-    end, { expr = true, noremap = true })
   end,
 }

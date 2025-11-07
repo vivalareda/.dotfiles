@@ -41,7 +41,7 @@ return {
         biome = function()
           require("lspconfig").biome.setup({
             capabilities = {
-              positionEncodings = { 'utf-16' }
+              positionEncodings = { 'utf-8' }
             }
           })
         end,
@@ -54,31 +54,31 @@ return {
             }
           })
         end,
-        eslint = function()
-          require('lspconfig').eslint.setup({
-            flags = {
-              allow_incremental_sync = false,
-              debounce_text_changes = 1000,
-            },
-            on_attach = function(client, bufnr)
-              vim.api.nvim_create_autocmd("BufWritePre", {
-                buffer = bufnr,
-                command = "EslintFixAll",
-              })
-            end,
-            root_dir = require("lspconfig.util").root_pattern(
-              "eslint.config.mjs",
-              "eslint.config.cjs",
-              "eslint.config.js",
-              ".eslintrc",
-              ".eslintrc.js",
-              "package.json"
-            ),
-            settings = {
-              workingDirectory = { mode = "auto" },
-            },
-          })
-        end,
+        -- eslint = function()
+        --   require('lspconfig').eslint.setup({
+        --     flags = {
+        --       allow_incremental_sync = false,
+        --       debounce_text_changes = 1000,
+        --     },
+        --     on_attach = function(client, bufnr)
+        --       vim.api.nvim_create_autocmd("BufWritePre", {
+        --         buffer = bufnr,
+        --         command = "EslintFixAll",
+        --       })
+        --     end,
+        --     root_dir = require("lspconfig.util").root_pattern(
+        --       "eslint.config.mjs",
+        --       "eslint.config.cjs",
+        --       "eslint.config.js",
+        --       ".eslintrc",
+        --       ".eslintrc.js",
+        --       "package.json"
+        --     ),
+        --     settings = {
+        --       workingDirectory = { mode = "auto" },
+        --     },
+        --   })
+        -- end,
       }
     }
 

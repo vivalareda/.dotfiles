@@ -42,7 +42,7 @@ return {
           local function smart_goto_definition()
             local filetype = vim.bo.filetype
             if filetype == "typescript" or filetype == "typescriptreact" or
-                filetype == "javascript" or filetype == "javascriptreact" then
+                filetype == "javascript" or filetype == "javascriptreact" or filetype == "rust" then
               vim.lsp.buf.definition()
             else
               vim.lsp.buf.implementation()

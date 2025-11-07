@@ -18,9 +18,20 @@ keymap({ "o", "n", "v" }, "H", "^")
 keymap({ "o", "n", "v" }, "L", "$")
 keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })
 keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
+keymap("i", "<C-o>", "<Down>", { noremap = true, silent = true })
+keymap("n", "<C-v>", "<C-q>", { noremap = true, silent = true })
+
+-- make ctrl j/k work in cmd-line mode
+-- keymap("c", "<C-j>", "<Nop>", { noremap = true })
+-- keymap("c", "<C-k>", "<Nop>", { noremap = true })
 
 -- Unbind default 's' behavior for flash.nvim
-vim.keymap.set("n", "s", "<Nop>", { noremap = true, silent = true })
+keymap("n", "s", "<Nop>", { noremap = true, silent = true })
+
+-- color scheme
+keymap("n", "<leader>cs", function()
+  require('telescope.builtin').colorscheme()
+end)
 
 keymap("n", "<leader>fa", function()
   vim.lsp.buf.format()
@@ -102,5 +113,5 @@ end
 , { desc = "Open finder" })
 
 keymap("n", "<leader>rp", function()
-  os.execute('repomix')
+  os.execute('repomix > /dev/null')
 end, { desc = "Run repomix" })

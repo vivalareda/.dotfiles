@@ -1,23 +1,31 @@
 return {
-  "mfussenegger/nvim-lint",
-  event = { 
-    "BufWritePost",
-    "BufEnter",
-    "BufNewFile" 
-  },
-  config = function()
-    require("lint").linters_by_ft = {
-      javascript = { "biomejs" },
-      typescript = { "biomejs" },
-    }
-
-    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-    vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
-      group = lint_augroup,
-      callback = function()
-        require("lint").try_lint()
-      end,
-    })
-  end,
+  -- "mfussenegger/nvim-lint",
+  -- event = {
+  --   "BufWritePost",
+  --   "BufEnter",
+  --   "BufNewFile"
+  -- },
+  -- config = function()
+  --   require("lint").linters_by_ft = {
+  --     javascript = { "biomejs" },
+  --     typescript = { "biomejs" },
+  --   }
+  --
+  --   local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+  --   local active = true;
+  --
+  --   vim.keymap.set("n", "<leader>db", function()
+  --     print("setting state to: ", not active)
+  --     active = not active
+  --   end, { desc = "Toggle biome linting" })
+  --
+  --   vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
+  --     group = lint_augroup,
+  --     callback = function()
+  --       if (active) then
+  --         require("lint").try_lint()
+  --       end
+  --     end,
+  --   })
+  -- end,
 }
