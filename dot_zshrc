@@ -141,6 +141,7 @@ alias gc='sh ~/.config/script/check-commit.sh && command git commit -m'
 alias gcs='command git commit -m'
 alias ga='git add .'
 alias gp='git push'
+alias github='cd ~/github && cd $(fd --type d --max-depth 1 | fzf)'
 
 # REPOMIX
 alias rpm='repomix'
@@ -158,6 +159,10 @@ else
 	echo "obsidian path not set homie run setobspath if u wanna set it"
 fi
 
+find-ip() {
+  command ifconfig | grep "inet "
+}
+
 tmux() {
   if [ $# -eq 0 ]; then
     print -n "wus the session name homie? "
@@ -171,6 +176,9 @@ tmux() {
 repomix() {
   if [ $# -eq 0 ]; then
     command repomix --global && rm ignore/repomix-output.xml
+    if [ -z "$( ls -A './ignore' )" ]; then
+      command rm -rf ignore/
+    fi
   else
     command repomix "$@"
   fi
@@ -218,21 +226,15 @@ killport() {
   kill -9 $PID
 }
 
-# pbcopy() {
-#   if [ $# -eq 0 ]; then
-#     selected_file=$(find . -maxdepth 1 -type f | fzf --prompt="Select file: ")
-#     [[ -n "$selected_file" ]] && cat $selected_file | command pbcopy
-#   fi
-# }
-
 # Use bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Set path
-export PATH="/opt/homebrew/anaconda3/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-source $HOME/.local/bin/env
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/opt/zigup/bin:$PATH"
+
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -257,5 +259,3 @@ function y() {
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
-
-. "$HOME/.local/bin/env"
