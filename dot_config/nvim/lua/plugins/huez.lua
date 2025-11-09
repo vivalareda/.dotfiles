@@ -7,6 +7,6 @@ return {
   config = function()
     require("huez").setup({})
 
-    vim.keymap.set("n", "<leader>hu", function() require("huez.pickers").themes() end, { desc = "Open theme picker" })
+    vim.keymap.set("n", "<leader>ct", function() require("huez.pickers").themes() end, { desc = "Open theme picker" })
   end,
 }

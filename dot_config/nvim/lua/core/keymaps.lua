@@ -28,11 +28,6 @@ keymap("n", "<C-v>", "<C-q>", { noremap = true, silent = true })
 -- Unbind default 's' behavior for flash.nvim
 keymap("n", "s", "<Nop>", { noremap = true, silent = true })
 
--- color scheme
-keymap("n", "<leader>cs", function()
-  require('telescope.builtin').colorscheme()
-end)
-
 keymap("n", "<leader>fa", function()
   vim.lsp.buf.format()
 end, { noremap = true, silent = true })
