@@ -79,7 +79,6 @@ if [[ "$CONFIG" == "arch" ]]; then
   alias pa='$aurhelper -Ss'
   alias pc='$aurhelper -Sc'
   alias po='$aurhelper -Qtdq | $aurhelper -Rns -'
-  alias github='cd ~/github'
 fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -131,6 +130,7 @@ alias vim='nvim'
 alias nvconfig='cd ~/.config/nvim && nvim'
 alias obs='cd ~/obsidian/obsidian && nvim'
 alias dl='yt-dlp'
+alias dlyt='yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]"'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
@@ -141,7 +141,7 @@ alias gc='sh ~/.config/script/check-commit.sh && command git commit -m'
 alias gcs='command git commit -m'
 alias ga='git add .'
 alias gp='git push'
-alias github='cd ~/github && cd $(fd --type d --max-depth 1 | fzf)'
+alias gh='cd ~/github && cd $(fd --type d --max-depth 1 | fzf)'
 
 # REPOMIX
 alias rpm='repomix'

@@ -197,6 +197,7 @@ t = ['layout v_tiles', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
 a = ['layout accordion', 'mode main']
 q = ['mode main']
+l = ['exec-and-forget bash ~/.config/script/copy-last-screenshot.sh', "mode main"]
 
 1 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 1', "mode main"]
 2 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 2', "mode main"]
