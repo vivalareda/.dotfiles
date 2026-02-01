@@ -49,11 +49,32 @@ ls.add_snippets("typescript", {
     i(0)
   }),
 
-  s({ trig = 'yield ', snippetType = 'autosnippet' }, {
-    t "yield*"
-  }),
-
   s({ trig = 'Effect.gen()', snippetType = 'autosnippet' }, fmt([[
+    Effect.gen(function* () {{
+      {}
+    }})
+    ]], {
+      i(1)
+  })),
+
+  s({ trig = "Es", snippetType = "autosnippet" }, fmt([[
+export class {} extends Effect.Service<{}>()(
+  "{}",
+  {{
+    effect: Effect.gen(function* () {{
+      {}
+    }}),
+  }},
+) {{ }}
+]], {
+    i(1),
+    rep(1),
+    rep(1),
+    i(0),
+  })),
+
+
+  s({ trig = 'Eg', snippetType = 'autosnippet' }, fmt([[
     Effect.gen(function* () {{
       {}
     }})

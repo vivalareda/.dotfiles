@@ -33,6 +33,7 @@ return {
         "prismals",
         "pyright",
         "terraformls",
+        "oxlint",
       },
       handlers = {
         function(server_name)

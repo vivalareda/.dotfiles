@@ -54,5 +54,14 @@ local toggle_terminal = function()
   end
 end
 
+local close_terminal = function()
+  if vim.api.nvim_win_is_valid(state.floating.win) then
+    vim.api.nvim_win_hide(state.floating.win)
+  else
+    vim.cmd("nohlsearch")
+  end
+end
+
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
 vim.keymap.set({ "n", "t" }, "<leader>tt", toggle_terminal, { desc = "Toggle floating terminal" })
+vim.keymap.set({ "n", "t" }, "<esc>", close_terminal, { desc = "Close floating terminal" })

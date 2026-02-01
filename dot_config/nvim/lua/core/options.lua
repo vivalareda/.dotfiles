@@ -68,7 +68,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Real time edits without notification
 vim.opt.autoread = true
-vim.opt.updatetime = 100
+vim.opt.updatetime = 250
+vim.opt.swapfile = false
 
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
   pattern = "*",

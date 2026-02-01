@@ -18,8 +18,8 @@ return {
     require("mini.ai").setup {
       n_lines = 500,
       custom_textobjects = {
-        f = spec_treesitter({ 
-          a = { '@function.outer', '@lexical_declaration.outer' }, 
+        f = spec_treesitter({
+          a = { '@function.outer', '@lexical_declaration.outer' },
           i = { '@function.inner', '@lexical_declaration.inner' }
         }),
       },

@@ -146,6 +146,13 @@ return {
         highlight_overrides = {
           all = function(colors)
             return {
+
+              -- Hop highlights
+              HopNextKey = { fg = colors.peach, bold = true, nocombine = true },
+              HopNextKey1 = { fg = colors.blue, bold = true, nocombine = true },
+              HopNextKey2 = { fg = colors.teal, nocombine = true },
+              HopUnmatched = { fg = colors.overlay0 },
+
               -- Completion menu styling
               Pmenu = { bg = colors.mantle, fg = colors.text },
               PmenuSel = { bg = colors.surface0, fg = colors.text },

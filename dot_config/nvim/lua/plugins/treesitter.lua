@@ -48,45 +48,46 @@ return {
           keymaps = {
             init_selection = "st",    -- Start incremental selection
             node_incremental = "es",  -- Increment to the next node
-            scope_incremental = "ef", -- Increment to the next scope (e.g., function or class)
+            scope_incremental = "is", -- Increment to the next scope (e.g., function or class)
             node_decremental = "ds",  -- Decrement selection
           },
         },
-        textobjects = {
-          move = {
-            enable = true,
-            goto_next_start = {
-              ["]f"] = "@function.outer",
-              ["]c"] = "@class.outer",
-              ["]a"] = "@parameter.inner"
-            },
-            goto_next_end = {
-              ["]F"] = "@function.outer",
-              ["]C"] = "@class.outer",
-              ["]A"] = "@parameter.inner"
-            },
-            goto_previous_start = {
-              ["[f"] = "@function.outer",
-              ["[c"] = "@class.outer",
-              ["[a"] = "@parameter.inner"
-            },
-            goto_previous_end = {
-              ["[F"] = "@function.outer",
-              ["[C"] = "@class.outer",
-              ["[A"] = "@parameter.inner"
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ["<leader>a"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["<leader>A"] = "@parameter.inner",
-            },
-          },
-        },
+        -- textobjects = {
+        --   move = {
+        --     enable = true,
+        --     goto_next_start = {
+        --       ["]f"] = "@function.outer",
+        --       ["]c"] = "@class.outer",
+        --       ["]a"] = "@parameter.inner"
+        --     },
+        --     goto_next_end = {
+        --       ["]F"] = "@function.outer",
+        --       ["]C"] = "@class.outer",
+        --       ["]A"] = "@parameter.inner"
+        --     },
+        --     goto_previous_start = {
+        --       ["[f"] = "@function.outer",
+        --       ["[c"] = "@class.outer",
+        --       ["[a"] = "@parameter.inner"
+        --     },
+        --     goto_previous_end = {
+        --       ["[F"] = "@function.outer",
+        --       ["[C"] = "@class.outer",
+        --       ["[A"] = "@parameter.inner"
+        --     },
+        --   },
+        --   swap = {
+        --     enable = true,
+        --     swap_next = {
+        --       ["<leader>a"] = "@parameter.inner",
+        --     },
+        --     swap_previous = {
+        --       ["<leader>A"] = "@parameter.inner",
+        --     },
+        --   },
+        -- },
       }
     end,
   },
+
 }

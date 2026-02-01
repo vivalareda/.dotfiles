@@ -4,12 +4,11 @@
 
 [core]
     excludesfile = ~/.gitignore_global
-
 [credential "https://github.com"]
     helper = /opt/homebrew/bin/gh auth git-credential
-
 [credential "https://gist.github.com"]
     helper = /opt/homebrew/bin/gh auth git-credential
-
 [push]
 	autoSetupRemote = true
+[coderabbit]
+	machineId = cli/db7933635c8c43eb9d0ae5fabbb3d0b4

@@ -1,42 +1,42 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    opts = {
-      suggestion = {
-        enabled = false,
-        auto_trigger = false,
-      },
-      panel = {
-        enabled = false
-      },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    }
+    "github/copilot.vim",
+    event = "VeryLazy",
+    init = function()
+      vim.g.copilot_enabled = 0
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_no_maps = true
+    end,
+    config = function()
+      -- Disable ALL inline suggestions
+      vim.g.copilot_enabled = 0
+
+      -- Disable the default tab map
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_no_maps = true -- Add this line
+
+      -- Set workspace folders for better context in chat
+      vim.api.nvim_create_autocmd("BufEnter", {
+        callback = function()
+          local root = vim.fn.finddir(".git/..", vim.fn.expand("%:p:h") .. ";")
+          if root == "" then
+            root = vim.fn.expand("%:p:h")
+          end
+          vim.g.copilot_workspace_folders = { root }
+        end,
+      })
+    end,
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
     dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+      { "github/copilot.vim" },
+      { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope.nvim" },
     },
     event = "VeryLazy",
     keys = {
-      {
-        "<leader>cpp",
-        function()
-          -- Use the correct API from the documentation
-          local chat = require("CopilotChat")
-          chat.select_prompt()
-        end,
-        mode = { "n", "v" },
-        desc = "Select CopilotChat prompt",
-      },
       {
         "<C-p>",
         function()
@@ -46,51 +46,43 @@ return {
         desc = "Toggle Copilot chat",
       },
       {
+        "<leader>cpp",
+        function()
+          require("CopilotChat").select_prompt()
+        end,
+        mode = { "n", "v" },
+        desc = "Select CopilotChat prompt",
+      },
+      {
         "<leader>cpa",
         function()
-          local input = vim.fn.input "What's the question: "
+          local input = vim.fn.input("What's the question: ")
           if input ~= "" then
-            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+            require("CopilotChat").ask(input, {
+              selection = require("CopilotChat.select").buffer
+            })
           end
         end,
         desc = "Copilot Quick Chat",
       },
     },
+    opts = {
+      model = 'claude-opus-4.5',
+      temperature = 0.1,
 
+      window = {
+        layout = 'vertical', -- vertical split
+        width = 0.33,        -- 33% of screen width (1/3)
+        height = 1,          -- full height
+      },
+    },
     config = function(_, opts)
-      local chat = require "CopilotChat"
-      local select = require "CopilotChat.select"
-      vim.g.copilot_no_tab_map = true
-
-      local function ToggleCopilot()
-        local is_disabled = require("copilot.client").is_disabled()
-
-        if is_disabled then
-          vim.cmd "Copilot enable"
-          print "Copilot enabled"
-        else
-          vim.cmd "Copilot disable"
-          print "Copilot disabled"
-        end
-      end
-
-      vim.keymap.set("n", "<leader>cpt", ToggleCopilot, { desc = "Toggle Copilot", noremap = true, silent = true })
-
-      vim.api.nvim_create_autocmd("BufEnter", {
-        callback = function()
-          -- Detect the project root using .git or fallback to the current directory
-          local root = vim.fn.finddir(".git/..", vim.fn.expand "%:p:h" .. ";")
-          if root == "" then
-            root = vim.fn.expand "%:p:h" -- Fallback to the directory of the current file
-          end
-          vim.g.copilot_workspace_folders = { root }
-        end,
-      })
+      local chat = require("CopilotChat")
+      local select = require("CopilotChat.select")
 
       chat.setup(vim.tbl_deep_extend("force", opts, {
-        model = 'claude-sonnet-4.5', -- Set Claude Sonnet 4.5 as default
+        model = 'claude-sonnet-4.5',
         temperature = 0.1,
-        -- Custom prompts
         prompts = {
           DiagnosticError = {
             prompt =
@@ -117,8 +109,6 @@ return {
             selection = select.visual,
           },
         },
-
-        -- Mappings
         mappings = {
           reset = {
             normal = "<C-t>",

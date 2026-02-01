@@ -9,6 +9,7 @@ end, { desc = "Show Notification History" })
 keymap("n", "<leader>wq", ":wqa<CR>") -- save and quit
 keymap("n", "<leader>qq", ":qa!<CR>") -- quit without saving
 keymap("n", "<leader>ww", ":wa<CR>")  -- save
+keymap("n", "<leader>qp", ":q<CR>")   -- close window
 
 -- Basic keymaps
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -21,12 +22,8 @@ keymap("n", "<leader>o", "O<Esc>j", { noremap = true, silent = true })
 keymap("i", "<C-o>", "<Down>", { noremap = true, silent = true })
 keymap("n", "<C-v>", "<C-q>", { noremap = true, silent = true })
 
--- make ctrl j/k work in cmd-line mode
--- keymap("c", "<C-j>", "<Nop>", { noremap = true })
--- keymap("c", "<C-k>", "<Nop>", { noremap = true })
-
 -- Unbind default 's' behavior for flash.nvim
-keymap("n", "s", "<Nop>", { noremap = true, silent = true })
+-- keymap("n", "s", "<Nop>", { noremap = true, silent = true })
 
 keymap("n", "<leader>fa", function()
   vim.lsp.buf.format()
@@ -108,5 +105,5 @@ end
 , { desc = "Open finder" })
 
 keymap("n", "<leader>rp", function()
-  os.execute('repomix > /dev/null')
+  os.execute('repomix > /dev/null && rm -rf ignore/repomix-output.xml')
 end, { desc = "Run repomix" })
