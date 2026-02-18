@@ -1,6 +1,8 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		-- nvim-lspconfig is loaded for its lsp/*.lua server configs on the runtimepath.
+		-- Server activation is handled via vim.lsp.enable() in mason.lua.
 		dependencies = {
 			"saghen/blink.cmp",
 			{
@@ -39,6 +41,10 @@ return {
 					-- See `:help vim.lsp.*` for documentation on any of the below functions
 					local opts = { buffer = args.buf, silent = true }
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+					pcall(function()
+						require("core.vtsls_tsdk").ensure(client, args.buf)
+					end)
 					local function smart_goto_definition()
 						local filetype = vim.bo.filetype
 						if
@@ -87,13 +93,6 @@ return {
 							})
 						end
 					end, opts)
-
-					-- if client.supports_method("textDocument/formatting") then
-					--   opts.desc = "Format buffer"
-					--   keymap.set("n", "<leader>fm", function()
-					--     vim.lsp.buf.format({ async = true })
-					--   end, opts)
-					-- end
 				end,
 			})
 		end,
