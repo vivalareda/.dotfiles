@@ -4,8 +4,8 @@
 success_symbol = "[🚀](green)"
 error_symbol = "[🚀](red)"
 
-vicmd_symbol = "[🚀](blue)"
-vimcmd_visual_symbol = "[🚀](purple)"
+vicmd_symbol = "[🥀](blue)"
+vimcmd_visual_symbol = "[🥀](purple)"
 
 [aws]
 symbol = " "

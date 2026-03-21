@@ -10,6 +10,7 @@ SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _tide_left_items:os\x1epwd\x1egit\x1echaracter
 SETUVAR _tide_right_items:status\x1ecmd_duration\x1econtext\x1ejobs\x1ebun\x1enode\x1epython\x1erustc\x1ejava\x1ephp\x1eruby\x1ego\x1ekubectl\x1enix_shell\x1ezig
 SETUVAR fish_color_command:green
+SETUVAR fish_greeting:\x1d
 SETUVAR fish_user_paths:/Users/lilflare/\x2ebun/bin\x1e/Users/lilflare/\x2elocal/bin\x1e/Users/lilflare/\x2ecargo/bin\x1e/opt/homebrew/opt/zigup/bin
 SETUVAR tide_aws_bg_color:normal
 SETUVAR tide_aws_color:FF9900
