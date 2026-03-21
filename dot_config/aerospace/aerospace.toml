@@ -124,12 +124,14 @@ cmd-slash = 'layout tiles horizontal vertical'
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 cmd-h = 'focus left'
 cmd-l = 'focus right'
+cmd-alt-h = 'swap left'
+cmd-alt-l = 'swap right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 cmd-shift-j = 'move-workspace-to-monitor --wrap-around next'
 cmd-shift-k = 'move-workspace-to-monitor --wrap-around prev'
-cmd-alt-j = 'move-node-to-monitor --wrap-around next'
-cmd-alt-k = 'move-node-to-monitor --wrap-around prev'
+cmd-alt-j = 'move-workspace-to-monitor --wrap-around next'
+cmd-alt-k = 'move-workspace-to-monitor --wrap-around prev'
 cmd-j = 'focus-monitor --wrap-around next'
 cmd-k = 'focus-monitor --wrap-around prev'
 
@@ -153,7 +155,6 @@ cmd-o = 'workspace O'
 cmd-b = 'workspace B'
 cmd-m = 'workspace M'
 cmd-g = 'workspace G'
-# cmd-t = 'workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
@@ -171,15 +172,30 @@ cmd-shift-o = 'move-node-to-workspace O --focus-follows-window'
 cmd-shift-b = 'move-node-to-workspace B --focus-follows-window'
 cmd-shift-m = 'move-node-to-workspace M --focus-follows-window'
 cmd-shift-g = 'move-node-to-workspace G --focus-follows-window'
-# cmd-shift-t = 'move-node-to-workspace T --focus-follows-window'
 
 alt-enter = 'exec-and-forget bash ~/.config/script/move-workspace-to-monitor.sh'
-# cmd-enter = 'macos-native-fullscreen'
 cmd-e = 'exec-and-forget open -n "/Applications/BorderLess Arc.app"'
 cmd-alt-m = 'macos-native-minimize'
 cmd-alt-f = 'macos-native-fullscreen'
-cmd-alt-l = 'layout tiles tiling'
 cmd-alt-o = 'layout tiles tiling'
+alt-c = '''exec-and-forget osascript -e '
+  tell application "System Events"
+    set frontApp to name of first application process whose frontmost is true
+  end tell
+  tell application "Finder"
+    set screenBounds to bounds of window of desktop
+    set sw to item 3 of screenBounds
+    set sh to item 4 of screenBounds
+  end tell
+  tell application frontApp
+    set {x1, y1, x2, y2} to bounds of front window
+    set w to x2 - x1
+    set h to y2 - y1
+    set newX to round ((sw - w) / 2)
+    set newY to round ((sh - h) / 2)
+    set bounds of front window to {newX, newY, newX + w, newY + h}
+  end tell
+' '''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 cmd-tab= 'workspace-back-and-forth'
@@ -191,7 +207,6 @@ cmd-comma = 'mode service'
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 r = ['reload-config', 'exec-and-forget sketchybar --reload', 'mode main']
-enter = ['reload-config', 'mode main']
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 t = ['layout v_tiles', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
@@ -211,14 +226,6 @@ l = ['exec-and-forget bash ~/.config/script/copy-last-screenshot.sh', "mode main
 0 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 0', "mode main"]
 d = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh D', "mode main"]
 o = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh O', "mode main"]
-
-# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-#s = ['layout sticky tiling', 'mode main']
-
-cmd-shift-h = ['join-with left', 'mode main']
-cmd-shift-j = ['join-with down', 'mode main']
-cmd-shift-k = ['join-with up', 'mode main']
-cmd-shift-l = ['join-with right', 'mode main']
 
 down = 'volume down'
 up = 'volume up'
