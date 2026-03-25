@@ -7,7 +7,7 @@ sketchybar --set $NAME \
 # Fetch weather data for Montreal
 LOCATION="Montreal"
 REGION="Canada"
-LANG="EN"
+LANG="en"
 
 # Replace spaces with +
 LOCATION_ESCAPED="${LOCATION// /+}+${REGION// /+}"
