@@ -9,6 +9,7 @@
 
     homebrew_packages:
       - neovim
+      - fish
       - fzf
       - yazi
       - bat
@@ -89,6 +90,21 @@
       community.general.homebrew:
         name: "{{ homebrew_packages }}"
         state: present
+
+    - name: Ensure fish is in /etc/shells
+       lineinfile:
+         path: /etc/shells
+         line: /opt/homebrew/bin/fish
+         state: present
+       become: true
+       when: os_type == 'Darwin'
+
+    - name: Set fish as default shell
+       user:
+         name: "{{ ansible_user_id }}"
+         shell: /opt/homebrew/bin/fish
+       become: true
+       when: os_type == 'Darwin'
 
     - name: Clone TMP
       shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
