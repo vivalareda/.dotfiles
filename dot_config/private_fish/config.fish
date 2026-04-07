@@ -8,6 +8,10 @@ set -gx VISUAL nvim
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx BUN_INSTALL "$HOME/.bun"
 
+if not status is-interactive
+  return
+end
+
 abbr -a c clear
 abbr -a nv nvim
 abbr -a vim nvim
