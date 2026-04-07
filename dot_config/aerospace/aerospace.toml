@@ -260,10 +260,6 @@ if.app-id = 'company.thebrowser.Browser'
 run = ['layout tiling']
 
 [[on-window-detected]]
-if.app-id = 'net.kovidgoyal.kitty'
-run = ['layout tiling']
-
-[[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'layout floating'
 
