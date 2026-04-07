@@ -276,6 +276,11 @@
                 "type": "basic"
               },
               {
+                "from": { "key_code": "h", "modifiers": { "mandatory": ["right_option"] } },
+                "to": [{ "key_code": "grave_accent_and_tilde" }],
+                "type": "basic"
+              },
+              {
                 "from": { "key_code": "semicolon", "modifiers": { "mandatory": ["control"] } },
                 "to": [{ "key_code": "semicolon", "modifiers": ["shift"] }],
                 "type": "basic"
