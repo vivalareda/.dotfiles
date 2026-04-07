@@ -107,4 +107,22 @@ ls.add_snippets("typescript", {
 			}
 		)
 	),
+
+	s(
+		"fori",
+		fmt(
+			[[
+for (let {} = 0; {} < {}; {}++) {{
+  {}
+}}
+]],
+			{
+				i(1, "i"), -- variable name
+				rep(1), -- reuse variable
+				i(2, "n"), -- end condition
+				rep(1), -- reuse variable
+				i(0), -- loop body
+			}
+		)
+	),
 })

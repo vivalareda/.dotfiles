@@ -5,6 +5,7 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			"OXY2DEV/markview.nvim",
+			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
 		config = function()
 			require("nvim-treesitter").setup({
