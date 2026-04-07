@@ -1,4 +1,3 @@
-
 - name: Install system
   hosts: localhost
   connection: local
@@ -46,6 +45,13 @@
       - 1password-cli
       - unar
       - nvm
+      - starship
+      - btop
+      - cloc
+      - tw93/tap/mole
+      - codex
+      - rtk
+      - typst
 
     homebrew_cask_packages:
       - arc
@@ -64,13 +70,13 @@
       - font-hack-nerd-font
       - font-sketchybar-app-font
       - font-jetbrains-mono-nerd-font
+      - font-sf-mono-nerd-font-ligaturized
       - webcatalog
       - vivid-app
       - superwhisper
       - pdf-expert
       - macwhisper
       - the-unarchiver
-
 
   tasks:
     - name: Update Homebrew
@@ -83,28 +89,49 @@
           - FelixKratz/formulae
           - nikitabobko/tap
           - oven-sh/bun
+          - tw93/tap
       when: os_type == 'Darwin'
       ignore_errors: true
 
     - name: Install Homebrew packages
       community.general.homebrew:
-        name: "{{ homebrew_packages }}"
+        name: "{{ item }}"
         state: present
+      loop: "{{ homebrew_packages }}"
+      register: homebrew_package_results
+      ignore_errors: true
+
+    - name: Report failed Homebrew packages
+      debug:
+        msg: "Failed to install Homebrew package: {{ item.item }}"
+      loop: "{{ homebrew_package_results.results | selectattr('failed', 'defined') | selectattr('failed') | list }}"
+      when: homebrew_package_results is defined
 
     - name: Ensure fish is in /etc/shells
-       lineinfile:
-         path: /etc/shells
-         line: /opt/homebrew/bin/fish
-         state: present
-       become: true
-       when: os_type == 'Darwin'
+      lineinfile:
+        path: /etc/shells
+        line: /opt/homebrew/bin/fish
+        state: present
+      become: true
+      when: os_type == 'Darwin'
 
     - name: Set fish as default shell
-       user:
-         name: "{{ ansible_user_id }}"
-         shell: /opt/homebrew/bin/fish
-       become: true
-       when: os_type == 'Darwin'
+      user:
+        name: "{{ ansible_user_id }}"
+        shell: /opt/homebrew/bin/fish
+      become: true
+      when: os_type == 'Darwin'
+
+    - name: Install fisher
+      shell: |
+        fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
+      when: os_type == 'Darwin'
+      ignore_errors: true
+
+    - name: Install/update fish plugins with fisher
+      shell: fish -c 'fisher update'
+      when: os_type == 'Darwin'
+      ignore_errors: true
 
     - name: Clone TMP
       shell: git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -126,6 +153,16 @@
         install_options: ["cask"]
       when: os_type == 'Darwin'
       loop: "{{ homebrew_cask_packages }}"
+      register: homebrew_cask_results
+      ignore_errors: true
+
+    - name: Report failed Homebrew cask packages
+      debug:
+        msg: "Failed to install Homebrew cask: {{ item.item }}"
+      loop: "{{ homebrew_cask_results.results | selectattr('failed', 'defined') | selectattr('failed') | list }}"
+      when:
+        - os_type == 'Darwin'
+        - homebrew_cask_results is defined
 
     - name: Set Arc as default browser
       shell: defaultbrowser browser
@@ -148,5 +185,3 @@
         nix run nixpkgs#duti -- -s com.colliderli.iina avi all
         nix run nixpkgs#duti -- -s com.colliderli.iina mkv all
       when: os_type == 'Darwin'
-
-

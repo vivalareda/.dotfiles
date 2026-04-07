@@ -49,6 +49,7 @@
 
           masApps = {
             "Excalidraw" = 6636493997;
+            "iBar Pro-Menubar control tool" = 6737150304;
           };
 
           # Optional: cleanup settings
