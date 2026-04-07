@@ -11,3 +11,4 @@ dit_config/borders
 kitty/
 {{ end }}
 README.md
+.config/fish/fish_variables
