@@ -34,39 +34,87 @@ return {
 		config = function()
 			local keymap = vim.keymap
 
+			do
+				local ok, fte = pcall(require, "format-ts-errors")
+				if not ok then
+					return
+				end
+
+				fte.setup({ add_markdown = true, start_indent_level = 0 })
+
+				local default = vim.lsp.handlers["textDocument/publishDiagnostics"]
+
+				vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+					if result and result.diagnostics and ctx and ctx.client_id then
+						local client = vim.lsp.get_client_by_id(ctx.client_id)
+
+						-- scope to TS server(s)
+						if
+							client and (client.name == "vtsls" or client.name == "tsserver" or client.name == "ts_ls")
+						then
+							local i = 1
+							while i <= #result.diagnostics do
+								local d = result.diagnostics[i]
+
+								-- optional: drop annoying diagnostics
+								if d.code == 80001 then
+									table.remove(result.diagnostics, i)
+								else
+									local code = d.code
+									local formatter = fte[code] or fte[tonumber(code) or -1] or fte[tostring(code)]
+									if formatter and d.message then
+										d.message = formatter(d.message)
+									end
+									i = i + 1
+								end
+							end
+						end
+					end
+
+					return default(err, result, ctx, config)
+				end
+			end
+
+			vim.filetype.add({
+				extension = {
+					qc = "qc",
+				},
+			})
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "qc",
+				callback = function()
+					vim.lsp.start({
+						name = "qc_lsp",
+						cmd = { "bun", "/Users/lilflare/github/lsp-tj/index.ts" },
+					})
+				end,
+			})
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(args)
-					-- Buffer local mappings.
-					-- See `:help vim.lsp.*` for documentation on any of the below functions
 					local opts = { buffer = args.buf, silent = true }
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
-
 					pcall(function()
 						require("core.vtsls_tsdk").ensure(client, args.buf)
 					end)
-					local function smart_goto_definition()
-						local filetype = vim.bo.filetype
-						if
-							filetype == "typescript"
-							or filetype == "typescriptreact"
-							or filetype == "javascript"
-							or filetype == "javascriptreact"
-							or filetype == "rust"
-							or filetype == "go"
-						then
-							vim.lsp.buf.definition()
-						else
-							vim.lsp.buf.implementation()
-						end
+
+					if client and client.name == "vtsls" then
+						opts.desc = "Go to source definition"
+						keymap.set("n", "gd", "<cmd>VtsExec goto_source_definition<cr>", opts)
+						return
+					end
+
+					local has_vtsls = #vim.lsp.get_clients({ bufnr = args.buf, name = "vtsls" }) > 0
+					if not has_vtsls then
+						opts.desc = "Go to definition"
+						keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					end
 
 					-- set keybinds
 					opts.desc = "Go to declaration"
 					keymap.set("n", "gD", vim.lsp.buf.implementation, opts) -- go to declaration
-
-					opts.desc = "Go to source definition"
-					keymap.set("n", "gd", smart_goto_definition, opts) -- go to source definition
 
 					opts.desc = "Smart rename"
 					keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename

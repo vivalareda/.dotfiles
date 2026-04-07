@@ -29,12 +29,13 @@ return {
 				"svelte-language-server",
 				"graphql-language-service-cli",
 				"prisma-language-server",
-				"pyright",
+				"basedpyright",
 				"terraform-ls",
 				"oxlint",
 				-- Tools
 				"prettier",
 				"eslint_d",
+				"tinymist",
 			},
 		})
 
@@ -42,6 +43,7 @@ return {
 		-- Base configs come from nvim-lspconfig's lsp/*.lua files on the runtimepath.
 		-- Custom overrides live in ~/.config/nvim/after/lsp/*.lua
 		vim.lsp.enable({
+			"tinymist",
 			"biome",
 			"lua_ls",
 			"eslint",
@@ -52,7 +54,7 @@ return {
 			"svelte",
 			"graphql",
 			"prismals",
-			"pyright",
+			"basedpyright",
 			"terraformls",
 			"oxlint",
 		})

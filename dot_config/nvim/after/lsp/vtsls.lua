@@ -3,6 +3,7 @@ return {
 	root_markers = { "pnpm-workspace.yaml", "turbo.json", "lerna.json", ".git" },
 	settings = {
 		vtsls = {
+			preferGoToSourceDefinition = true,
 			autoUseWorkspaceTsdk = true,
 			tsserverRestartOnTsdkChange = true,
 			separateDiagnosticServer = { enable = true },
