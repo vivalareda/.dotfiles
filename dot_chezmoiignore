@@ -1,14 +1,8 @@
 {{- if eq .chezmoi.os "linux" }}
-.config/kitty/
-dot_config/kitty/
-dot_config/aerospace
-.config/aerospace
-dot_config/sketchybar
-dit_config/borders
-.config/borders
-.config/sketchybar
-{{- else if eq .chezmoi.os "darwin" }}
-kitty/
-{{ end }}
-README.md
+ .config/aerospace
+ .config/sketchybar
+ .config/borders
+ {{ end }}
+ README.md
 .config/fish/fish_variables
+
