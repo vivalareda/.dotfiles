@@ -260,19 +260,7 @@ if.app-id = 'company.thebrowser.Browser'
 run = ['layout tiling']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.MobileSMS'
-run = 'layout floating'
-
-[[on-window-detected]]
 if.app-id = 'com.apple.Terminal'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.ActivityMonitor'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -282,3 +270,31 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.colliderli.iina'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = [
+  'layout floating',
+  'exec-and-forget ~/.config/script/center-app-windows.sh "Activity Monitor"'
+]
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = [
+  'layout floating',
+  'exec-and-forget ~/.config/script/center-app-windows.sh "Finder"'
+]
+
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = [
+  'layout floating',
+  'exec-and-forget ~/.config/script/center-app-windows.sh "Messages"'
+]
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Notes'
+run = [
+  'layout floating',
+  'exec-and-forget ~/.config/script/center-app-windows.sh "Notes"'
+]
