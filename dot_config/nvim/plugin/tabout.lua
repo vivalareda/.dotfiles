@@ -28,11 +28,11 @@ local function is_closing_char_backward()
 end
 
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
-	if ls.expand_or_locally_jumpable() then
-		ls.expand_or_jump()
-	elseif is_closing_char_forward() then
+	if is_closing_char_forward() then
 		local cursor = vim.api.nvim_win_get_cursor(0)
 		vim.api.nvim_win_set_cursor(0, { cursor[1], cursor[2] + 1 })
+	elseif ls.expand_or_locally_jumpable() then
+		ls.expand_or_jump()
 	else
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 	end

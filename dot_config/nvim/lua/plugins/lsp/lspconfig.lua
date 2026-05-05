@@ -75,18 +75,13 @@ return {
 				end
 			end
 
-			vim.filetype.add({
-				extension = {
-					qc = "qc",
-				},
-			})
-
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "qc",
 				callback = function()
 					vim.lsp.start({
 						name = "qc_lsp",
-						cmd = { "bun", "/Users/lilflare/github/lsp-tj/index.ts" },
+						cmd = { "bun", "/Users/lilflare/github/interpreter-presentation/language/lsp/index.ts" },
+						-- exit_timeout = 2000,
 					})
 				end,
 			})
@@ -126,10 +121,10 @@ return {
 					keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
 					opts.desc = "Restart LSP"
-					keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+					keymap.set("n", "<leader>rs", ":lsp restart<CR>", opts) -- mapping to restart lsp if necessary
 
-					opts.desc = "Show LSP code actions"
-					keymap.set("n", "<leader>sa", vim.lsp.buf.code_action, opts) -- show code actions
+					-- opts.desc = "Show LSP code actions"
+					-- keymap.set("n", "<leader>sa", vim.lsp.buf.code_action, opts) -- show code actions
 
 					opts.desc = "Select typescript version"
 					keymap.set("n", "<leader>cv", function()
