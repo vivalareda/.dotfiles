@@ -9,7 +9,6 @@ update() {
     #echo space.sh $'FOCUSED_WORKSPACE': $FOCUSED_WORKSPACE, $'SELECTED': $SELECTED, NAME: $NAME, SENDER: $SENDER, INFO: $INFO  >> ~/aaaa
     #echo $(aerospace list-workspaces --focused) >> ~/aaaa
     source "$CONFIG_DIR/colors.sh"
-    source "$CONFIG_DIR/plugins/icon_map.sh"
     COLOR=$BACKGROUND_2
     if [ "$SELECTED" = "true" ]; then
       COLOR=$GREY
