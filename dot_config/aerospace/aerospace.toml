@@ -76,24 +76,17 @@ outer.top = [{ monitor.main = 30 }, { monitor.secondary = 62 }, 62]
 outer.right = 15
 
 [workspace-to-monitor-force-assignment]
-1 = ['secondary']  
-2 = ['secondary']  
+1 = ['secondary']
+2 = ['secondary']
 3 = ['secondary']
 4 = ['secondary']
 5 = ['secondary']
-# D = ['main']
-# O = ['main']
-# # T = ['secondary']
 6 = ['main']
 7 = ['main']
 8 = ['main']
 9 = ['main']
 0 = ['main']
 
-# 'main' binding mode declaration
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-# 'main' binding mode must be always presented
-# Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
 
 # All possible keys:
@@ -176,7 +169,6 @@ cmd-shift-g = 'move-node-to-workspace G --focus-follows-window'
 alt-enter = 'exec-and-forget bash ~/.config/script/move-workspace-to-monitor.sh'
 cmd-e = 'exec-and-forget open -n "/Applications/BorderLess Arc.app"'
 cmd-alt-m = 'macos-native-minimize'
-cmd-alt-f = 'macos-native-fullscreen'
 cmd-alt-o = 'layout tiles tiling'
 alt-c = '''exec-and-forget osascript -e '
   tell application "System Events"
@@ -196,6 +188,7 @@ alt-c = '''exec-and-forget osascript -e '
     set bounds of front window to {newX, newY, newX + w, newY + h}
   end tell
 ' '''
+alt-t = 'exec-and-forget bash ~/.config/script/copy-ssh.sh'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 cmd-tab= 'workspace-back-and-forth'
@@ -213,6 +206,7 @@ backspace = ['close-all-windows-but-current', 'mode main']
 a = ['layout accordion', 'mode main']
 q = ['mode main']
 l = ['exec-and-forget bash ~/.config/script/copy-last-screenshot.sh', "mode main"]
+w = ['exec-and-forget bash ~/.config/script/restore-workspaces.sh', "mode main"]
 
 1 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 1', "mode main"]
 2 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 2', "mode main"]
@@ -298,3 +292,18 @@ run = [
   'layout floating',
   'exec-and-forget ~/.config/script/center-app-windows.sh "Notes"'
 ]
+
+[[on-window-detected]]
+if.app-id = 'com.apple.AppStore'
+run = [
+  'layout floating',
+  'exec-and-forget ~/.config/script/center-app-windows.sh "Notes"'
+]
+
+[[on-window-detected]]
+if.app-id = 'com.docker.docker'
+run = [
+  'layout floating',
+  'exec-and-forget ~/.config/script/center-app-windows.sh "Notes"'
+]
+
