@@ -13,6 +13,7 @@ keymap("n", "<leader>qp", ":q<CR>") -- close window
 
 -- Basic keymaps
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
+keymap("n", "diw", "daw", { noremap = true, silent = true })
 keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 keymap("i", "JJ", "<Esc>", { noremap = true, silent = true })
 keymap({ "o", "n", "v" }, "H", "^")

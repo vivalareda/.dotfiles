@@ -1,8 +1,9 @@
 return {
 	"saghen/blink.cmp",
-	version = "1.*",
-	option = true,
+	branch = "main",
+	build = "cargo build --release",
 	dependencies = {
+		"saghen/blink.lib",
 		"fang2hou/blink-copilot",
 		"L3MON4D3/LuaSnip",
 		"rafamadriz/friendly-snippets",
@@ -36,7 +37,7 @@ return {
 		-- (Default) Only show the documentation popup when manually triggered
 		completion = {
 			keyword = {
-				range = "full",
+				range = "prefix",
 			},
 			list = {
 				selection = {
@@ -74,6 +75,11 @@ return {
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer", "copilot" },
 			providers = {
+				lsp = {
+					async = true,
+					timeout_ms = 2000,
+					fallback = {},
+				},
 				copilot = {
 					name = "copilot",
 					module = "blink-copilot",
@@ -90,7 +96,6 @@ return {
 		-- See the fuzzy documentation for more information
 		fuzzy = {
 			implementation = "prefer_rust",
-			prebuilt_binaries = { download = true },
 		},
 	},
 	opts_extend = { "sources.default" },

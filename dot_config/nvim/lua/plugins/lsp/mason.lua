@@ -36,13 +36,16 @@ return {
 				"prettier",
 				"eslint_d",
 				"tinymist",
+				"rust-analyzer",
 			},
 		})
 
 		-- Enable LSP servers using the native vim.lsp.config API (Neovim 0.11+)
 		-- Base configs come from nvim-lspconfig's lsp/*.lua files on the runtimepath.
 		-- Custom overrides live in ~/.config/nvim/after/lsp/*.lua
+		vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 		vim.lsp.enable({
+			"rust_analyzer",
 			"tinymist",
 			"biome",
 			"lua_ls",
@@ -57,6 +60,7 @@ return {
 			"basedpyright",
 			"terraformls",
 			"oxlint",
+			"postgres-language-server",
 		})
 	end,
 }

@@ -32,6 +32,7 @@ return {
 			},
 		},
 		config = function()
+			vim.lsp.document_color.enable(false)
 			local keymap = vim.keymap
 
 			do
