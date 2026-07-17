@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "0.65.2",
+  "packages": [
+    "npm:pi-vim",
+    "npm:pi-powerline-footer",
+    "npm:@aliou/pi-guardrails",
+    "npm:pi-markdown-preview"
+  ],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.4"
+}

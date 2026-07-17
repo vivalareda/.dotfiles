@@ -1,0 +1,28 @@
+{{- if eq .chezmoi.os "linux" }}
+.config/kitty/
+dot_config/kitty/
+dot_config/aerospace
+.config/aerospace
+dot_config/sketchybar
+dit_config/borders
+.config/borders
+.config/sketchybar
+{{- else if eq .chezmoi.os "darwin" }}
+kitty/
+{{ end }}
+README.md
+.pi/agent/auth.json
+.pi/agent/sessions/
+.pi/agent/npm/node_modules/
+.pi/agent/git/
+node_modules/
+**/node_modules/
+target/
+**/target/
+dist/
+**/dist/
+.venv/
+**/.venv/
+*.log
+herdr/release-notes.json
+herdr/session.json

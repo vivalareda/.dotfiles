@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "target": "ESNext",
+    "noEmit": true,
+    "paths": {
+      "@mariozechner/pi-coding-agent": ["/opt/homebrew/lib/node_modules/@mariozechner/pi-coding-agent"]
+    }
+  }
+}

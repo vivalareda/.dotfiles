@@ -1,0 +1,17 @@
+{
+  "name": "pi-extensions",
+  "private": true,
+  "dependencies": {
+    "@aliou/pi-guardrails": "^0.15.0",
+    "@mobrienv/pi-tidy-tools": "^0.4.0",
+    "@ogulcancelik/pi-ghostty-theme-sync": "^0.1.2",
+    "@pi-kaush/pi-double-paste": "^0.1.0",
+    "@plannotator/pi-extension": "^0.23.1",
+    "pi-effort": "^0.0.5",
+    "pi-firecrawl": "^0.1.0",
+    "pi-image-tools": "^1.4.0",
+    "pi-markdown-preview": "^0.10.0",
+    "pi-openai-fast-mode": "^0.3.0",
+    "pi-rtk-optimizer": "^0.9.0"
+  }
+}

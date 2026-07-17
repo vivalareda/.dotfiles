@@ -1,8 +1,0 @@
-{{- if eq .chezmoi.os "linux" }}
- .config/aerospace
- .config/sketchybar
- .config/borders
- {{ end }}
- README.md
-.config/fish/fish_variables
-
