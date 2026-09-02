@@ -165,68 +165,80 @@
               {
                 "conditions": [
                   {
-                    "type": "device_if",
                     "identifiers": [
                       {
-                        "vendor_id": 0,
-                        "product_id": 0
+                        "product_id": 0,
+                        "vendor_id": 0
                       }
                     ],
-                    "is": "built_in_keyboard"
+                    "is": "built_in_keyboard",
+                    "type": "device_if"
                   }
                 ],
-                "from": { "key_code": "9", "modifiers": { "mandatory": ["shift"] } },
+                "from": {
+                  "key_code": "9",
+                  "modifiers": { "mandatory": ["shift"] }
+                },
                 "to": [],
                 "type": "basic"
               },
               {
                 "conditions": [
                   {
-                    "type": "device_if",
                     "identifiers": [
                       {
-                        "vendor_id": 0,
-                        "product_id": 0
+                        "product_id": 0,
+                        "vendor_id": 0
                       }
                     ],
-                    "is": "built_in_keyboard"
+                    "is": "built_in_keyboard",
+                    "type": "device_if"
                   }
                 ],
-                "from": { "key_code": "0", "modifiers": { "mandatory": ["shift"] } },
+                "from": {
+                  "key_code": "0",
+                  "modifiers": { "mandatory": ["shift"] }
+                },
                 "to": [],
                 "type": "basic"
               },
               {
                 "conditions": [
                   {
-                    "type": "device_if",
                     "identifiers": [
                       {
-                        "vendor_id": 0,
-                        "product_id": 0
+                        "product_id": 0,
+                        "vendor_id": 0
                       }
                     ],
-                    "is": "built_in_keyboard"
+                    "is": "built_in_keyboard",
+                    "type": "device_if"
                   }
                 ],
-                "from": { "key_code": "open_bracket", "modifiers": { "optional": ["any"] } },
+                "from": {
+                  "key_code": "open_bracket",
+                  "modifiers": { "optional": ["any"] }
+                },
                 "to": [],
                 "type": "basic"
               },
               {
                 "conditions": [
                   {
-                    "type": "device_if",
                     "identifiers": [
                       {
-                        "vendor_id": 0,
-                        "product_id": 0
+                        "product_id": 0,
+                        "vendor_id": 0
                       }
                     ],
-                    "is": "built_in_keyboard"
+                    "is": "built_in_keyboard",
+                    "type": "device_if"
                   }
                 ],
-                "from": { "key_code": "close_bracket", "modifiers": { "optional": ["any"] } },
+                "from": {
+                  "key_code": "close_bracket",
+                  "modifiers": { "optional": ["any"] }
+                },
                 "to": [],
                 "type": "basic"
               }
@@ -236,58 +248,131 @@
             "description": "Custom key mappings: Tab+u/i for {}, Tab+j/k for (), Tab+n/m for [], Tab+l for \", Ctrl+; for :, Ctrl+Backspace for Option+Backspace",
             "manipulators": [
               {
-                "from": { "key_code": "u", "modifiers": { "mandatory": ["right_option"] } },
-                "to": [{ "key_code": "open_bracket", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "u",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "i", "modifiers": { "mandatory": ["right_option"] } },
-                "to": [{ "key_code": "close_bracket", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "i",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "j", "modifiers": { "mandatory": ["right_option"] } },
-                "to": [{ "key_code": "9", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "j",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "9",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "k", "modifiers": { "mandatory": ["right_option"] } },
-                "to": [{ "key_code": "0", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "k",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "0",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "n", "modifiers": { "mandatory": ["right_option"] } },
+                "from": {
+                  "key_code": "n",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
                 "to": [{ "key_code": "open_bracket" }],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "m", "modifiers": { "mandatory": ["right_option"] } },
+                "from": {
+                  "key_code": "m",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
                 "to": [{ "key_code": "close_bracket" }],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "l", "modifiers": { "mandatory": ["right_option"] } },
-                "to": [{ "key_code": "quote", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "l",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "quote",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "o", "modifiers": { "mandatory": ["right_option"] } },
-                "to": [{ "key_code": "grave_accent_and_tilde", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "o",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
+                "to": [
+                  {
+                    "key_code": "grave_accent_and_tilde",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "h", "modifiers": { "mandatory": ["right_option"] } },
+                "from": {
+                  "key_code": "h",
+                  "modifiers": { "mandatory": ["right_option"] }
+                },
                 "to": [{ "key_code": "grave_accent_and_tilde" }],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "semicolon", "modifiers": { "mandatory": ["control"] } },
-                "to": [{ "key_code": "semicolon", "modifiers": ["shift"] }],
+                "from": {
+                  "key_code": "semicolon",
+                  "modifiers": { "mandatory": ["control"] }
+                },
+                "to": [
+                  {
+                    "key_code": "semicolon",
+                    "modifiers": ["shift"]
+                  }
+                ],
                 "type": "basic"
               },
               {
-                "from": { "key_code": "delete_or_backspace", "modifiers": { "mandatory": ["control"] } },
-                "to": [{ "key_code": "delete_or_backspace", "modifiers": ["option"] }],
+                "from": {
+                  "key_code": "delete_or_backspace",
+                  "modifiers": { "mandatory": ["control"] }
+                },
+                "to": [
+                  {
+                    "key_code": "delete_or_backspace",
+                    "modifiers": ["option"]
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -333,7 +418,10 @@
                     "type": "frontmost_application_unless"
                   }
                 ],
-                "from": { "key_code": "h", "modifiers": { "mandatory": ["control"] } },
+                "from": {
+                  "key_code": "h",
+                  "modifiers": { "mandatory": ["control"] }
+                },
                 "to": [{ "key_code": "left_arrow" }],
                 "type": "basic"
               },
@@ -350,7 +438,10 @@
                     "type": "frontmost_application_unless"
                   }
                 ],
-                "from": { "key_code": "j", "modifiers": { "mandatory": ["control"] } },
+                "from": {
+                  "key_code": "j",
+                  "modifiers": { "mandatory": ["control"] }
+                },
                 "to": [{ "key_code": "down_arrow" }],
                 "type": "basic"
               },
@@ -367,7 +458,10 @@
                     "type": "frontmost_application_unless"
                   }
                 ],
-                "from": { "key_code": "k", "modifiers": { "mandatory": ["control"] } },
+                "from": {
+                  "key_code": "k",
+                  "modifiers": { "mandatory": ["control"] }
+                },
                 "to": [{ "key_code": "up_arrow" }],
                 "type": "basic"
               },
@@ -384,7 +478,10 @@
                     "type": "frontmost_application_unless"
                   }
                 ],
-                "from": { "key_code": "l", "modifiers": { "mandatory": ["control"] } },
+                "from": {
+                  "key_code": "l",
+                  "modifiers": { "mandatory": ["control"] }
+                },
                 "to": [{ "key_code": "right_arrow" }],
                 "type": "basic"
               },
@@ -401,8 +498,16 @@
                     "type": "frontmost_application_unless"
                   }
                 ],
-                "from": { "key_code": "h", "modifiers": { "mandatory": ["control", "command"] } },
-                "to": [{ "key_code": "left_arrow", "modifiers": ["option"] }],
+                "from": {
+                  "key_code": "h",
+                  "modifiers": { "mandatory": ["control", "command"] }
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": ["option"]
+                  }
+                ],
                 "type": "basic"
               },
               {
@@ -418,8 +523,16 @@
                     "type": "frontmost_application_unless"
                   }
                 ],
-                "from": { "key_code": "l", "modifiers": { "mandatory": ["control", "command"] } },
-                "to": [{ "key_code": "right_arrow", "modifiers": ["option"] }],
+                "from": {
+                  "key_code": "l",
+                  "modifiers": { "mandatory": ["control", "command"] }
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": ["option"]
+                  }
+                ],
                 "type": "basic"
               }
             ]
@@ -440,8 +553,14 @@
                     "type": "frontmost_application_if"
                   }
                 ],
-                "from": { "key_code": "b", "modifiers": { "mandatory": ["option"] } },
-                "to": [{ "key_code": "escape" }, { "key_code": "b" }],
+                "from": {
+                  "key_code": "b",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [
+                  { "key_code": "escape" },
+                  { "key_code": "b" }
+                ],
                 "type": "basic"
               },
               {
@@ -457,8 +576,14 @@
                     "type": "frontmost_application_if"
                   }
                 ],
-                "from": { "key_code": "f", "modifiers": { "mandatory": ["option"] } },
-                "to": [{ "key_code": "escape" }, { "key_code": "f" }],
+                "from": {
+                  "key_code": "f",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [
+                  { "key_code": "escape" },
+                  { "key_code": "f" }
+                ],
                 "type": "basic"
               }
             ]
@@ -470,8 +595,14 @@
                 "conditions": [
                   {
                     "identifiers": [
-                      { "product_id": 18804, "vendor_id": 12951 },
-                      { "product_id": 6505, "vendor_id": 12951 }
+                      {
+                        "product_id": 18804,
+                        "vendor_id": 12951
+                      },
+                      {
+                        "product_id": 6505,
+                        "vendor_id": 12951
+                      }
                     ],
                     "type": "device_if"
                   },
@@ -488,17 +619,31 @@
                 ],
                 "from": {
                   "key_code": "c",
-                  "modifiers": { "mandatory": ["control", "shift"], "optional": ["any"] }
+                  "modifiers": {
+                    "mandatory": ["control", "shift"],
+                    "optional": ["any"]
+                  }
                 },
-                "to": [{ "key_code": "c", "modifiers": ["control"] }],
+                "to": [
+                  {
+                    "key_code": "c",
+                    "modifiers": ["control"]
+                  }
+                ],
                 "type": "basic"
               },
               {
                 "conditions": [
                   {
                     "identifiers": [
-                      { "product_id": 18804, "vendor_id": 12951 },
-                      { "product_id": 6505, "vendor_id": 12951 }
+                      {
+                        "product_id": 18804,
+                        "vendor_id": 12951
+                      },
+                      {
+                        "product_id": 6505,
+                        "vendor_id": 12951
+                      }
                     ],
                     "type": "device_if"
                   },
@@ -515,9 +660,17 @@
                 ],
                 "from": {
                   "key_code": "z",
-                  "modifiers": { "mandatory": ["control", "shift"], "optional": ["any"] }
+                  "modifiers": {
+                    "mandatory": ["control", "shift"],
+                    "optional": ["any"]
+                  }
                 },
-                "to": [{ "key_code": "z", "modifiers": ["control"] }],
+                "to": [
+                  {
+                    "key_code": "z",
+                    "modifiers": ["control"]
+                  }
+                ],
                 "type": "basic"
               }
             ]
@@ -527,10 +680,23 @@
             "manipulators": [
               {
                 "conditions": [
-                  { "bundle_identifiers": ["^dev\\.nikitabobko\\.aerospace"], "type": "frontmost_application_unless" }
+                  {
+                    "bundle_identifiers": [
+                      "^dev\\.nikitabobko\\.aerospace"
+                    ],
+                    "type": "frontmost_application_unless"
+                  }
                 ],
-                "from": { "key_code": "tab", "modifiers": { "mandatory": ["left_command"] } },
-                "to": [{ "key_code": "tab", "modifiers": ["left_command"] }],
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": { "mandatory": ["left_command"] }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": ["left_command"]
+                  }
+                ],
                 "type": "basic"
               }
             ]
@@ -542,34 +708,98 @@
                 "conditions": [
                   {
                     "identifiers": [
-                      { "product_id": 18804, "vendor_id": 12951 },
-                      { "product_id": 6505, "vendor_id": 12951 }
+                      {
+                        "product_id": 18804,
+                        "vendor_id": 12951
+                      },
+                      {
+                        "product_id": 6505,
+                        "vendor_id": 12951
+                      },
+                      { 
+                        "product_id": 761,
+                        "vendor_id": 13364 
+                      }
                     ],
                     "type": "device_if"
                   }
                 ],
-                "from": { "key_code": "c", "modifiers": { "mandatory": ["control"], "optional": ["any"] } },
-                "to": [{ "key_code": "c", "modifiers": ["command"] }],
+                "from": {
+                  "key_code": "c",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "c",
+                    "modifiers": ["command"]
+                  }
+                ],
                 "type": "basic"
               },
               {
                 "conditions": [
                   {
                     "identifiers": [
-                      { "product_id": 18804, "vendor_id": 12951 },
-                      { "product_id": 6505, "vendor_id": 12951 }
+                      {
+                        "product_id": 18804,
+                        "vendor_id": 12951
+                      },
+                      {
+                        "product_id": 6505,
+                        "vendor_id": 12951
+                      },
+                      { 
+                        "product_id": 761,
+                        "vendor_id": 13364 
+                      }
                     ],
                     "type": "device_if"
                   }
                 ],
-                "from": { "key_code": "v", "modifiers": { "mandatory": ["control"], "optional": ["any"] } },
-                "to": [{ "key_code": "v", "modifiers": ["command"] }],
+                "from": {
+                  "key_code": "v",
+                  "modifiers": {
+                    "mandatory": ["control"],
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "v",
+                    "modifiers": ["command"]
+                  }
+                ],
                 "type": "basic"
               }
             ]
           }
         ]
       },
+      "devices": [
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "product_id": 761,
+            "vendor_id": 13364
+          },
+          "ignore_vendor_events": true,
+          "treat_as_built_in_keyboard": true
+        },
+        {
+          "identifiers": {
+            "is_keyboard": true,
+            "is_pointing_device": true,
+            "product_id": 761,
+            "vendor_id": 13364
+          },
+          "ignore": false,
+          "ignore_vendor_events": true,
+          "treat_as_built_in_keyboard": true
+        }
+      ],
       "name": "Default profile",
       "selected": true,
       "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }

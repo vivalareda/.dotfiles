@@ -6,4 +6,6 @@ cursor-style-blink = false
 clipboard-read = allow
 shell-integration-features = no-cursor
 font-family = TX-02
+font-style = medium
 keybind = super+n=unbind
+font-thicken-strength = 40
