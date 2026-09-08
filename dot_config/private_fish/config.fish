@@ -52,6 +52,7 @@ bind -M default H beginning-of-line
 bind -M default L end-of-line
 
 set -g fish_key_bindings fish_vi_key_bindings
+set -g fish_color_command green
 
 set fish_cursor_default block
 set fish_cursor_insert block
