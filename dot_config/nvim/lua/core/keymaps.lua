@@ -14,8 +14,8 @@ keymap("n", "<leader>qp", ":q<CR>") -- close window
 -- Basic keymaps
 keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
 keymap("n", "diw", "daw", { noremap = true, silent = true })
-keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
-keymap("i", "JJ", "<Esc>", { noremap = true, silent = true })
+keymap("i", "jk", "<Esc>", { noremap = true, silent = true })
+keymap("i", "JK", "<Esc>", { noremap = true, silent = true })
 keymap({ "o", "n", "v" }, "H", "^")
 keymap({ "o", "n", "v" }, "L", "$")
 keymap("n", "<CR>", "o<Esc>k", { noremap = true, silent = true })

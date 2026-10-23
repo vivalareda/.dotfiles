@@ -96,18 +96,21 @@ return {
 						require("core.vtsls_tsdk").ensure(client, args.buf)
 					end)
 
-					if client and client.name == "vtsls" then
-						opts.desc = "Go to source definition"
-						keymap.set("n", "gd", "<cmd>VtsExec goto_source_definition<cr>", opts)
-						return
-					end
+					-- if client and client.name == "vtsls" then
+					-- 	opts.desc = "Go to source definition"
+					-- 	keymap.set("n", "gd", "<cmd>VtsExec goto_sourc_definition<cr>", opts)
+					-- 	return
+					-- end
 
-					local has_vtsls = #vim.lsp.get_clients({ bufnr = args.buf, name = "vtsls" }) > 0
-					if not has_vtsls then
-						opts.desc = "Go to definition"
-						keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-					end
+					-- local has_vtsls = #vim.lsp.get_clients({ bufnr = args.buf, name = "vtsls" }) > 0
+					-- if not has_vtsls then
+					-- 	opts.desc = "Go to definition"
+					-- 	keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					-- end
 
+          opts.desc = "Go to definition"
+          keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+          
 					-- set keybinds
 					opts.desc = "Go to declaration"
 					keymap.set("n", "gD", vim.lsp.buf.implementation, opts) -- go to declaration

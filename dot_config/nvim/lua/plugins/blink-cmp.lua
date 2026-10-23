@@ -12,7 +12,7 @@ return {
 	opts = {
 		keymap = {
 			preset = "none",
-			["<C-k>"] = { "show", "select_prev", "fallback" },
+			["<C-k>"] = { "show", "select_prev" },
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-e>"] = { "hide", "fallback" },
 			["<CR>"] = { "accept", "fallback" },
