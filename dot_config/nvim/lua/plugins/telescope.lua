@@ -1,73 +1,75 @@
+-- Telescope is the picker (see vim.g.lazyvim_picker in config/lazy.lua).
+-- These mappings replace/override the LazyVim defaults with the personal ones.
 return {
-	"nvim-telescope/telescope.nvim",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		"nvim-tree/nvim-web-devicons",
-		"debugloop/telescope-undo.nvim",
-		"nvim-telescope/telescope-ui-select.nvim",
-	},
-	config = function()
-		local telescope = require("telescope")
-		local actions = require("telescope.actions")
-		telescope.setup({
-			extensions = {
-				undo = {
-					"debugloop/telescope-undo.nvim",
-				},
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown({}),
-				},
-			},
-			defaults = {
-				file_ignore_patterns = { "node_modules", "*flask-app/*" },
-				mappings = {
-					i = {
-						["<C-h>"] = "which_key",
-						["<C-j>"] = "move_selection_next",
-						["<C-k>"] = "move_selection_previous",
-						["<esc>"] = actions.close,
-					}, -- Example mapping for insert mode
-				},
-			},
-			pickers = {
-				find_files = { theme = "dropdown" },
-			},
-		})
-
-		telescope.load_extension("fzf")
-		telescope.load_extension("undo")
-		telescope.load_extension("ui-select")
-
-		-- Telescope key mappings
-		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>fiw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "[S]earch [R]eferences" })
-		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "[S]earch Recent Files ('repeat')" })
-		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-		vim.keymap.set("n", "<leader>ep", function()
-			builtin.find_files({
-				cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
-			})
-		end, { desc = "Search lazyvim plugin files" })
-
-		-- Live Grep in Open Files
-		vim.keymap.set("n", "<leader>s/", function()
-			builtin.live_grep({
-				grep_open_files = true,
-				prompt_title = "Live Grep in Open Files",
-			})
-		end, { desc = "[S]earch [/] in Open Files" })
-
-		-- Search Neovim configuration files
-		vim.keymap.set("n", "<leader>fn", function()
-			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "[S]earch [N]eovim files" })
-
-		vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>")
-	end,
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "debugloop/telescope-undo.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
+    },
+    opts = {
+      defaults = {
+        file_ignore_patterns = { "node_modules", "*flask-app/*" },
+        mappings = {
+          i = {
+            ["<C-h>"] = "which_key",
+            ["<C-j>"] = "move_selection_next",
+            ["<C-k>"] = "move_selection_previous",
+            ["<esc>"] = "close",
+          },
+        },
+      },
+      pickers = {
+        find_files = { theme = "dropdown" },
+      },
+    },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+      telescope.load_extension("fzf")
+      telescope.load_extension("undo")
+      telescope.load_extension("ui-select")
+    end,
+    keys = {
+      { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Search help" },
+      { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Search files" },
+      { "<leader>fw", function() require("telescope.builtin").live_grep() end, desc = "Search by grep" },
+      { "<leader>fiw", function() require("telescope.builtin").grep_string() end, desc = "Search current word" },
+      { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" },
+      { "<leader>fr", function() require("telescope.builtin").lsp_references() end, desc = "Search references" },
+      { "<leader>f.", function() require("telescope.builtin").oldfiles() end, desc = "Search recent files" },
+      {
+        "<leader><leader>",
+        function() require("telescope.builtin").buffers() end,
+        desc = "Find existing buffers",
+      },
+      {
+        "<leader>ep",
+        function()
+          require("telescope.builtin").find_files({ cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") })
+        end,
+        desc = "Search plugin files",
+      },
+      {
+        "<leader>s/",
+        function()
+          require("telescope.builtin").live_grep({
+            grep_open_files = true,
+            prompt_title = "Live Grep in Open Files",
+          })
+        end,
+        desc = "Search in open files",
+      },
+      {
+        "<leader>fn",
+        function()
+          require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "Search Neovim config",
+      },
+      { "<leader>fu", "<cmd>Telescope undo<cr>", desc = "Undo history" },
+      -- Freed for code actions (see actions-preview in editor.lua).
+      { "<leader>sa", false },
+    },
+  },
 }

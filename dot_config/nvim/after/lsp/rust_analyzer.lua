@@ -1,10 +1,10 @@
 return {
-	settings = {
-		["rust-analyzer"] = {
-			cargo = {
-				allFeatures = false,
-				targetDir = true,
-			},
-		},
-	},
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = false,
+        targetDir = true,
+      },
+    },
+  },
 }

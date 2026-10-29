@@ -1,32 +1,45 @@
--- Status line
+-- Status line: keep LazyVim's structure, use the personal theme and path style.
 return {
-  -- https://github.com/nvim-lualine/lualine.nvim
-  'nvim-lualine/lualine.nvim',
-  dependencies = {
-    -- https://github.com/nvim-tree/nvim-web-devicons
-    'nvim-tree/nvim-web-devicons', -- fancy icons
-    -- https://github.com/linrongbin16/lsp-progress.nvim
-    'linrongbin16/lsp-progress.nvim', -- LSP loading progress
-  },
-  opts = {
-    options = {
-      -- For more themes, see https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-      theme = "codedark", -- "auto, tokyonight, catppuccin, codedark, nord" 
-    },
-    sections = {
-      lualine_c = {
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      opts.options.theme = "codedark"
+
+      opts.sections.lualine_c = {
+        LazyVim.lualine.root_dir(),
         {
-          -- Customize the filename part of lualine to be parent/filename
-          'filename',
-          file_status = true,      -- Displays file status (readonly status, modified status)
-          newfile_status = false,  -- Display new file status (new file means no write after created)
-          path = 4,                -- 0: Just the filename
+          "diagnostics",
           symbols = {
-            modified = '[+]',      -- Text to show when the file is modified.
-            readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-          }
-        }
+            error = LazyVim.config.icons.diagnostics.Error,
+            warn = LazyVim.config.icons.diagnostics.Warn,
+            info = LazyVim.config.icons.diagnostics.Info,
+            hint = LazyVim.config.icons.diagnostics.Hint,
+          },
+        },
+        { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+        {
+          "filename",
+          file_status = true,
+          newfile_status = false,
+          path = 4,
+          symbols = {
+            modified = "[+]",
+            readonly = "[-]",
+          },
+        },
       }
-    }
-  }
+
+      table.insert(opts.sections.lualine_x, 1, {
+        function()
+          return require("noice").api.statusline.mode.get()
+        end,
+        cond = function()
+          return require("noice").api.statusline.mode.has()
+        end,
+        color = { fg = "#ff9e64" },
+      })
+
+      return opts
+    end,
+  },
 }
