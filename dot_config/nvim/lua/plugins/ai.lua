@@ -1,4 +1,4 @@
--- AI helpers. Inline suggestions stay off for Copilot; Supermaven handles those.
+-- AI helpers. Inline suggestions stay off for Copilot; NeoCodeium handles those.
 return {
   {
     "github/copilot.vim",
@@ -107,25 +107,12 @@ return {
   },
 
   {
-    "supermaven-inc/supermaven-nvim",
-    -- Must load at startup: inline suggestions only work once the plugin
-    -- (and its server) is running. A `keys`-only spec defers it until pressed.
-    lazy = false,
+    "monkoose/neocodeium",
+    event = "VeryLazy",
     keys = {
-      {
-        "<leader>ts",
-        function()
-          require("supermaven-nvim.api").toggle()
-        end,
-        desc = "Toggle Supermaven",
-      },
+      { "<C-l>", function() require("neocodeium").accept() end, mode = "i", desc = "Accept AI suggestion" },
+      { "<leader>ts", "<cmd>NeoCodeium toggle<cr>", desc = "Toggle NeoCodeium" },
     },
-    config = function()
-      require("supermaven-nvim").setup({
-        disable_inline_completion = false,
-        disable_keymaps = false,
-        keymaps = { accept_suggestion = "<C-l>" },
-      })
-    end,
+    opts = { show_label = false },
   },
 }
