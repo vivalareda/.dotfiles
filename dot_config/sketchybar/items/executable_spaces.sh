@@ -8,7 +8,9 @@ SPACE_ICONS=("1" "2" "3" "4" "5")
 sketchybar --add event aerospace_workspace_change
 #echo $(aerospace list-workspaces --monitor 1 --visible no --empty no) >> ~/aaaa
 
-for m in $(aerospace list-monitors | awk '{print $1}'); do
+for m in $(aerospace list-monitors --format "%{monitor-id}"); do
+  # sketchybar display ids follow macOS NSScreen order, not aerospace monitor ids
+  d=$(aerospace list-monitors --format "%{monitor-id} %{monitor-appkit-nsscreen-screens-id}" | awk -v m=$m '$1 == m {print $2}')
   for i in $(aerospace list-workspaces --monitor $m); do
     sid=$i
     space=(
@@ -16,7 +18,7 @@ for m in $(aerospace list-monitors | awk '{print $1}'); do
       icon="$sid"
       icon.highlight_color=$RED
       icon.padding_left=10
-      display=$m
+      display=$d
       padding_left=2
       label.padding_right=20
       label.color=$GREY

@@ -39,7 +39,7 @@ bar=(
   margin=10
   topmost=window
   border_color=0xffffffff
-  blur_radius=20
+  blur_radius=0
   corner_radius=10
 )
 

@@ -129,6 +129,12 @@ function __icon_map() {
    "Claude")
         icon_result=":claude:"
         ;;
+   "Grok Bot")
+        icon_result=":grok_bot:"
+        ;;
+   "Wispr Flow")
+        icon_result=":wispr_flow:"
+        ;;
    "ClickUp")
         icon_result=":click_up:"
         ;;
@@ -686,6 +692,9 @@ function __icon_map() {
         ;;
    "Microsoft To Do" | "Things")
         icon_result=":things:"
+        ;;
+    "T3 Code "| "T3 Code (Nightly)")
+        icon_result=":t3_code:"
         ;;
    "Thunderbird")
         icon_result=":thunderbird:"

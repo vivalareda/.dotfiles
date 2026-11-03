@@ -37,7 +37,7 @@ workspace_is_empty() {
 }
 
 if [ "$SENDER" = "aerospace_workspace_change" ]; then
- AEROSPACE_FOCUSED_MONITOR=$(aerospace list-monitors --focused | awk '{print $1}')
+ AEROSPACE_FOCUSED_MONITOR=$(aerospace list-monitors --focused --format "%{monitor-appkit-nsscreen-screens-id}")
 
  reload_workspace_icon "$AEROSPACE_PREV_WORKSPACE"
  reload_workspace_icon "$AEROSPACE_FOCUSED_WORKSPACE"
