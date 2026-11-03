@@ -114,6 +114,8 @@ symbol = " "
 
 [nodejs]
 symbol = " "
+# Off: `node --version` goes through the mise shim and adds ~80ms per prompt
+disabled = true
 
 [ocaml]
 symbol = " "

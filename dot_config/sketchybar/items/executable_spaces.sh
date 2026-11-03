@@ -6,6 +6,7 @@ SPACE_ICONS=("1" "2" "3" "4" "5")
 # New space by left clicking separator (>)
 
 sketchybar --add event aerospace_workspace_change
+focused_workspace=$(aerospace list-workspaces --focused)
 #echo $(aerospace list-workspaces --monitor 1 --visible no --empty no) >> ~/aaaa
 
 for m in $(aerospace list-monitors --format "%{monitor-id}"); do
@@ -49,6 +50,8 @@ for m in $(aerospace list-monitors --format "%{monitor-id}"); do
     fi
 
     sketchybar --set space.$sid label="$icon_strip"
+    [ "$sid" = "$focused_workspace" ] && \
+      sketchybar --set space.$sid icon.highlight=true label.highlight=true background.border_color=$GREY
   done
 
   for i in $(aerospace list-workspaces --monitor $m --empty); do
