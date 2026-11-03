@@ -1,62 +1,58 @@
 #!/usr/bin/env bash
 
+# On workspace change: refresh the app-icon labels of the previous and the
+# focused workspace, hide the previous one if it became empty, and move the
+# highlight to the focused one. All updates go out in a single sketchybar call.
+
 source "$CONFIG_DIR/colors.sh"
 source "$CONFIG_DIR/icon_map.sh"
 
+# Prints the app names of every window in a workspace, one per line.
 workspace_apps() {
- local workspace="$1"
- [ -z "$workspace" ] && return
- aerospace list-windows --workspace "$workspace" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}'
+ aerospace list-windows --workspace "$1" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}'
 }
 
-reload_workspace_icon() {
- local workspace="$1"
- local apps icon_strip=" "
+# Sets $icon_strip to the icon label for a newline-separated list of app names
+# (written to a variable instead of echoed, to avoid a subshell per call).
+build_icon_strip() {
+ local apps="$1"
+ icon_strip=" "
 
- [ -z "$workspace" ] && return
-
- apps=$(workspace_apps "$workspace")
-
- if [ -n "$apps" ]; then
-   while read -r app; do
-     [ -z "$app" ] && continue
-     __icon_map "$app"
-     icon_strip+=" $icon_result"
-   done <<< "$apps"
- else
+ if [ -z "$apps" ]; then
    icon_strip=" —"
+   return
  fi
 
- sketchybar --set "space.$workspace" label="$icon_strip"
+ while read -r app; do
+   [ -z "$app" ] && continue
+   __icon_map "$app"
+   icon_strip+=" $icon_result"
+ done <<< "$apps"
 }
 
-workspace_is_empty() {
- local workspace="$1"
- [ -z "$workspace" ] && return 0
- [ -z "$(workspace_apps "$workspace")" ]
-}
+[ "$SENDER" = "aerospace_workspace_change" ] || exit 0
 
-if [ "$SENDER" = "aerospace_workspace_change" ]; then
- AEROSPACE_FOCUSED_MONITOR=$(aerospace list-monitors --focused --format "%{monitor-appkit-nsscreen-screens-id}")
+prev="$AEROSPACE_PREV_WORKSPACE"
+focused="$AEROSPACE_FOCUSED_WORKSPACE"
+args=()
 
- reload_workspace_icon "$AEROSPACE_PREV_WORKSPACE"
- reload_workspace_icon "$AEROSPACE_FOCUSED_WORKSPACE"
+if [ -n "$prev" ]; then
+ prev_apps=$(workspace_apps "$prev")
+ build_icon_strip "$prev_apps"
+ args+=(--set "space.$prev" label="$icon_strip")
 
- if [ -n "$AEROSPACE_PREV_WORKSPACE" ]; then
-   if workspace_is_empty "$AEROSPACE_PREV_WORKSPACE"; then
-     sketchybar --set "space.$AEROSPACE_PREV_WORKSPACE" display=0
-   else
-     sketchybar --set "space.$AEROSPACE_PREV_WORKSPACE" \
-       icon.highlight=false \
-       label.highlight=false \
-       background.border_color=$BACKGROUND_2
-   fi
+ if [ -z "$prev_apps" ]; then
+   args+=(display=0)
+ else
+   args+=(icon.highlight=false label.highlight=false background.border_color=$BACKGROUND_2)
  fi
-
- [ -n "$AEROSPACE_FOCUSED_WORKSPACE" ] && \
-   sketchybar --set "space.$AEROSPACE_FOCUSED_WORKSPACE" \
-     display="$AEROSPACE_FOCUSED_MONITOR" \
-     icon.highlight=true \
-     label.highlight=true \
-     background.border_color=$GREY
 fi
+
+if [ -n "$focused" ]; then
+ monitor=$(aerospace list-monitors --focused --format "%{monitor-appkit-nsscreen-screens-id}")
+ build_icon_strip "$(workspace_apps "$focused")"
+ args+=(--set "space.$focused" label="$icon_strip" display="$monitor"
+        icon.highlight=true label.highlight=true background.border_color=$GREY)
+fi
+
+[ ${#args[@]} -gt 0 ] && sketchybar "${args[@]}"
