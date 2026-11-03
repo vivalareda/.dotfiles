@@ -71,21 +71,21 @@ preset = 'qwerty'
 inner.horizontal = 15
 inner.vertical = 15
 outer.left = 15
-outer.bottom = [{ monitor.main = 18 }, { monitor.secondary = 22 }, 22]
-outer.top = [{ monitor.main = 30 }, { monitor.secondary = 62 }, 62]
+outer.bottom = [{ monitor.main = 14 }, { monitor.secondary = 22 }, { monitor.'^P27u-20 \(\d+\)$' = 15 }, 22]
+outer.top = [{ monitor.'32ML60TM' = 64 }, { monitor.'^P27u-20 \(\d+\)$' = 64 }, { monitor.secondary = 38 }, { monitor.built-in = 32 }, 64]
 outer.right = 15
 
 [workspace-to-monitor-force-assignment]
-1 = ['secondary']
-2 = ['secondary']
-3 = ['secondary']
-4 = ['secondary']
-5 = ['secondary']
-6 = ['main']
-7 = ['main']
-8 = ['main']
-9 = ['main']
-0 = ['main']
+1 = ['P27u-20', '32ML60TM', 'main']
+2 = ['P27u-20', '32ML60TM', 'main']
+3 = ['P27u-20', '32ML60TM', 'main']
+4 = ['P27u-20', '32ML60TM', 'main']
+5 = ['P27u-20', '32ML60TM', 'main']
+6 = ['built-in', 'secondary']
+7 = ['built-in', 'secondary']
+8 = ['built-in', 'secondary']
+9 = ['built-in', 'secondary']
+0 = ['built-in', 'secondary']
 
 [mode.main.binding]
 
@@ -125,8 +125,10 @@ cmd-shift-j = 'move-workspace-to-monitor --wrap-around next'
 cmd-shift-k = 'move-workspace-to-monitor --wrap-around prev'
 cmd-alt-j = 'move-workspace-to-monitor --wrap-around next'
 cmd-alt-k = 'move-workspace-to-monitor --wrap-around prev'
-cmd-j = 'focus-monitor --wrap-around next'
-cmd-k = 'focus-monitor --wrap-around prev'
+alt-j = 'focus-monitor --wrap-around next'
+alt-k = 'focus-monitor --wrap-around prev'
+alt-h = 'focus-monitor --wrap-around left'
+alt-l = 'focus-monitor --wrap-around right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 cmd-shift-minus = 'resize smart -50'
@@ -207,19 +209,6 @@ a = ['layout accordion', 'mode main']
 q = ['mode main']
 l = ['exec-and-forget bash ~/.config/script/copy-last-screenshot.sh', "mode main"]
 w = ['exec-and-forget bash ~/.config/script/restore-workspaces.sh', "mode main"]
-
-1 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 1', "mode main"]
-2 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 2', "mode main"]
-3 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 3', "mode main"]
-4 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 4', "mode main"]
-5 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 5', "mode main"]
-6 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 6', "mode main"]
-7 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 7', "mode main"]
-8 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 8', "mode main"]
-9 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 9', "mode main"]
-0 = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh 0', "mode main"]
-d = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh D', "mode main"]
-o = ['exec-and-forget bash ~/.config/script/exchange-windows-aerospace.sh O', "mode main"]
 
 down = 'volume down'
 up = 'volume up'
